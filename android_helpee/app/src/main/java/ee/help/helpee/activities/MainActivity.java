@@ -1,8 +1,10 @@
 package ee.help.helpee.activities;
 
 import com.mikepenz.materialdrawer.Drawer;
+import com.mikepenz.materialdrawer.accountswitcher.AccountHeader;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
+import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
@@ -27,17 +29,21 @@ public class MainActivity extends ActionBarActivity {
 
     PrimaryDrawerItem eventsDrawerItem;
 
-    SecondaryDrawerItem profileDrawerItem;
+    PrimaryDrawerItem profileDrawerItem;
 
     SecondaryDrawerItem settingsDrawerItem;
 
-    Drawer navigationDrawer;
+    AccountHeader.Result accountHeaderResult;
+
+    Drawer navigationDrawerBuilder;
+    Drawer.Result navigationDrawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
+        setSupportActionBar(toolbar);
         buildDrawer();
 
 
@@ -45,7 +51,7 @@ public class MainActivity extends ActionBarActivity {
 
 
     void buildDrawer() {
-        navigationDrawer = new Drawer().withActivity(this)
+        navigationDrawerBuilder = new Drawer().withActivity(this)
                 .withToolbar(toolbar);
         createDrawerItems();
         setDrawerListeners();
@@ -55,29 +61,40 @@ public class MainActivity extends ActionBarActivity {
     }
 
     void createDrawerItems() {
-        navigationDrawer.addDrawerItems(
+        accountHeaderResult = new AccountHeader().withActivity(this).build();
+        accountHeaderResult.addProfile(
+                new ProfileDrawerItem().withName("Ian Rumac").withIcon(getResources().getDrawable(R.drawable.ic_launcher)),0);
+
+
+        eventsDrawerItem = new PrimaryDrawerItem().withName(R.string.events_title);
+        profileDrawerItem = new PrimaryDrawerItem().withName(R.string.profile_title);
+        settingsDrawerItem = new SecondaryDrawerItem().withName(R.string.action_settings);
+        navigationDrawerBuilder.addDrawerItems(
                 eventsDrawerItem,
-                new DividerDrawerItem(),
                 profileDrawerItem,
+                new DividerDrawerItem(),
                 settingsDrawerItem
 
-        );
+        ).withAccountHeader(accountHeaderResult);
 
+
+        setDrawerListeners();
+        navigationDrawer = navigationDrawerBuilder.build();
 
     }
 
     void setDrawerListeners() {
-        navigationDrawer.withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+        navigationDrawerBuilder.withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l, IDrawerItem iDrawerItem) {
-                if(iDrawerItem.equals(eventsDrawerItem)){
+                if (iDrawerItem.equals(eventsDrawerItem)) {
                     Toast.makeText(MainActivity.this, "Events", Toast.LENGTH_SHORT).show();
                 }
-                if(iDrawerItem.equals(profileDrawerItem)){
-                    Toast.makeText(MainActivity.this, "Events", Toast.LENGTH_SHORT).show();
+                if (iDrawerItem.equals(profileDrawerItem)) {
+                    Toast.makeText(MainActivity.this, "Profile", Toast.LENGTH_SHORT).show();
                 }
-                if(iDrawerItem.equals(settingsDrawerItem)){
-                    Toast.makeText(MainActivity.this, "Events", Toast.LENGTH_SHORT).show();
+                if (iDrawerItem.equals(settingsDrawerItem)) {
+                    Toast.makeText(MainActivity.this, "Settings", Toast.LENGTH_SHORT).show();
                 }
             }
         });
