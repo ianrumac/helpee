@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+        <ImageView android:layout_width="72dp" android:layout_height="72dp"
+                   android:src="@drawable/ic_launcher"
+                   android:padding="@dimen/basic_padding"
+                   android:id="@+id/event_img"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:text="Pomoc oko preseljenja"
+                  android:textSize="@dimen/abc_text_size_title_material"
+                  android:paddingTop="@dimen/basic_padding"
+                android:textColor="@android:color/black"
+                  android:layout_toRightOf="@id/event_img"
+                  android:id="@+id/event_title"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:text="Ian rumac"
+
+                  android:layout_toRightOf="@id/event_img"
+
+                  android:layout_below="@id/event_title"
+                  android:id="@+id/event_user_name"/>
+
+    </RelativeLayout>
+
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:padding="@dimen/basic_padding"
+              android:text="13:00h - 16:00h  17/03/15"/>
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:paddingLeft="16dp"
+              android:paddingRight="16dp"
+
+              android:text="U petak se selim u novi stan i trebala bi mi pomoć keksi i kava uključeni u ponudu :)"/>
+
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:layout_gravity="right"
+              android:text="+10 points"/>
+
+    <View android:layout_width="match_parent" android:layout_height="1dp"
+          android:layout_marginTop="8dp"
+            android:background="@color/divider"
+            />
+
+    <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:text="@string/btn_help_title"
+                  android:id="@+id/btn_help"
+                  android:background="@drawable/abc_list_selector_holo_dark"
+                  android:padding="@dimen/basic_padding"
+                  android:textColor="@color/md_black_1000"
+                  android:layout_alignParentRight="true"
+                />
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:text="@string/btn_share_title"
+                  android:textColor="@color/md_black_1000"
+                  android:background="@drawable/abc_list_selector_holo_dark"
+                  android:padding="@dimen/basic_padding"
+                android:layout_toLeftOf="@id/btn_help"
+                />
+
+    </RelativeLayout>
+
+</LinearLayout>

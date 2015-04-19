@@ -12,5 +12,7 @@
     <string name="request_error">There has been an error with your request, please try again later</string>
     <string name="logout">Logout</string>
     <string name="session_expired">Your session has expired. Please login again.</string>
+    <string name="btn_share_title">SHARE</string>
+    <string name="btn_help_title">I\'LL HELP</string>
 
 </resources>
