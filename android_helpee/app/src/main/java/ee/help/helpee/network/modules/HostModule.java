@@ -2,9 +2,9 @@ package ee.help.helpee.network.modules;
 
 import javax.inject.Named;
 
-import co.infinum.azerfon.custom.Constants;
 import dagger.Module;
 import dagger.Provides;
+import ee.help.helpee.custom.Constants;
 import retrofit.Endpoint;
 import retrofit.Endpoints;
 

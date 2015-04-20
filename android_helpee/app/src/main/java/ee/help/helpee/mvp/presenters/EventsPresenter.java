@@ -10,5 +10,6 @@ public interface EventsPresenter {
 
     void eventJoined(int id);
 
-    void
+
+
 }

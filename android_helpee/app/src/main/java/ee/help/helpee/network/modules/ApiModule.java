@@ -2,10 +2,10 @@ package ee.help.helpee.network.modules;
 
 import javax.inject.Named;
 
-import co.infinum.azerfon.network.ApiManager;
-import co.infinum.azerfon.network.ApiService;
 import dagger.Module;
 import dagger.Provides;
+import ee.help.helpee.network.ApiManager;
+import ee.help.helpee.network.ApiService;
 import retrofit.Endpoint;
 
 /**

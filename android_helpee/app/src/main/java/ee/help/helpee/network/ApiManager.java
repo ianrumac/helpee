@@ -7,6 +7,7 @@ package ee.help.helpee.network;
 import com.squareup.okhttp.OkHttpClient;
 
 import ee.help.helpee.BuildConfig;
+import ee.help.helpee.custom.Constants;
 import retrofit.Endpoint;
 import retrofit.RestAdapter;
 import retrofit.client.OkClient;
