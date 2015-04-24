@@ -19,4 +19,5 @@
     <string name="error_occured_title">An error occurred</string>
     <string name="loading_msg">Loading …</string>
 
+    <string name="points">+%s POINTS FROM :</string>
 </resources>

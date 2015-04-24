@@ -47,11 +47,13 @@ public class EventsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     void bindToEvent(EventHolder holder, Event event) {
 
+        holder.title.setText(event.getEventTitle());
+        holder.userName.setText(event.getUserFullName());
+        Glide.with(context).load(event.getUserImageLink()).into(holder.image);
+        holder.time.setText(event.getEventDateAndTime());
+        holder.description.setText(event.getDescription());
+        holder.points.setText(String.format(context.getString(R.string.points), event.getPoints()));
 
-        holder.textViewEventTitle.setText(event.getEventTitle());
-        holder.textViewUserName.setText(event.getUserFullName());
-        Glide.with(context).load(event.getUserImageLink()).into(holder.imageViewEventImage);
-        holder.textViewEventTime.setText(event.getEventDateAndTime());
     }
 
 
@@ -60,19 +62,26 @@ public class EventsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         return eventList.size();
     }
 
-    private class EventHolder extends RecyclerView.ViewHolder {
+    public class EventHolder extends RecyclerView.ViewHolder {
+
 
         @InjectView(R.id.event_img)
-        ImageView imageViewEventImage;
+        ImageView image;
 
         @InjectView(R.id.event_time)
-        TextView textViewEventTime;
+        TextView time;
 
         @InjectView(R.id.event_title)
-        TextView textViewEventTitle;
+        TextView title;
 
         @InjectView(R.id.event_user_name)
-        TextView textViewUserName;
+        TextView userName;
+
+        @InjectView(R.id.event_description)
+        TextView description;
+
+        @InjectView(R.id.event_points)
+        TextView points;
 
         public EventHolder(View itemView) {
             super(itemView);

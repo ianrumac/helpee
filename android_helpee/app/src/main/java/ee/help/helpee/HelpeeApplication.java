@@ -4,12 +4,15 @@ import com.facebook.FacebookSdk;
 
 import android.app.Application;
 
+import ee.help.helpee.models.User;
+
 /**
  * Created by ian on 19/04/15.
  */
 public class HelpeeApplication extends Application {
 
     private static HelpeeApplication instance;
+    public static User userInstance;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -22,4 +25,12 @@ public class HelpeeApplication extends Application {
         return instance;
     }
 
+
+    public static User getUserInstance() {
+        return userInstance;
+    }
+
+    public static void setUserInstance(User userInstance) {
+        HelpeeApplication.userInstance = userInstance;
+    }
 }

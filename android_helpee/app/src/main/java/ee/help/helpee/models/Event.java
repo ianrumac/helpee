@@ -13,6 +13,7 @@ public class Event {
 
     String eventDateAndTime;
 
+    String description;
 
     int eventId;
 
@@ -36,6 +37,14 @@ public class Event {
     public String getUserImageLink() {
         //TODO placeholder if it is null
         return userImageLink;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getEventDateAndTime() {

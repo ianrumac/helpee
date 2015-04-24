@@ -8,8 +8,8 @@ import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
+import android.app.FragmentManager;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,24 +20,27 @@ import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import ee.help.helpee.R;
+import ee.help.helpee.fragments.EventFeedFragment;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends BaseActionBarActivity {
 
     @InjectView(R.id.toolbar)
     Toolbar toolbar;
 
     PrimaryDrawerItem eventsDrawerItem;
 
-    PrimaryDrawerItem profileDrawerItem;
+    PrimaryDrawerItem profileFragmentDrawerItem;
 
     SecondaryDrawerItem settingsDrawerItem;
 
     AccountHeader.Result accountHeaderResult;
 
+    ProfileDrawerItem profileDrawerItem;
     Drawer navigationDrawerBuilder;
     Drawer.Result navigationDrawer;
 
+    FragmentManager fragmentManager = getFragmentManager();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +48,7 @@ public class MainActivity extends ActionBarActivity {
         ButterKnife.inject(this);
         setSupportActionBar(toolbar);
         buildDrawer();
-
+        fragmentManager.beginTransaction().add(R.id.fragment_container,new EventFeedFragment()).addToBackStack(EventFeedFragment.TAG).commit();
 
     }
 
@@ -62,16 +65,18 @@ public class MainActivity extends ActionBarActivity {
 
     void createDrawerItems() {
         accountHeaderResult = new AccountHeader().withActivity(this).build();
-        accountHeaderResult.addProfile(
-                new ProfileDrawerItem().withName("Ian Rumac").withIcon(getResources().getDrawable(R.drawable.ic_launcher)),0);
+        profileDrawerItem =                 new ProfileDrawerItem().withName(getUser().getFullName()).withIcon(
+                getResources().getDrawable(R.drawable.ic_launcher));
+        accountHeaderResult.addProfile(profileDrawerItem, 0);
+
 
 
         eventsDrawerItem = new PrimaryDrawerItem().withName(R.string.events_title);
-        profileDrawerItem = new PrimaryDrawerItem().withName(R.string.profile_title);
+        profileFragmentDrawerItem = new PrimaryDrawerItem().withName(R.string.profile_title);
         settingsDrawerItem = new SecondaryDrawerItem().withName(R.string.action_settings);
         navigationDrawerBuilder.addDrawerItems(
                 eventsDrawerItem,
-                profileDrawerItem,
+                profileFragmentDrawerItem,
                 new DividerDrawerItem(),
                 settingsDrawerItem
 
@@ -90,7 +95,7 @@ public class MainActivity extends ActionBarActivity {
                 if (iDrawerItem.equals(eventsDrawerItem)) {
                     Toast.makeText(MainActivity.this, "Events", Toast.LENGTH_SHORT).show();
                 }
-                if (iDrawerItem.equals(profileDrawerItem)) {
+                if (iDrawerItem.equals(profileFragmentDrawerItem)) {
                     Toast.makeText(MainActivity.this, "Profile", Toast.LENGTH_SHORT).show();
                 }
                 if (iDrawerItem.equals(settingsDrawerItem)) {

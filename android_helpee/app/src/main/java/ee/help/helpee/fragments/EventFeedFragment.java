@@ -16,6 +16,8 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import ee.help.helpee.R;
 import ee.help.helpee.adapters.EventsAdapter;
+import ee.help.helpee.dagger.EventFeedModule;
+import ee.help.helpee.dagger.components.DaggerEventFeedComponent;
 import ee.help.helpee.models.Event;
 import ee.help.helpee.mvp.presenters.EventFeedPresenter;
 import ee.help.helpee.mvp.views.EventFeedView;
@@ -24,6 +26,8 @@ import ee.help.helpee.mvp.views.EventFeedView;
  * Created by ian on 24/04/15.
  */
 public class EventFeedFragment extends BaseFragment implements EventFeedView {
+
+    public final static String TAG = "EVENT_FEED_FRAGMENT";
 
     @InjectView(R.id.event_list)
     RecyclerView eventList;
@@ -42,6 +46,7 @@ public class EventFeedFragment extends BaseFragment implements EventFeedView {
         View contentView = inflater.inflate(R.layout.fragment_eventlist, container, false);
 
         ButterKnife.inject(this, contentView);
+        DaggerEventFeedComponent.builder().eventFeedModule(new EventFeedModule(this)).build().inject(this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         eventList.setLayoutManager(layoutManager);
@@ -73,7 +78,9 @@ public class EventFeedFragment extends BaseFragment implements EventFeedView {
     }
 
     @Override
-    public void eventJoined() {
+    public void eventJoined(int id) {
         //TODO animate event
+
     }
+
 }

@@ -14,6 +14,7 @@ import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import ee.help.helpee.HelpeeApplication;
 import ee.help.helpee.R;
 import ee.help.helpee.dagger.LoginModule;
 import ee.help.helpee.dagger.components.DaggerLoginComponent;
@@ -81,7 +82,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
     @Override
     public void userLoggedIn(User user) {
         loginPresenter.saveUser(user);
-
+        HelpeeApplication.setUserInstance(user);
         Intent openHome = new Intent(this, MainActivity.class);
         startActivity(openHome);
 

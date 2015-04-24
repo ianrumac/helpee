@@ -8,7 +8,7 @@ public interface EventFeedPresenter {
 
     void loadEventList();
 
-    void eventJoined(int id);
+    void tryJoiningEvent(int id);
 
 
 

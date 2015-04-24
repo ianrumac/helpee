@@ -12,7 +12,7 @@ public interface EventFeedView extends BaseView {
 
     void showEventList(List<Event> eventList);
 
-    void eventJoined();
+    void eventJoined(int id);
 
 
 }
