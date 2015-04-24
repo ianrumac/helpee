@@ -14,5 +14,9 @@
     <string name="session_expired">Your session has expired. Please login again.</string>
     <string name="btn_share_title">SHARE</string>
     <string name="btn_help_title">I\'LL HELP</string>
+    <string name="log_in">LOG IN</string>
+    <string name="login_text">Log in or create an account and start helping</string>
+    <string name="error_occured_title">An error occurred</string>
+    <string name="loading_msg">Loading …</string>
 
 </resources>

@@ -9,7 +9,6 @@ import com.facebook.login.widget.LoginButton;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import javax.inject.Inject;
 
@@ -19,15 +18,16 @@ import ee.help.helpee.R;
 import ee.help.helpee.dagger.LoginModule;
 import ee.help.helpee.dagger.components.DaggerLoginComponent;
 import ee.help.helpee.errors.ErrorType;
+import ee.help.helpee.models.User;
 import ee.help.helpee.mvp.presenters.LoginPresenter;
 import ee.help.helpee.mvp.views.LoginView;
 
 /**
  * Created by ian on 19/04/15.
  */
-public class LoginActivity extends BaseActivity implements LoginView{
+public class LoginActivity extends BaseActivity implements LoginView {
 
-    @InjectView(R.id.login_button)
+    @InjectView(R.id.facebook_login_button)
     LoginButton loginButton;
 
     CallbackManager callbackManager;
@@ -37,6 +37,7 @@ public class LoginActivity extends BaseActivity implements LoginView{
 
 
     FragmentManager fm;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,26 +47,24 @@ public class LoginActivity extends BaseActivity implements LoginView{
         ButterKnife.inject(this);
 
         DaggerLoginComponent.builder().loginModule(new LoginModule(this)).build().inject(this);
-        fm = getFragmentManager();
 
+        /*Facebook callbacks*/
         callbackManager = CallbackManager.Factory.create();
 
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                Toast.makeText(LoginActivity.this,
-                        loginResult.getAccessToken().getToken() + "User id:" + loginResult.getAccessToken().getUserId(), Toast.LENGTH_LONG)
-                        .show();
+
+                loginPresenter.loginUserWithFacebookToken(loginResult.getAccessToken().getToken());
             }
 
             @Override
             public void onCancel() {
-                Toast.makeText(LoginActivity.this, "CANCELED", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onError(FacebookException exception) {
-                Toast.makeText(LoginActivity.this, exception.toString(), Toast.LENGTH_LONG).show();
+                showError(ErrorType.CONNECTION_ERROR);
             }
         });
 
@@ -73,24 +72,18 @@ public class LoginActivity extends BaseActivity implements LoginView{
 
 
     @Override
-    public void showError(ErrorType message) {
-
-    }
-
-    @Override
-    public void showLoading() {
-
-    }
-
-    @Override
-    public void hideLoading() {
-
-    }
-
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
+
+    }
+
+    @Override
+    public void userLoggedIn(User user) {
+        loginPresenter.saveUser(user);
+
+        Intent openHome = new Intent(this, MainActivity.class);
+        startActivity(openHome);
 
     }
 }

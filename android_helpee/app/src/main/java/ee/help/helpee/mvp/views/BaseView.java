@@ -10,9 +10,9 @@ public interface BaseView {
 
     void showError(ErrorType message);
 
-    void showLoading();
+    void showProgress();
 
-    void hideLoading();
+    void hideProgress();
 
 
 }

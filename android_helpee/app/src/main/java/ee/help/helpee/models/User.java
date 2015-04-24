@@ -1,5 +1,7 @@
 package ee.help.helpee.models;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by ian on 12/04/15.
  */
@@ -7,21 +9,14 @@ public class User {
 
     int id;
 
-    String name;
+    @SerializedName("userName")
+    String fullName;
 
-    String surname;
-
-    String email;
-
+    @SerializedName("access_token")
     String token;
 
-    public User(int id, String name, String surname, String email, String token) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.token = token;
-    }
+    @SerializedName("model.token")
+    String fbToken;
 
     public int getId() {
         return id;
@@ -31,28 +26,12 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getToken() {
@@ -61,5 +40,13 @@ public class User {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getFbToken() {
+        return fbToken;
+    }
+
+    public void setFbToken(String fbToken) {
+        this.fbToken = fbToken;
     }
 }
