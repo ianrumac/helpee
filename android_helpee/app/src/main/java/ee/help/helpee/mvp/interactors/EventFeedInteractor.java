@@ -8,7 +8,7 @@ import ee.help.helpee.models.Event;
 /**
  * Created by ian on 12/04/15.
  */
-public interface EventsInteractor {
+public interface EventFeedInteractor {
 
     void fetchEvents(BaseListener<List<Event>> eventsListener);
 }
