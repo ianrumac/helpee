@@ -9,6 +9,7 @@ import ee.help.helpee.HelpeeApplication;
 import ee.help.helpee.R;
 import ee.help.helpee.errors.ErrorHandler;
 import ee.help.helpee.errors.ErrorType;
+import ee.help.helpee.models.User;
 
 /**
  * Created by ian on 12/04/15.
@@ -18,6 +19,9 @@ public abstract class BaseActivity extends Activity {
     ProgressDialog mProgressDialog;
 
     Dialog mDialog;
+    public User getUser(){
+        return HelpeeApplication.getUserInstance();
+    }
 
 
     public void showProgress() {

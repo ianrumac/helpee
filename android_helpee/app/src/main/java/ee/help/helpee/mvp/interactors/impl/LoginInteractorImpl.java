@@ -51,7 +51,7 @@ public class LoginInteractorImpl implements LoginInteractor {
     public void saveUserToPreferences(User user) {
         String userAsJson = new Gson().toJson(user);
         HelpeeApplication.getInstance().getSharedPreferences(Constants.HELPEE_PREFS, Context.MODE_PRIVATE).edit()
-                .putString(Constants.HELPEE_PREFS, userAsJson).commit();
+                .putString(Constants.USER_ITEM, userAsJson).commit();
     }
 
 

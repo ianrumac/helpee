@@ -1,5 +1,7 @@
 package ee.help.helpee.fragments;
 
+import com.melnykov.fab.FloatingActionButton;
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -25,12 +27,16 @@ import ee.help.helpee.mvp.views.EventFeedView;
 /**
  * Created by ian on 24/04/15.
  */
+
 public class EventFeedFragment extends BaseFragment implements EventFeedView {
 
     public final static String TAG = "EVENT_FEED_FRAGMENT";
 
     @InjectView(R.id.event_list)
     RecyclerView eventList;
+
+    @InjectView(R.id.fab)
+    FloatingActionButton newEventButton;
 
     EventsAdapter eventsAdapter;
 
@@ -50,7 +56,7 @@ public class EventFeedFragment extends BaseFragment implements EventFeedView {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         eventList.setLayoutManager(layoutManager);
-
+        newEventButton.attachToRecyclerView(eventList);
         return contentView;
 
 

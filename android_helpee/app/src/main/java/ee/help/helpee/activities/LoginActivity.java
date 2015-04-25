@@ -37,7 +37,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
     LoginPresenter loginPresenter;
 
 
-    FragmentManager fm;
+    FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +85,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
         HelpeeApplication.setUserInstance(user);
         Intent openHome = new Intent(this, MainActivity.class);
         startActivity(openHome);
+        finish();
 
     }
 }

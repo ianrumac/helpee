@@ -14,5 +14,7 @@
     <color name="divider_grey">#ff9a9a9a</color>
 
     <color name="background_gray">#f2f2f2</color>
+    <color name="main_blue">#303AA5</color>
+    <color name="pressed_blue">#ff1a205b</color>
 
 </resources>

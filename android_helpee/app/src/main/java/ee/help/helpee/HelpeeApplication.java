@@ -1,9 +1,13 @@
 package ee.help.helpee;
 
+import com.google.gson.Gson;
+
 import com.facebook.FacebookSdk;
 
 import android.app.Application;
+import android.content.Context;
 
+import ee.help.helpee.custom.Constants;
 import ee.help.helpee.models.User;
 
 /**
@@ -12,12 +16,13 @@ import ee.help.helpee.models.User;
 public class HelpeeApplication extends Application {
 
     private static HelpeeApplication instance;
+
     public static User userInstance;
+
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
-
         FacebookSdk.sdkInitialize(this);
     }
 
@@ -27,6 +32,15 @@ public class HelpeeApplication extends Application {
 
 
     public static User getUserInstance() {
+        if (userInstance == null) {
+            String userAsJson;
+            userAsJson = getInstance().getSharedPreferences(Constants.HELPEE_PREFS, Context.MODE_PRIVATE)
+                    .getString(Constants.USER_ITEM, null);
+            if (userAsJson != null) {
+                userInstance = new Gson().fromJson(userAsJson, User.class);
+            }
+
+        }
         return userInstance;
     }
 
