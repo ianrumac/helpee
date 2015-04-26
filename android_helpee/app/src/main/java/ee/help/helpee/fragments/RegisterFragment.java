@@ -1,48 +1,36 @@
 package ee.help.helpee.fragments;
-        import android.os.Bundle;
-        import android.support.annotation.Nullable;
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.widget.EditText;
+        import com.pkmmte.view.CircularImageView;
 
-        import butterknife.ButterKnife;
-        import butterknife.InjectView;
-        import ee.help.helpee.R;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
-            import com.pkmmte.view.CircularImageView;
+import javax.inject.Inject;
 
-    import android.app.Activity;
-    import android.app.AlertDialog;
-    import android.content.DialogInterface;
-    import android.content.Intent;
-    import android.database.Cursor;
-    import android.graphics.Bitmap;
-    import android.graphics.BitmapFactory;
-    import android.net.Uri;
-    import android.os.Bundle;
-    import android.os.Environment;
-    import android.provider.MediaStore;
-    import android.support.annotation.Nullable;
-    import android.view.LayoutInflater;
-    import android.view.View;
-    import android.view.ViewGroup;
-    import android.widget.EditText;
-
-    import java.io.ByteArrayOutputStream;
-    import java.io.File;
-    import java.io.FileOutputStream;
-    import java.io.IOException;
-
-    import javax.inject.Inject;
-
-    import butterknife.ButterKnife;
-    import butterknife.InjectView;
-    import butterknife.OnClick;
-    import ee.help.helpee.R;
-    import ee.help.helpee.mvp.presenters.RegisterPresenter;
-    import retrofit.mime.TypedFile;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnClick;
+import ee.help.helpee.R;
+import ee.help.helpee.mvp.presenters.RegisterPresenter;
+import retrofit.mime.TypedFile;
 
     /**
      * Created by ian on 25/04/15.
