@@ -14,7 +14,7 @@ import retrofit.mime.TypedFile;
 /**
  * Created by ian on 25/04/15.
  */
-public class RegisterPresenterImpl implements RegisterPresenter{
+public class RegisterPresenterImpl implements RegisterPresenter {
 
     RegisterView registerView;
 
@@ -28,22 +28,22 @@ public class RegisterPresenterImpl implements RegisterPresenter{
 
     @Override
     public void registerUser(String name, String email, String password, final TypedFile typedFile) {
-            registerView.showProgress();
-            registerInteractor.sendUserData(name, email, password, new SimpleBaseListener() {
-                @Override
-                public void onSuccess() {
-                    registerInteractor.uploadUserPicture(typedFile,uploadImageBaseListener);
-                }
+        registerView.showProgress();
+        registerInteractor.sendUserData(name, email, password, new SimpleBaseListener() {
+            @Override
+            public void onSuccess() {
+                registerInteractor.uploadUserPicture(typedFile, uploadImageBaseListener);
+            }
 
-                @Override
-                public void onFail(ErrorType errorType) {
-                    registerView.hideProgress();
-                    registerView.showError(errorType);
-                }
-            });
+            @Override
+            public void onFail(ErrorType errorType) {
+                registerView.hideProgress();
+                registerView.showError(errorType);
+            }
+        });
     }
 
-    BaseListener<User> uploadImageBaseListener = new BaseListener<User>(){
+    BaseListener<User> uploadImageBaseListener = new BaseListener<User>() {
 
         @Override
         public void onSuccess(User result) {

@@ -19,6 +19,8 @@ public class HelpeeApplication extends Application {
 
     public static User userInstance;
 
+    public static String userCity;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -42,6 +44,16 @@ public class HelpeeApplication extends Application {
 
         }
         return userInstance;
+    }
+
+
+
+    public static String getUserCity() {
+        return userCity;
+    }
+
+    public static void setUserCity(String userCity) {
+        HelpeeApplication.userCity = userCity;
     }
 
     public static void setUserInstance(User userInstance) {
