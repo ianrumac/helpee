@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:padding="@dimen/basic_padding"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+
+    <CircleImageView android:layout_width="144dp"
+                     android:layout_height="144dp"
+                     android:src="@drawable/ic_launcher"
+            />
+
+
+    <EditText android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:hint="Username"
+              android:id="@+id/register_username"/>
+    <EditText android:layout_width="match_parent"
+              android:hint="E-mail"
+              android:layout_height="wrap_content"
+              android:id="@+id/register_email"/>
+    <EditText android:layout_width="match_parent"
+              android:hint="Password"
+              android:layout_height="wrap_content"
+              android:id="@+id/register_password"/>
+
+    <TextView android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+            android:padding="@dimen/basic_padding"
+            android:background="@color/main_blue"/>
+
+
+</LinearLayout>
