@@ -12,7 +12,7 @@
     <string name="request_error">There has been an error with your request, please try again later</string>
     <string name="logout">Logout</string>
     <string name="session_expired">Your session has expired. Please login again.</string>
-    <string name="btn_share_title">SHARE</string>
+    <string name="btn_chip_in">CHIP IN</string>
     <string name="btn_help_title">I\'LL HELP</string>
     <string name="log_in">LOG IN</string>
     <string name="login_text">Log in or create an account and start helping</string>
@@ -20,4 +20,24 @@
     <string name="loading_msg">Loading …</string>
 
     <string name="points">+%s POINTS FROM :</string>
+    <string name="create_account">Create an account</string>
+    <string name="click_to_create_account">Or click here to create an account</string>
+    <string name="check_username">Please check your username and try again</string>
+    <string name="check_email">Please check your e-mail and try again</string>
+    <string name="check_password">Please check your password and try again</string>
+    <string name="check_picture">Sorry, but we want everyone to see how pretty you are.\nTake a picture and try again!</string>
+    <string name="no_geocoder_available">No geocoder available</string>
+
+
+    <string name="fetch_address">Fetch address</string>
+
+
+    <string name="address_found">Address found</string>
+
+
+    <string name="no_address_found">No address found</string>
+    <string name="no_location_data_provided">No location data provided</string>
+    <string name="service_not_available">The service is not available</string>
+    <string name="invalid_lat_long_used">Invalid latitude or longitude used</string>
+
 </resources>

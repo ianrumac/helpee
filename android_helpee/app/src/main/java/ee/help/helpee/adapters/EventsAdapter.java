@@ -1,13 +1,13 @@
 package ee.help.helpee.adapters;
 
 import com.bumptech.glide.Glide;
+import com.pkmmte.view.CircularImageView;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -41,11 +41,11 @@ public class EventsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof EventHolder) {
-            bindToEvent((EventHolder) holder, eventList.get(position));
+            bindDataToEventView((EventHolder) holder, eventList.get(position));
         }
     }
 
-    void bindToEvent(EventHolder holder, Event event) {
+    void bindDataToEventView(EventHolder holder, Event event) {
 
         holder.title.setText(event.getEventTitle());
         holder.userName.setText(event.getUserFullName());
@@ -66,7 +66,7 @@ public class EventsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
 
         @InjectView(R.id.event_img)
-        ImageView image;
+        CircularImageView image;
 
         @InjectView(R.id.event_time)
         TextView time;

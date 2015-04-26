@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:padding="@dimen/basic_padding"
+              android:layout_width="match_parent"
+              android:background="@color/background_gray"
+                android:animateLayoutChanges="true"
+              android:layout_height="match_parent">
+
+
+    <com.pkmmte.view.CircularImageView
+            android:layout_marginLeft="@dimen/default_padding"
+            android:layout_marginRight="@dimen/default_padding"
+            android:id="@+id/profile_picture"
+            android:layout_width="match_parent"
+            android:layout_height="144dp"
+            android:src="@drawable/ic_launcher"
+            />
+
+
+
+        <EditText android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:hint="Username"
+                  android:layout_marginBottom="@dimen/basic_padding"
+                  style="@style/EditTextUserInfo"
+                  android:id="@+id/register_username"/>
+
+
+        <EditText android:layout_width="match_parent"
+                  android:hint="E-mail"
+                  android:layout_marginBottom="@dimen/basic_padding"
+
+                  style="@style/EditTextUserInfo"
+
+                  android:layout_height="wrap_content"
+                  android:id="@+id/register_email"/>
+
+        <EditText android:layout_width="match_parent"
+                  android:layout_marginBottom="@dimen/basic_padding"
+
+                  android:hint="Password"
+                  style="@style/EditTextUserInfo"
+
+                  android:layout_height="wrap_content"
+                  android:id="@+id/register_password"/>
+
+    <TextView android:layout_width="match_parent"
+              android:id="@+id/create_account_button"
+              style="@style/LargeTextButton"
+              android:text="@string/create_account"
+              android:layout_height="wrap_content"
+              android:background="@color/md_yellow_800"/>
+
+
+</LinearLayout>

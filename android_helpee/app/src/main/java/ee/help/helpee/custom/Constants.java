@@ -10,5 +10,18 @@ public class Constants {
     public static final String USER_ITEM = "USER_ITEM";
 
     public static final String HELPEE_PREFS = "HELPEE_PREFS";
+    public static final int SUCCESS_RESULT = 0;
+
+
+    public static final int FAILURE_RESULT = 1;
+
+
+    public static final String RECEIVER =  "RECEIVER";
+
+
+    public static final String RESULT_DATA_KEY = "RESULT_DATA_KEY";
+
+
+    public static final String LOCATION_DATA_EXTRA =  "LOCATION_DATA_EXTRA";
 
 }

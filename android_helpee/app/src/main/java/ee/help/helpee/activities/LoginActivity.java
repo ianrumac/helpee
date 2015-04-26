@@ -9,16 +9,19 @@ import com.facebook.login.widget.LoginButton;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 import ee.help.helpee.HelpeeApplication;
 import ee.help.helpee.R;
 import ee.help.helpee.dagger.LoginModule;
 import ee.help.helpee.dagger.components.DaggerLoginComponent;
 import ee.help.helpee.errors.ErrorType;
+import ee.help.helpee.fragments.RegisterFragment;
 import ee.help.helpee.models.User;
 import ee.help.helpee.mvp.presenters.LoginPresenter;
 import ee.help.helpee.mvp.views.LoginView;
@@ -37,7 +40,17 @@ public class LoginActivity extends BaseActivity implements LoginView {
     LoginPresenter loginPresenter;
 
 
-    FragmentManager fragmentManager;
+    FragmentManager fragmentManager = getFragmentManager();
+
+    @InjectView(R.id.login_text)
+    TextView loginText;
+
+    @InjectView(R.id.login_button)
+    TextView normalLoginButton;
+
+    @InjectView(R.id.create_account)
+    TextView createAccount;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +84,14 @@ public class LoginActivity extends BaseActivity implements LoginView {
 
     }
 
+    @OnClick(R.id.create_account)
+    void openRegistration() {
+        fragmentManager.beginTransaction()
+                .add(R.id.fragment_container, new RegisterFragment())
+                .addToBackStack("")
+                .commit();
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -88,4 +109,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
         finish();
 
     }
-}
+
+
+
+    }

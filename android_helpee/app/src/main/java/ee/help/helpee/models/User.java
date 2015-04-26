@@ -18,6 +18,26 @@ public class User {
     @SerializedName("model.token")
     String fbToken;
 
+    @SerializedName("email")
+    String email;
+
+    @SerializedName("imageUri")
+    String imageUri;
+
+    @SerializedName("Points")
+
+    int points;
+
+    String userCity;
+
+    public String getUserCity() {
+        return userCity;
+    }
+
+    public void setUserCity(String userCity) {
+        this.userCity = userCity;
+    }
+
     public int getId() {
         return id;
     }
