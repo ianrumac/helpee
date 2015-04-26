@@ -7,10 +7,12 @@ import com.google.gson.annotations.SerializedName;
  */
 public class User {
 
-    int id;
 
-    @SerializedName("userName")
+    @SerializedName("Name")
     String fullName;
+
+    @SerializedName("userid")
+    String userId;
 
     @SerializedName("access_token")
     String token;
@@ -21,7 +23,7 @@ public class User {
     @SerializedName("email")
     String email;
 
-    @SerializedName("imageUri")
+    @SerializedName("ImageUri")
     String imageUri;
 
     @SerializedName("Points")
@@ -38,12 +40,37 @@ public class User {
         this.userCity = userCity;
     }
 
-    public int getId() {
-        return id;
+
+    public String getUserId() {
+        return userId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getImageUri() {
+        return imageUri;
+    }
+
+    public void setImageUri(String imageUri) {
+        this.imageUri = imageUri;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
     }
 
     public String getFullName() {

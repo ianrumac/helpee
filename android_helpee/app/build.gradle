@@ -69,4 +69,10 @@ dependencies {
 
     /* FB SDK*/
     compile 'com.facebook.android:facebook-android-sdk:4.0.0'
+
+
+    compile 'com.pkmmte.view:circularimageview:1.1'
+
 }
+
+

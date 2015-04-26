@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:materialdesign="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:padding="@dimen/basic_padding"
+              android:layout_width="match_parent"
+              android:background="@color/background_gray"
+              android:animateLayoutChanges="true"
+              android:layout_height="match_parent">
+
+
+
+
+
+        <EditText android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:hint="Title"
+                  android:layout_marginBottom="@dimen/basic_padding"
+                  style="@style/EditTextUserInfo"
+                  android:id="@+id/event_title"/>
+
+
+        <EditText android:layout_width="match_parent"
+                  android:hint="Description"
+                  android:lines="2"
+                  android:layout_marginBottom="@dimen/basic_padding"
+
+                  style="@style/EditTextUserInfo"
+
+                  android:layout_height="wrap_content"
+                  android:id="@+id/event_description"/>
+
+    <com.gc.materialdesign.views.Slider
+            android:id="@+id/event_points"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#1E88E5"
+            materialdesign:max="50"
+            materialdesign:min="0"
+            materialdesign:showNumberIndicator="true"/>
+
+    <TextView android:layout_width="match_parent"
+              android:id="@+id/create_event_btn"
+              style="@style/LargeTextButton"
+              android:text="@string/create_account"
+              android:layout_height="wrap_content"
+              android:background="@color/md_yellow_800"/>
+
+
+</LinearLayout>

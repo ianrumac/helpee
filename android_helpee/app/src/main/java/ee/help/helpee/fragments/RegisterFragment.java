@@ -1,13 +1,7 @@
 package ee.help.helpee.fragments;
 
-<<<<<<< Updated upstream
-/**
- * Created by ian on 25/04/15.
- */
-public class RegisterFragment {
 
-=======
-import com.pkmmte.view.CircularImageView;
+
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -25,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import com.pkmmte.view.CircularImageView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -199,6 +194,4 @@ public class RegisterFragment extends BaseFragment {
         }
     }
 
-
->>>>>>> Stashed changes
 }
