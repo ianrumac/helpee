@@ -1,7 +1,6 @@
 package ee.help.helpee.fragments;
 
-
-
+import com.pkmmte.view.CircularImageView;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -19,7 +18,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import com.pkmmte.view.CircularImageView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -101,11 +99,6 @@ public class RegisterFragment extends BaseFragment {
         builder.show();
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.reset(this);
-    }
 
     @OnClick(R.id.create_account_button)
     void createUserAccount() {
