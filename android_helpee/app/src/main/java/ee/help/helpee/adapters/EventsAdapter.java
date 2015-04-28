@@ -49,7 +49,9 @@ public class EventsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         holder.title.setText(event.getEventTitle());
         holder.userName.setText(event.getUserFullName());
+/*
         Glide.with(context).load(event.getUserImageLink()).into(holder.image);
+*/
         holder.time.setText(event.getEventDateAndTime());
         holder.description.setText(event.getDescription());
         holder.points.setText(String.format(context.getString(R.string.points), event.getPoints()));

@@ -46,9 +46,9 @@ public class RegisterPresenterImpl implements RegisterPresenter {
     BaseListener<User> uploadImageBaseListener = new BaseListener<User>() {
 
         @Override
-        public void onSuccess(User result) {
+        public void onSuccess(User success) {
             registerView.hideProgress();
-            registerView.userRegistered(result);
+            registerView.userRegistered(success);
 
         }
 

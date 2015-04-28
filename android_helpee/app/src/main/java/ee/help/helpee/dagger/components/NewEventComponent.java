@@ -2,7 +2,7 @@ package ee.help.helpee.dagger.components;
 
 import dagger.Component;
 import ee.help.helpee.dagger.NewEventModule;
-import ee.help.helpee.fragments.NewEventFragment;
+import ee.help.helpee.activities.NewEventActivity;
 import ee.help.helpee.network.modules.NetworkModule;
 
 /**
@@ -13,5 +13,5 @@ import ee.help.helpee.network.modules.NetworkModule;
         NetworkModule.class})
 public interface NewEventComponent {
 
-    void inject(NewEventFragment fragment);
+    void inject(NewEventActivity fragment);
 }

@@ -1,6 +1,7 @@
 package ee.help.helpee.fragments;
 
 import com.pkmmte.view.CircularImageView;
+import com.rengwuxian.materialedittext.MaterialEditText;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -43,13 +44,13 @@ public class RegisterFragment extends BaseFragment {
     static final int SELECT_FILE = 3;
 
     @InjectView(R.id.register_username)
-    EditText registerUsername;
+    MaterialEditText registerUsername;
 
     @InjectView(R.id.register_email)
-    EditText registerEmail;
+    MaterialEditText registerEmail;
 
     @InjectView(R.id.register_password)
-    EditText registerPassword;
+    MaterialEditText registerPassword;
 
     @InjectView(R.id.profile_picture)
     CircularImageView profilePicture;

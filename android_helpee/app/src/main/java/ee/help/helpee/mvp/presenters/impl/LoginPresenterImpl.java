@@ -38,9 +38,9 @@ public class LoginPresenterImpl implements LoginPresenter {
 
     BaseListener<User> userListener = new BaseListener<User>() {
         @Override
-        public void onSuccess(User result) {
+        public void onSuccess(User success) {
             loginView.hideProgress();
-            loginView.userLoggedIn(result);
+            loginView.userLoggedIn(success);
 
         }
 

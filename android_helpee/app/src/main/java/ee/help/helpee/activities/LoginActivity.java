@@ -8,8 +8,16 @@ import com.facebook.login.widget.LoginButton;
 
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
 import android.widget.TextView;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import javax.inject.Inject;
 
@@ -52,10 +60,12 @@ public class LoginActivity extends BaseActivity implements LoginView {
     TextView createAccount;
 
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_login);
 
         ButterKnife.inject(this);
@@ -111,5 +121,4 @@ public class LoginActivity extends BaseActivity implements LoginView {
     }
 
 
-
-    }
+}

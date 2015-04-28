@@ -1,57 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:padding="@dimen/basic_padding"
-              android:layout_width="match_parent"
-              android:background="@color/background_gray"
-                android:animateLayoutChanges="true"
-              android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:background="@color/background_gray"
+    android:orientation="vertical"
+    android:padding="@dimen/basic_padding">
 
 
     <com.pkmmte.view.CircularImageView
-            android:layout_marginLeft="@dimen/default_padding"
-            android:layout_marginRight="@dimen/default_padding"
-            android:id="@+id/profile_picture"
-            android:layout_width="match_parent"
-            android:layout_height="144dp"
-            android:src="@drawable/ic_launcher"
-            />
+        android:id="@+id/profile_picture"
+        android:layout_width="match_parent"
+        android:layout_height="144dp"
+        android:layout_marginLeft="@dimen/default_padding"
+        android:layout_marginRight="@dimen/default_padding"
+        android:src="@drawable/ic_launcher" />
 
 
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/register_username"
+        style="@style/EditTextUserInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/basic_padding"
+        app:met_floatingLabelText="Username"
+        app:met_floatingLabel="normal" />
 
-        <EditText android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:hint="Username"
-                  android:layout_marginBottom="@dimen/basic_padding"
-                  style="@style/EditTextUserInfo"
-                  android:id="@+id/register_username"/>
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/register_email"
+        style="@style/EditTextUserInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/basic_padding"
+        app:met_floatingLabelText="E-mail"
+        app:met_floatingLabel="normal" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/register_password"
+        style="@style/EditTextUserInfo"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginBottom="@dimen/basic_padding"
+        app:met_floatingLabelText="Password"
+        app:met_floatingLabel="normal" />
 
 
-        <EditText android:layout_width="match_parent"
-                  android:hint="E-mail"
-                  android:layout_marginBottom="@dimen/basic_padding"
-
-                  style="@style/EditTextUserInfo"
-
-                  android:layout_height="wrap_content"
-                  android:id="@+id/register_email"/>
-
-        <EditText android:layout_width="match_parent"
-                  android:layout_marginBottom="@dimen/basic_padding"
-
-                  android:hint="Password"
-                  style="@style/EditTextUserInfo"
-
-                  android:layout_height="wrap_content"
-                  android:id="@+id/register_password"/>
-
-    <TextView android:layout_width="match_parent"
-              android:id="@+id/create_account_button"
-              style="@style/LargeTextButton"
-              android:text="@string/create_account"
-              android:layout_height="wrap_content"
-              android:background="@color/md_yellow_800"/>
-
+    <TextView
+        android:id="@+id/create_account_button"
+        style="@style/LargeTextButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/md_yellow_800"
+        android:text="@string/create_account" />
 
 
 </LinearLayout>

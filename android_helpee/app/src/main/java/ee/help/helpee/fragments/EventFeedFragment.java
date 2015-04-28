@@ -2,6 +2,7 @@ package ee.help.helpee.fragments;
 
 import com.melnykov.fab.FloatingActionButton;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,7 +17,9 @@ import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 import ee.help.helpee.R;
+import ee.help.helpee.activities.NewEventActivity;
 import ee.help.helpee.adapters.EventsAdapter;
 import ee.help.helpee.dagger.EventFeedModule;
 import ee.help.helpee.dagger.components.DaggerEventFeedComponent;
@@ -62,6 +65,10 @@ public class EventFeedFragment extends BaseFragment implements EventFeedView {
 
     }
 
+    @OnClick(R.id.fab)
+    void createNewEvent(){
+        startActivity(new Intent(getActivity(), NewEventActivity.class));
+    }
     @Override
     public void onResume() {
         super.onResume();

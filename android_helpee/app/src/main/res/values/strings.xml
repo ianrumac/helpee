@@ -39,5 +39,19 @@
     <string name="no_location_data_provided">No location data provided</string>
     <string name="service_not_available">The service is not available</string>
     <string name="invalid_lat_long_used">Invalid latitude or longitude used</string>
+    <string name="single_point">1 POINT</string>
+    <string name="int_points">%s POINTS</string>
+
+    <string name="reward">Reward</string>
+    <string name="select_date">Select date</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="select_time">Select time</string>
+    <string name="select_location">Select location</string>
+    <string name="location">Location</string>
+    <string name="create_new_event">Create a new event</string>
+    <string name="click_for_location">Click to select a location</string>
+    <string name="event_created">Event created!</string>
+    <string name="failed_location">Failed to select location, please try again.</string>
 
 </resources>
