@@ -34,11 +34,7 @@ public class RegisterPresenterImpl implements RegisterPresenter {
 
             @Override
             public void onSuccess(User success) {
-/*
-                registerInteractor.uploadUserPicture(typedFile, uploadImageBaseListener);
-*/
-                HelpeeApplication.setUserInstance(success);
-                registerView.userRegistered(success);
+                registerInteractor.uploadUserPicture(HelpeeApplication.getUserInstance(), HelpeeApplication.getUserInstance().getUserId(), typedFile, uploadImageBaseListener);
 
             }
 
@@ -55,6 +51,7 @@ public class RegisterPresenterImpl implements RegisterPresenter {
         @Override
         public void onSuccess(User success) {
             registerView.hideProgress();
+            HelpeeApplication.setUserInstance(success);
             registerView.userRegistered(success);
 
         }

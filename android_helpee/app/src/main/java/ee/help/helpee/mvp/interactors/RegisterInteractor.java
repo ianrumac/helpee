@@ -13,5 +13,5 @@ public interface RegisterInteractor {
 
     void sendUserData(String name, String email, String password, BaseListener<User> registeredListener);
 
-    void uploadUserPicture(TypedFile typedFile, BaseListener<User> uploadCallback);
+    void uploadUserPicture(User user, String userId, TypedFile typedFile, BaseListener<User> uploadCallback);
 }

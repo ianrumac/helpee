@@ -12,11 +12,17 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.LatLng;
 
+import javax.inject.Inject;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import ee.help.helpee.R;
 import ee.help.helpee.custom.Constants;
+import ee.help.helpee.dagger.EventDetailsModule;
+import ee.help.helpee.dagger.components.DaggerEventDetailsComponent;
 import ee.help.helpee.models.Event;
+import ee.help.helpee.mvp.presenters.EventDetailsPresenter;
+import ee.help.helpee.mvp.views.EventDetailsView;
 
 import static ee.help.helpee.HelpeeApplication.getInstance;
 import static ee.help.helpee.HelpeeApplication.getLastKnownLocation;
@@ -24,7 +30,7 @@ import static ee.help.helpee.HelpeeApplication.getLastKnownLocation;
 /**
  * Created by infinum on 29/04/15.
  */
-public class EventDetailsActivity extends BaseActivity {
+public class EventDetailsActivity extends BaseActivity implements EventDetailsView {
 
     @InjectView(R.id.map_view)
     MapView mapView;
@@ -45,6 +51,11 @@ public class EventDetailsActivity extends BaseActivity {
     @InjectView(R.id.chip_in_container)
     RelativeLayout chipInContainer;
 
+
+    @Inject
+    EventDetailsPresenter detailsPresenter;
+
+
     GoogleMap googleMap;
     Event currentEvent;
 
@@ -56,9 +67,11 @@ public class EventDetailsActivity extends BaseActivity {
         ButterKnife.inject(this);
         mapView.onCreate(savedInstanceState);
         MapsInitializer.initialize(getInstance());
+        DaggerEventDetailsComponent.builder().eventDetailsModule(new EventDetailsModule(this)).build().inject(this);
         if(getIntent().getBooleanExtra(Constants.SHOULD_OPEN_CHIP_IN, false)){
             openChipIn();
         }
+
 
         super.onCreate(savedInstanceState);
     }
@@ -118,5 +131,18 @@ public class EventDetailsActivity extends BaseActivity {
     }
 
 
+    @Override
+    public void showEventData(Event event) {
 
+    }
+
+    @Override
+    public void hasChippedIn() {
+
+    }
+
+    @Override
+    public void hasHelped() {
+
+    }
 }

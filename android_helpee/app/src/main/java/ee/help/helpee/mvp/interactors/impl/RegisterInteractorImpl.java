@@ -2,6 +2,7 @@ package ee.help.helpee.mvp.interactors.impl;
 
 import javax.inject.Inject;
 
+import ee.help.helpee.errors.ErrorType;
 import ee.help.helpee.listeners.BaseListener;
 import ee.help.helpee.listeners.SimpleBaseListener;
 import ee.help.helpee.models.SimpleUser;
@@ -44,7 +45,19 @@ public class RegisterInteractorImpl implements RegisterInteractor {
     }
 
     @Override
-    public void uploadUserPicture(TypedFile typedFile, BaseListener<User> uploadCallback) {
+    public void uploadUserPicture(final User user, String userId, TypedFile typedFile, final BaseListener<User> uploadCallback) {
+            apiManager.getApiService().uploadUserImage(typedFile, userId, "Bearer" + user.getToken(), new Callback<String>() {
+                @Override
+                public void success(String s, Response response) {
+                    user.setImageUri(s);
+                    uploadCallback.onSuccess(user);
 
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+            uploadCallback.onFail(ErrorType.CONNECTION_ERROR);
+                }
+            });
     }
 }

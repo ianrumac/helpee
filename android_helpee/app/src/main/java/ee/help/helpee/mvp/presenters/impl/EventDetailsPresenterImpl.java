@@ -1,17 +1,34 @@
 package ee.help.helpee.mvp.presenters.impl;
 
+import javax.inject.Inject;
+
+import ee.help.helpee.models.Event;
 import ee.help.helpee.mvp.presenters.EventDetailsPresenter;
+import ee.help.helpee.mvp.views.EventDetailsView;
 
 /**
  * Created by infinum on 01/05/15.
  */
-public class EventDetailsPresenterImpl implements EventDetailsPresenter{
+public class EventDetailsPresenterImpl implements EventDetailsPresenter {
 
 
-    EventDetailsPresenter eventDetailsPresenter
+    EventDetailsPresenter eventDetailsPresenter;
+
+    EventDetailsView eventDetailsView;
+
+    @Inject
+    public EventDetailsPresenterImpl(EventDetailsPresenter eventDetailsPresenter, EventDetailsView eventDetailsView) {
+        this.eventDetailsPresenter = eventDetailsPresenter;
+        this.eventDetailsView = eventDetailsView;
+    }
 
     @Override
-    public void showEventData() {
+    public void fetchEventData(int eventId, String userId, String token) {
+
+    }
+
+    @Override
+    public void showEventData(Event event) {
 
     }
 

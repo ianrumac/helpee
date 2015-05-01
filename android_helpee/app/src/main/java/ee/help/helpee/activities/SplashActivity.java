@@ -139,7 +139,7 @@ public class SplashActivity extends BaseActivity implements
 
         /*Check if user is logged in and start the corresponding activity*/
         if (getUser() != null) {
-            startActivity(new Intent(this, MainActivity.class));
+            startActivity(new Intent(this, LoginActivity.class));
         } else {
             startActivity(new Intent(this, LoginActivity.class));
         }

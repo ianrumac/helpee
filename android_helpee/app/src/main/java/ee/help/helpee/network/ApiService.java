@@ -28,13 +28,14 @@ public interface ApiService {
     void postAccountInfo(@Query("access_token") String accessToken, Callback<User> userResponseCallback);
 
     @Multipart
-    @POST("/upload")
-    void upload(@Part("myfile") TypedFile file,
-            @Part("description") String description,
-            Callback<String> cb);
+    @POST("/Account/ImageUpload")
+    void uploadUserImage(@Part("myfile") TypedFile file,
+                         @Query("userid") String userId,
+                         @Header("Authorization") String token,
+                         Callback<String> urlCallback);
 
     @POST("/Events/CreateEvent")
-    void postEvent(@Body SimpleEvent event,@Header("Authorization") String token, Callback<Response> simpleCallback);
+    void postEvent(@Body SimpleEvent event, @Header("Authorization") String token, Callback<Response> simpleCallback);
 
     @POST("/Account/Register")
     void registerUster(@Body SimpleUser user, Callback<User> userRegisteredCallback);
