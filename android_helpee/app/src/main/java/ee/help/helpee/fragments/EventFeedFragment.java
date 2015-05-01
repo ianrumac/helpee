@@ -18,6 +18,7 @@ import javax.inject.Inject;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import ee.help.helpee.HelpeeApplication;
 import ee.help.helpee.R;
 import ee.help.helpee.activities.NewEventActivity;
 import ee.help.helpee.adapters.EventsAdapter;
@@ -66,15 +67,15 @@ public class EventFeedFragment extends BaseFragment implements EventFeedView {
     }
 
     @OnClick(R.id.fab)
-    void createNewEvent(){
+    void createNewEvent() {
         startActivity(new Intent(getActivity(), NewEventActivity.class));
     }
+
     @Override
     public void onResume() {
         super.onResume();
-        if (events == null) {
-            eventsPresenter.loadEventList();
-        }
+        eventsPresenter.loadEventList(HelpeeApplication.getUserCity(), getUser());
+
     }
 
     @Override

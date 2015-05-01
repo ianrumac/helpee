@@ -2,103 +2,49 @@ package ee.help.helpee.models;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 /**
  * Created by ian on 12/04/15.
  */
 public class Event {
 
-    @SerializedName("eventname")
-    String eventTitle;
-
-    String userFullName;
-
-    String userImageLink;
-
-    @SerializedName("creatorid")
-    String creatorId;
-
-    @SerializedName("date")
-    String eventDate;
-
-    @SerializedName("time")
-    String eventTime;
-
-    @SerializedName("description")
-    String description;
-
+    @SerializedName("ID")
     int eventId;
 
-    long eventStartTime;
+    @SerializedName("EventName")
+    String eventTitle;
 
-    long eventEndTime;
+    @SerializedName("City")
+    String location;
+
+    @SerializedName("Description")
+    String description;
+
+    @SerializedName("Longitude")
+    double longitude;
+
+    @SerializedName("Latitude")
+    double latitude;
+
+
+    @SerializedName("Creator")
+    User creator;
+
+    @SerializedName("Helpees")
+    List<User> helpeesList;
+
+    @SerializedName("ChipIns")
+    List<User> chipIns;
+
+    @SerializedName("IsCompleted")
+    boolean isCompleted;
+
+    @SerializedName("NrOfHelpees")
+    int numberOfHelpees;
 
     int points;
 
-    @SerializedName("city")
-    String location;
-
-    @SerializedName("latitude")
-    double latitude;
-
-    @SerializedName("longitude")
-    double longitude;
-
-
-    public Event() {
-    }
-
-    public Event(String eventTitle, String creatorId, String eventDate, String eventTime, String description,
-                 double latitude, double longitude, String location) {
-        this.eventTitle = eventTitle;
-        this.creatorId = creatorId;
-        this.eventDate = eventDate;
-        this.eventTime = eventTime;
-        this.description = description;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.location = location;
-    }
-
-    public String getEventTitle() {
-        return eventTitle;
-    }
-
-    public String getUserImageLink() {
-        //TODO placeholder if it is null
-        return userImageLink;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getEventDate() {
-        return eventDate;
-    }
-
-    public void setEventDate(String eventDate) {
-        this.eventDate = eventDate;
-    }
-
-    public void setUserImageLink(String userImageLink) {
-        this.userImageLink = userImageLink;
-    }
-
-    public void setEventTitle(String eventTitle) {
-        this.eventTitle = eventTitle;
-    }
-
-    public String getUserFullName() {
-        return userFullName;
-    }
-
-    public void setUserFullName(String userFullName) {
-        this.userFullName = userFullName;
-    }
 
     public int getEventId() {
         return eventId;
@@ -108,28 +54,12 @@ public class Event {
         this.eventId = eventId;
     }
 
-    public long getEventStartTime() {
-        return eventStartTime;
+    public String getEventTitle() {
+        return eventTitle;
     }
 
-    public void setEventStartTime(long eventStartTime) {
-        this.eventStartTime = eventStartTime;
-    }
-
-    public long getEventEndTime() {
-        return eventEndTime;
-    }
-
-    public void setEventEndTime(long eventEndTime) {
-        this.eventEndTime = eventEndTime;
-    }
-
-    public int getPoints() {
-        return points;
-    }
-
-    public void setPoints(int points) {
-        this.points = points;
+    public void setEventTitle(String eventTitle) {
+        this.eventTitle = eventTitle;
     }
 
     public String getLocation() {
@@ -140,12 +70,12 @@ public class Event {
         this.location = location;
     }
 
-    public double getLatitude() {
-        return latitude;
+    public String getDescription() {
+        return description;
     }
 
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public double getLongitude() {
@@ -154,5 +84,64 @@ public class Event {
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public User getCreator() {
+        return creator;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
+    }
+
+    public List<User> getHelpeesList() {
+        return helpeesList;
+    }
+
+    public void setHelpeesList(List<User> helpeesList) {
+        this.helpeesList = helpeesList;
+    }
+
+    public List<User> getChipIns() {
+        return chipIns;
+    }
+
+    public void setChipIns(List<User> chipIns) {
+        this.chipIns = chipIns;
+    }
+
+    public boolean isCompleted() {
+        return isCompleted;
+    }
+
+    public void setIsCompleted(boolean isCompleted) {
+        this.isCompleted = isCompleted;
+    }
+
+    public int getNumberOfHelpees() {
+        return numberOfHelpees;
+    }
+
+    public void setNumberOfHelpees(int numberOfHelpees) {
+        this.numberOfHelpees = numberOfHelpees;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    public Event() {
     }
 }

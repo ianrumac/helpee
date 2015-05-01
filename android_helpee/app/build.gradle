@@ -23,6 +23,10 @@ android {
    }
 
     buildTypes {
+        debug{
+            signingConfig signingConfigs.release
+
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -91,6 +95,7 @@ dependencies {
 
     compile 'com.github.flavienlaurent.datetimepicker:library:0.0.2'
 
+    compile 'com.facebook.fresco:fresco:0.4.0+'
 
 }
 

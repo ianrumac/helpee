@@ -43,10 +43,6 @@
         android:layout_height="match_parent"
         android:foreground="@drawable/bottom_shadow">
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -58,12 +54,12 @@
                     style="@style/EditTextUserInfo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:met_floatingLabel="normal"
-                    app:met_floatingLabelText="Title"
                     android:layout_marginLeft="@dimen/basic_padding"
                     android:layout_marginRight="@dimen/basic_padding"
-
-                    app:met_floatingLabelTextColor="@color/grey_subtitle" />
+                    app:met_floatingLabel="normal"
+                    app:met_floatingLabelText="Title"
+                    app:met_floatingLabelTextColor="@color/grey_subtitle"
+                    app:met_textColorHint="@color/grey_subtitle"/>
 
 
                 <com.rengwuxian.materialedittext.MaterialEditText
@@ -72,12 +68,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/basic_padding"
-                    android:lines="2"
                     android:layout_marginLeft="@dimen/basic_padding"
                     android:layout_marginRight="@dimen/basic_padding"
+                    android:lines="2"
                     app:met_floatingLabel="normal"
                     app:met_floatingLabelText="Description"
-                    app:met_floatingLabelTextColor="@color/grey_subtitle" />
+                    app:met_floatingLabelTextColor="@color/grey_subtitle"
+                    app:met_textColorHint="@color/grey_subtitle"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -190,22 +187,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/date"
-android:layout_marginBottom="@dimen/basic_padding"
+                    android:layout_marginBottom="@dimen/basic_padding"
                     android:paddingLeft="@dimen/basic_padding"
                     android:text="@string/select_location"
                     android:textColor="@color/main_blue"
                     android:textSize="@dimen/abc_text_size_title_material" />
 
-                <TextView
-                    android:id="@+id/create_event_btn"
-                    android:clickable="true"
-                    style="@style/LargeTextButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/md_yellow_800"
-                    android:text="@string/create_an_event" />
             </LinearLayout>
-        </ScrollView>
+
+        <TextView
+            android:layout_gravity="bottom"
+            android:id="@+id/create_event_btn"
+            style="@style/LargeTextButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/md_yellow_800"
+            android:clickable="true"
+            android:text="@string/create_an_event" />
 
     </FrameLayout>
 

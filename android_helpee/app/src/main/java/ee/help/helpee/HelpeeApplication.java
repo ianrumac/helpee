@@ -1,5 +1,6 @@
 package ee.help.helpee;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 
@@ -30,6 +31,7 @@ public class HelpeeApplication extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
+        Fresco.initialize(this);
         FacebookSdk.sdkInitialize(this);
         Parse.initialize(this, "ErveS8KjqjEL6BNhCxXByAeKJOvQoawLdJQrLK9n", "9soIopAA2W7lhp0zfoTWwplrvUyasRshTCfnVIXB");
         ParseInstallation.getCurrentInstallation().saveInBackground();
@@ -72,6 +74,10 @@ public class HelpeeApplication extends Application {
     }
 
     public static void setUserInstance(User userInstance) {
+        String userAsJson = new Gson().toJson(userInstance);
+        HelpeeApplication.getInstance().getSharedPreferences(Constants.HELPEE_PREFS, Context.MODE_PRIVATE).edit()
+                .putString(Constants.USER_ITEM, userAsJson).commit();
+
         HelpeeApplication.userInstance = userInstance;
     }
 }

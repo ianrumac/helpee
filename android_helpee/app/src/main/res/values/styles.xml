@@ -21,4 +21,13 @@
         <item name="android:backgroundTint">@color/md_yellow_800</item>
         <item name="android:padding">@dimen/basic_padding</item>
     </style>
+
+    <style name="DrawerItem">
+
+        <item name="android:paddingTop">@dimen/basic_padding</item>
+        <item name="android:paddingBottom">@dimen/basic_padding</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">@dimen/material_drawer_item_primary_text</item>
+        <item name="android:layout_marginLeft">@dimen/default_padding</item>
+    </style>
 </resources>

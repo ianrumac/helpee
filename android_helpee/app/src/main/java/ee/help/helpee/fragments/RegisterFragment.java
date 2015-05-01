@@ -31,13 +31,18 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import ee.help.helpee.R;
+import ee.help.helpee.activities.MainActivity;
+import ee.help.helpee.dagger.RegisterModule;
+import ee.help.helpee.dagger.components.DaggerRegisterComponent;
+import ee.help.helpee.models.User;
 import ee.help.helpee.mvp.presenters.RegisterPresenter;
+import ee.help.helpee.mvp.views.RegisterView;
 import retrofit.mime.TypedFile;
 
 /**
  * Created by ian on 25/04/15.
  */
-public class RegisterFragment extends BaseFragment {
+public class RegisterFragment extends BaseFragment implements RegisterView {
 
     static final int REQUEST_CAMERA = 1;
 
@@ -67,12 +72,17 @@ public class RegisterFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View contentView = inflater.inflate(R.layout.fragment_register, container, false);
+
+        DaggerRegisterComponent.builder().registerModule(new RegisterModule(this)).build().inject(this);
         ButterKnife.inject(this, contentView);
         return contentView;
     }
 
     @OnClick(R.id.profile_picture)
     void selectImage() {
+
+        /*Shows user intent to take a photo himself or existing one*/
+
         final CharSequence[] items = {"Take Photo", "Choose from Library",
                 "Cancel"};
 
@@ -130,7 +140,7 @@ public class RegisterFragment extends BaseFragment {
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == REQUEST_CAMERA) {
 
-                /*User requested to get take a pic, so we save it and use the thumbnail as profile*/
+                /*User requested to  take a picture, so we save it and use the thumbnail as profile*/
                 Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
                 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
                 thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
@@ -188,4 +198,10 @@ public class RegisterFragment extends BaseFragment {
         }
     }
 
+    @Override
+    public void userRegistered(User user) {
+
+        startActivity(new Intent(getActivity(), MainActivity.class));
+        getActivity().finish();
+    }
 }

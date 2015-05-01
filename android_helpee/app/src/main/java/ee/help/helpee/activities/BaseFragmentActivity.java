@@ -29,6 +29,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
 
         mProgressDialog = new ProgressDialog(this, HelpeeApplication.getInstance().getString(R.string.loading_msg),
                 R.color.maroon);
+        mProgressDialog.setCancelable(false);
         mProgressDialog.show();
 
     }
@@ -36,6 +37,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
      public void showProgress(int message) {
 
         mProgressDialog = new ProgressDialog(this, HelpeeApplication.getInstance().getString(message), R.color.maroon);
+         mProgressDialog.setCancelable(false);
         mProgressDialog.show();
 
     }

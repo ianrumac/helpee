@@ -24,4 +24,6 @@ public class Constants {
 
     public static final String LOCATION_DATA_EXTRA =  "LOCATION_DATA_EXTRA";
 
+    public static final String SHOULD_OPEN_CHIP_IN = "should-open-chip-in";
+
 }

@@ -1,8 +1,10 @@
 package ee.help.helpee.adapters;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.pkmmte.view.CircularImageView;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,13 +49,21 @@ public class EventsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     void bindDataToEventView(EventHolder holder, Event event) {
 
         holder.title.setText(event.getEventTitle());
-        holder.userName.setText(event.getUserFullName());
-/*
-        Glide.with(context).load(event.getUserImageLink()).into(holder.image);
-*/
-        holder.time.setText(event.getEventDate());
+        holder.userName.setText(String.format(context.getString(R.string.needs_help), event.getCreator().getFullName()));
+        /*Parse image URL and sent it into the drawee - if URL exists*/
+
+        if (event.getCreator().getImageUri() != null && !"".equals(event.getCreator().getImageUri())) {
+            Uri uri = Uri.parse(event.getCreator().getImageUri());
+            holder.image.setImageURI(uri);
+        }
+        holder.time.setText("What is that?");
+
         holder.description.setText(event.getDescription());
-        holder.points.setText(String.format(context.getString(R.string.points), event.getPoints()));
+
+        if (event.getPoints() > 1)
+            holder.points.setText(String.format(context.getString(R.string.points), event.getPoints()));
+        else
+            holder.points.setText("+".concat(context.getString(R.string.single_point)));
 
     }
 
@@ -67,7 +77,7 @@ public class EventsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
 
         @InjectView(R.id.event_img)
-        CircularImageView image;
+        SimpleDraweeView image;
 
         @InjectView(R.id.event_time)
         TextView time;

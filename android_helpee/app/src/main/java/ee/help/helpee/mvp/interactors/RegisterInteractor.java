@@ -11,7 +11,7 @@ import retrofit.mime.TypedFile;
  */
 public interface RegisterInteractor {
 
-    void sendUserData(String name, String email, String password, SimpleBaseListener stringCallback);
+    void sendUserData(String name, String email, String password, BaseListener<User> registeredListener);
 
     void uploadUserPicture(TypedFile typedFile, BaseListener<User> uploadCallback);
 }

@@ -1,63 +1,55 @@
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:id="@+id/drawer_layout"
-    android:layout_gravity="left"
-    android:background="@color/white"
-    android:elevation="@dimen/basic_padding"
-    android:layout_height="match_parent">
-<LinearLayout
+
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="10">
-    <RelativeLayout
-        android:padding="@dimen/basic_padding"
-        android:layout_weight="3"
-        android:layout_width="match_parent"
-        android:background="@color/main_blue"
-        android:layout_height="0dp">
+    android:layout_height="200dp"
+    android:background="@color/main_blue"
+    android:padding="@dimen/single_unit">
 
-
-        <TextView
-            android:layout_alignParentBottom="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAllCaps="true"
-            android:textColor="@color/white"
-            android:gravity="center"
-            android:id="@+id/user_chips_left"
-            android:drawablePadding="@dimen/half_unit"
-            android:padding="@dimen/half_unit"
-            android:drawableLeft="@drawable/chip_icon"
-            tools:text="5 left"/>
-        <TextView
-            android:layout_above="@id/user_chips_left"
-            android:textSize="@dimen/abc_text_size_title_material_toolbar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:id="@+id/user_name"
-            tools:text="Ivan Škoro"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/user_chips_left"
-            android:layout_alignParentRight="true"
-            android:src="@android:drawable/arrow_down_float"/>
-    </RelativeLayout>
 
     <LinearLayout
-        android:layout_weight="7"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/profile_image_view"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            fresco:placeholderImage="@drawable/ic_helpee"
+            fresco:roundAsCircle="true" />
+
+
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Users Name"
+            android:textColor="@color/white"
+            android:textSize="@dimen/abc_text_size_title_material_toolbar"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/user_chips_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:drawableLeft="@drawable/chip_icon"
+            android:drawablePadding="@dimen/half_unit"
+            android:gravity="center"
+            android:padding="@dimen/half_unit"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            tools:text="5 left" />
+
     </LinearLayout>
 
-</LinearLayout>
-</android.support.v4.widget.DrawerLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:src="@android:drawable/arrow_down_float" />
+
+
+</RelativeLayout>

@@ -7,5 +7,12 @@
     <dimen name="default_padding">72dp</dimen>
     <dimen name="extra_large_text">28sp</dimen>
     <dimen name="half_unit">4dp</dimen>
-    <dimen name="text_size_small_material_subtitle">12sp</dimen>
+
+    <dimen name="text_size_small_material_subtitle">10sp</dimen>
+    <dimen name="text_size_material_subtitle">14sp</dimen>
+    <dimen name="text_size_material_title">18sp</dimen>
+
+    <dimen name="drawer_width">320dp</dimen>
+    <dimen name="details_item_size">72dp</dimen>
+
 </resources>

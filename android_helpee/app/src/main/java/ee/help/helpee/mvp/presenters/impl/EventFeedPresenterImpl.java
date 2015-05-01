@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import ee.help.helpee.errors.ErrorType;
 import ee.help.helpee.listeners.BaseListener;
 import ee.help.helpee.models.Event;
+import ee.help.helpee.models.User;
 import ee.help.helpee.mvp.interactors.EventFeedInteractor;
 import ee.help.helpee.mvp.presenters.EventFeedPresenter;
 import ee.help.helpee.mvp.views.EventFeedView;
@@ -27,9 +28,9 @@ public class EventFeedPresenterImpl implements EventFeedPresenter {
     }
 
     @Override
-    public void loadEventList() {
+    public void loadEventList(String city, User user) {
         feedView.showProgress();
-        eventFeedInteractor.fetchEvents(eventListListenerImplementation);
+        eventFeedInteractor.fetchEvents(city, user.getUserId(), user.getToken(), eventListListenerImplementation);
 
     }
 

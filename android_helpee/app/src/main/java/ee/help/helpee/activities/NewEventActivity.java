@@ -5,14 +5,7 @@ import android.content.Intent;
 import android.location.Address;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
-import android.text.style.TtsSpan;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.fourmob.datetimepicker.date.DatePickerDialog;
@@ -30,8 +23,9 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import ee.help.helpee.R;
-import ee.help.helpee.activities.BaseActivity;
 import ee.help.helpee.custom.Constants;
+import ee.help.helpee.dagger.NewEventModule;
+import ee.help.helpee.dagger.components.DaggerNewEventComponent;
 import ee.help.helpee.errors.ErrorType;
 import ee.help.helpee.fragments.SelectLocationFragment;
 import ee.help.helpee.listeners.BaseListener;
@@ -76,6 +70,7 @@ public class NewEventActivity extends BaseFragmentActivity implements NewEventVi
     @InjectView(R.id.location_output)
     TextView locationOutput;
 
+    String locationCity;
     AddressResultReceiver mResultReceiver;
     boolean isDateSelected, isTimeSelected, isLocationSelected = false;
 
@@ -92,12 +87,13 @@ public class NewEventActivity extends BaseFragmentActivity implements NewEventVi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_new_event);
+        setContentView(R.layout.activity_new_event);
+        DaggerNewEventComponent.builder().newEventModule(new NewEventModule(this)).build().inject(this);
+
         dateBuilder = new StringBuilder();
         timeBuilder = new StringBuilder();
         eventPoints = 1;
         mResultReceiver = new AddressResultReceiver(new Handler(), returnAddressListener);
-
         calendar = Calendar.getInstance();
         datePickerDialog = DatePickerDialog.newInstance(onDateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), true);
         timePickerDialog = TimePickerDialog.newInstance(onTimeSetListener, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), false, false);
@@ -137,7 +133,10 @@ public class NewEventActivity extends BaseFragmentActivity implements NewEventVi
     void createNewEvent() {
         if (checkInputIsValid()) {
             newEventPresenter.createEvent(getUser(), userSelectedLocation, eventTitle.getText().toString(),
-                    eventDescription.getText().toString(), eventPoints, timeOutput.getText().toString(), dateOutput.getText().toString(),
+                    eventDescription.getText().toString(), eventPoints,
+                    timeOutput.getText().toString(),
+                    dateOutput.getText().toString(),
+                    locationCity,
                     locationOutput.getText().toString());
 
         }
@@ -160,8 +159,8 @@ public class NewEventActivity extends BaseFragmentActivity implements NewEventVi
         } else if (dateOutput.getText().toString().equals(getString(R.string.select_date))) {
             showError(getString(R.string.error_date));
             return false;
-        } else if (isLocationSelected) {
-            showError("Where should your helpees come? Psst, there's a select location button!");
+        } else if (!isLocationSelected) {
+            showError(getString(R.string.select_location_error));
             return false;
         } else return true;
 
@@ -178,6 +177,8 @@ public class NewEventActivity extends BaseFragmentActivity implements NewEventVi
     public void setLocation(LatLng latLng) {
         userSelectedLocation = latLng;
         isLocationSelected = true;
+
+        /*Start service, because Geocoder is synchronous and we don't want to block the UI thread*/
         startIntentService();
 
     }
@@ -191,17 +192,14 @@ public class NewEventActivity extends BaseFragmentActivity implements NewEventVi
 
         // Pass the location data as an extra to the service.
         intent.putExtra(Constants.LOCATION_DATA_EXTRA, userSelectedLocation);
-
-        // Start the service. If the service isn't already running, it is instantiated and started
-        // (creating a process for it if needed); if it is running then it remains running. The
-        // service kills itself automatically once all intents are processed.
         startService(intent);
     }
 
     BaseListener<Address> returnAddressListener = new BaseListener<Address>() {
         @Override
         public void onSuccess(Address success) {
-            locationOutput.setText(success.getThoroughfare());
+            locationOutput.setText(success.getAddressLine(0));
+            locationCity = success.getLocality();
         }
 
         @Override

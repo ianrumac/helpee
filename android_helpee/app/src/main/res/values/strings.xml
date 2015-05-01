@@ -19,7 +19,9 @@
     <string name="error_occured_title">An error occurred</string>
     <string name="loading_msg">Loading …</string>
 
-    <string name="points">+%s POINTS FROM :</string>
+    <string name="points">+%s POINTS </string>
+    <string name="needs_help">%s NEEDS HELP </string>
+
     <string name="create_account">Create an account</string>
     <string name="click_to_create_account">Or click here to create an account</string>
     <string name="check_username">Please check your username and try again</string>
@@ -41,7 +43,7 @@
     <string name="invalid_lat_long_used">Invalid latitude or longitude used</string>
     <string name="single_point">1 POINT</string>
     <string name="int_points">%s POINTS</string>
-
+    <string name="chips_left">%s LEFT</string>
     <string name="reward">Reward</string>
     <string name="select_date">Select date</string>
     <string name="date">Date</string>
@@ -58,5 +60,11 @@
     <string name="error_description">Ooops! Seems like you forgot a description! C\'mon, think of something and try again!</string>
     <string name="error_time">What time does the event start? Click on \'Select time\' and tell us !</string>
     <string name="error_date">Hey hey hey, can\'t create it without knowing the date! Click on \'Select date\' and pick a day.</string>
+    <string name="event_feed">Event feed</string>
+    <string name="my_events">My events</string>
+    <string name="heroes">Heroes</string>
+    <string name="select_location_error">Where should your helpees come? Psst, there\'s a select location button!</string>
+    <string name="details_needs_help">Needs help</string>
+    <string name="helpee">Helpee</string>
 
 </resources>
