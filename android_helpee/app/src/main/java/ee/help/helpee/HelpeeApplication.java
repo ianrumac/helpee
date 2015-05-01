@@ -1,5 +1,6 @@
 package ee.help.helpee;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 
 import com.facebook.FacebookSdk;
@@ -23,6 +24,8 @@ public class HelpeeApplication extends Application {
 
     public static String userCity;
 
+    public static LatLng lastKnownLocation;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -32,6 +35,7 @@ public class HelpeeApplication extends Application {
         ParseInstallation.getCurrentInstallation().saveInBackground();
 
     }
+
 
     public static HelpeeApplication getInstance() {
         return instance;
@@ -51,7 +55,13 @@ public class HelpeeApplication extends Application {
         return userInstance;
     }
 
+    public static LatLng getLastKnownLocation() {
+        return lastKnownLocation;
+    }
 
+    public static void setLastKnownLocation(LatLng lastKnownLocation) {
+        HelpeeApplication.lastKnownLocation = lastKnownLocation;
+    }
 
     public static String getUserCity() {
         return userCity;

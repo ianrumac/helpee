@@ -29,7 +29,7 @@ public class EventFeedInteractorImpl implements EventFeedInteractor {
 
         List<Event> events = new ArrayList<>();
         Event eventToTest = new Event();
-        eventToTest.setEventDateAndTime("01:20 - 22:30 16.4.2015");
+        eventToTest.setEventDate("01:20 - 22:30 16.4.2015");
         eventToTest.setEventTitle("Pomozimo ianu da popuni podatke");
         eventToTest.setLocation("Strojarska 22");
 

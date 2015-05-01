@@ -7,18 +7,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.fourmob.datetimepicker.date.DatePickerDialog;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.LatLng;
+import com.sleepbot.datetimepicker.time.RadialPickerLayout;
+import com.sleepbot.datetimepicker.time.TimePickerDialog;
 
 import java.lang.Override;
+import java.util.Calendar;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 import ee.help.helpee.HelpeeApplication;
 import ee.help.helpee.R;
 import ee.help.helpee.activities.NewEventActivity;
+
+import static ee.help.helpee.HelpeeApplication.*;
 
 /**
  * Created by ian on 16/01/15.
@@ -31,9 +39,9 @@ public class SelectLocationFragment extends DialogFragment {
     MapView mMapView;
 
 
+
+
     GoogleMap googleMap;
-
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,8 +49,10 @@ public class SelectLocationFragment extends DialogFragment {
         View mainView = inflater.inflate(R.layout.location_fragment, container, false);
         ButterKnife.inject(this, mainView);
         mMapView.onCreate(null);
-        MapsInitializer.initialize(HelpeeApplication.getInstance());
+        MapsInitializer.initialize(getInstance());
         initMap();
+
+
         return mainView;
     }
 
@@ -54,6 +64,7 @@ public class SelectLocationFragment extends DialogFragment {
             googleMap.getUiSettings().setZoomControlsEnabled(false);
             googleMap.getUiSettings().setMyLocationButtonEnabled(false);
             googleMap.setMyLocationEnabled(true);
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(getLastKnownLocation(),16));
 
             googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 

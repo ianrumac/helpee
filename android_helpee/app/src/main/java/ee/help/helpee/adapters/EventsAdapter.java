@@ -1,6 +1,5 @@
 package ee.help.helpee.adapters;
 
-import com.bumptech.glide.Glide;
 import com.pkmmte.view.CircularImageView;
 
 import android.content.Context;
@@ -52,7 +51,7 @@ public class EventsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 /*
         Glide.with(context).load(event.getUserImageLink()).into(holder.image);
 */
-        holder.time.setText(event.getEventDateAndTime());
+        holder.time.setText(event.getEventDate());
         holder.description.setText(event.getDescription());
         holder.points.setText(String.format(context.getString(R.string.points), event.getPoints()));
 

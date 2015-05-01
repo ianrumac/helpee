@@ -1,18 +1,29 @@
 package ee.help.helpee.models;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by ian on 12/04/15.
  */
 public class Event {
 
+    @SerializedName("eventname")
     String eventTitle;
 
     String userFullName;
 
     String userImageLink;
 
-    String eventDateAndTime;
+    @SerializedName("creatorid")
+    String creatorId;
 
+    @SerializedName("date")
+    String eventDate;
+
+    @SerializedName("time")
+    String eventTime;
+
+    @SerializedName("description")
     String description;
 
     int eventId;
@@ -23,12 +34,30 @@ public class Event {
 
     int points;
 
+    @SerializedName("city")
     String location;
 
+    @SerializedName("latitude")
     double latitude;
 
+    @SerializedName("longitude")
     double longitude;
 
+
+    public Event() {
+    }
+
+    public Event(String eventTitle, String creatorId, String eventDate, String eventTime, String description,
+                 double latitude, double longitude, String location) {
+        this.eventTitle = eventTitle;
+        this.creatorId = creatorId;
+        this.eventDate = eventDate;
+        this.eventTime = eventTime;
+        this.description = description;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.location = location;
+    }
 
     public String getEventTitle() {
         return eventTitle;
@@ -47,12 +76,12 @@ public class Event {
         this.description = description;
     }
 
-    public String getEventDateAndTime() {
-        return eventDateAndTime;
+    public String getEventDate() {
+        return eventDate;
     }
 
-    public void setEventDateAndTime(String eventDateAndTime) {
-        this.eventDateAndTime = eventDateAndTime;
+    public void setEventDate(String eventDate) {
+        this.eventDate = eventDate;
     }
 
     public void setUserImageLink(String userImageLink) {

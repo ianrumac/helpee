@@ -7,15 +7,22 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
+import android.text.style.TtsSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.fourmob.datetimepicker.date.DatePickerDialog;
 import com.gc.materialdesign.widgets.SnackBar;
 import com.google.android.gms.maps.model.LatLng;
 import com.rengwuxian.materialedittext.MaterialEditText;
+import com.sleepbot.datetimepicker.time.RadialPickerLayout;
+import com.sleepbot.datetimepicker.time.TimePickerDialog;
+
+import java.util.Calendar;
 
 import javax.inject.Inject;
 
@@ -36,7 +43,10 @@ import ee.help.helpee.services.FetchAddressIntentService;
 /**
  * Created by ian on 26/04/15.
  */
-public class NewEventActivity extends BaseActivity implements NewEventView {
+public class NewEventActivity extends BaseFragmentActivity implements NewEventView {
+
+    public static final String DATEPICKER_TAG = "datepicker";
+    public static final String TIMEPICKER_TAG = "timepicker";
 
 
     @InjectView(R.id.event_title)
@@ -57,12 +67,8 @@ public class NewEventActivity extends BaseActivity implements NewEventView {
     Toolbar toolbar;
     @InjectView(R.id.points_added)
     TextView pointsAdded;
-    @InjectView(R.id.date)
-    TextView date;
     @InjectView(R.id.date_output)
     TextView dateOutput;
-    @InjectView(R.id.time)
-    TextView time;
     @InjectView(R.id.time_output)
     TextView timeOutput;
     @InjectView(R.id.location)
@@ -73,12 +79,28 @@ public class NewEventActivity extends BaseActivity implements NewEventView {
     AddressResultReceiver mResultReceiver;
     boolean isDateSelected, isTimeSelected, isLocationSelected = false;
 
+    DatePickerDialog datePickerDialog;
+    TimePickerDialog timePickerDialog;
+    Calendar calendar;
+    StringBuilder timeBuilder;
+    StringBuilder dateBuilder;
+
+    String time;
+    String date;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_new_event);
+        dateBuilder = new StringBuilder();
+        timeBuilder = new StringBuilder();
         eventPoints = 1;
-        mResultReceiver = new AddressResultReceiver(new Handler(), returnAddressListener );
+        mResultReceiver = new AddressResultReceiver(new Handler(), returnAddressListener);
+
+        calendar = Calendar.getInstance();
+        datePickerDialog = DatePickerDialog.newInstance(onDateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), true);
+        timePickerDialog = TimePickerDialog.newInstance(onTimeSetListener, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), false, false);
 
         ButterKnife.inject(this);
 
@@ -113,34 +135,53 @@ public class NewEventActivity extends BaseActivity implements NewEventView {
 
     @OnClick(R.id.create_event_btn)
     void createNewEvent() {
-        if (checkInputIsValid())
+        if (checkInputIsValid()) {
             newEventPresenter.createEvent(getUser(), userSelectedLocation, eventTitle.getText().toString(),
-                    eventDescription.getText().toString(), eventPoints);
+                    eventDescription.getText().toString(), eventPoints, timeOutput.getText().toString(), dateOutput.getText().toString(),
+                    locationOutput.getText().toString());
+
+        }
     }
+
+    ;
 
     boolean checkInputIsValid() {
 
-        if (eventTitle.getText().toString().length() < 3)
+        if (eventTitle.getText().toString().length() < 3) {
+            showError(getString(R.string.error_title));
             return false;
-        else if (eventDescription.getText().toString().length() < 3)
+        } else if (eventDescription.getText().toString().length() < 3) {
+            showError(getString(R.string.error_description));
             return false;
-        else return (isLocationSelected && isDateSelected && isTimeSelected);
+
+        } else if (timeOutput.getText().toString().equals(getString(R.string.select_time))) {
+            showError(getString(R.string.error_time));
+            return false;
+        } else if (dateOutput.getText().toString().equals(getString(R.string.select_date))) {
+            showError(getString(R.string.error_date));
+            return false;
+        } else if (isLocationSelected) {
+            showError("Where should your helpees come? Psst, there's a select location button!");
+            return false;
+        } else return true;
+
 
     }
 
     @OnClick(R.id.location_output)
-    void openLocationPicker(){
+    void openLocationPicker() {
         SelectLocationFragment selectLocationFragment = new SelectLocationFragment();
         selectLocationFragment.setStyle(DialogFragment.STYLE_NO_TITLE, android.R.style.Theme_Black);
         selectLocationFragment.show(getFragmentManager(), SelectLocationFragment.TAG);
     }
 
-    public void setLocation(LatLng latLng){
+    public void setLocation(LatLng latLng) {
         userSelectedLocation = latLng;
         isLocationSelected = true;
         startIntentService();
 
     }
+
     protected void startIntentService() {
         // Create an intent for passing to the intent service responsible for fetching the address.
         Intent intent = new Intent(this, FetchAddressIntentService.class);
@@ -169,5 +210,53 @@ public class NewEventActivity extends BaseActivity implements NewEventView {
         }
     };
 
+    @OnClick(R.id.date_output)
+    void chooseDate() {
+        datePickerDialog.setVibrate(true);
+        datePickerDialog.setYearRange(calendar.get(Calendar.YEAR), 2028);
+        datePickerDialog.setCloseOnSingleTapDay(true);
+        datePickerDialog.show(getSupportFragmentManager(), DATEPICKER_TAG);
+    }
 
+    @OnClick(R.id.time_output)
+    void chooseTime() {
+        timePickerDialog.setVibrate(false);
+        timePickerDialog.setCloseOnSingleTapMinute(true);
+        timePickerDialog.show(getSupportFragmentManager(), TIMEPICKER_TAG);
+    }
+
+    DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePickerDialog datePickerDialog, int year, int month, int day) {
+            dateBuilder = new StringBuilder();
+            if (month < calendar.get(Calendar.MONTH))
+                datePickerDialog.show(getSupportFragmentManager(), DATEPICKER_TAG);
+            else if (day < calendar.get(Calendar.DAY_OF_WEEK_IN_MONTH))
+                datePickerDialog.show(getSupportFragmentManager(), DATEPICKER_TAG);
+
+
+            date = dateBuilder.append(timeToString(day)).append("-").append(timeToString(month)).append("-").append(year).toString();
+            dateOutput.setText(date);
+        }
+    };
+
+    TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+        @Override
+        public void onTimeSet(RadialPickerLayout radialPickerLayout, int hourOfDay, int minute) {
+            timeBuilder = new StringBuilder();
+            time = timeBuilder.append(timeToString(hourOfDay)).append(":").append(timeToString(minute)).toString();
+            timeOutput.setText(time);
+
+
+        }
+    };
+
+
+    String timeToString(int time) {
+        if (time < 10) {
+            return "0" + time;
+        } else
+            return String.valueOf(time);
+
+    }
 }

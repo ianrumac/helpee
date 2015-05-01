@@ -53,5 +53,10 @@
     <string name="click_for_location">Click to select a location</string>
     <string name="event_created">Event created!</string>
     <string name="failed_location">Failed to select location, please try again.</string>
+    <string name="create_an_event">Create an event!</string>
+    <string name="error_title">Ooops! Seems like you forgot to give your event a title! Fill it out and try again!</string>
+    <string name="error_description">Ooops! Seems like you forgot a description! C\'mon, think of something and try again!</string>
+    <string name="error_time">What time does the event start? Click on \'Select time\' and tell us !</string>
+    <string name="error_date">Hey hey hey, can\'t create it without knowing the date! Click on \'Select date\' and pick a day.</string>
 
 </resources>

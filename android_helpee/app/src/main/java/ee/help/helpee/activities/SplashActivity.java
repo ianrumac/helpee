@@ -18,6 +18,8 @@ import ee.help.helpee.listeners.BaseListener;
 import ee.help.helpee.receivers.AddressResultReceiver;
 import ee.help.helpee.services.FetchAddressIntentService;
 
+import static ee.help.helpee.HelpeeApplication.*;
+
 /**
  * Created by ian on 25/04/15.
  */
@@ -54,7 +56,7 @@ public class SplashActivity extends BaseActivity implements
         @Override
         public void onSuccess(Address success) {
             userCity = success.getLocality();
-            HelpeeApplication.setUserCity(userCity);
+            setUserCity(userCity);
             onSplashFinished();
         }
 
@@ -67,9 +69,7 @@ public class SplashActivity extends BaseActivity implements
     @Override
     public void onConnected(Bundle bundle) {
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-/*
-        HelpeeApplication.set
-*/
+        setLastKnownLocation(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude()));
         if (mLastLocation != null) {
             startIntentService();
         }else{

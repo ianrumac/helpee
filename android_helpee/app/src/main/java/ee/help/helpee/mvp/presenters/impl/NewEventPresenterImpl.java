@@ -31,12 +31,12 @@ public class NewEventPresenterImpl implements NewEventPresenter {
 
 
     @Override
-    public void createEvent(User user, LatLng location, String eventName, String eventDescription, int points) {
+    public void createEvent(User user, LatLng location, String eventName, String eventDescription, int points, String timeOutput, String dateOutput, String city) {
         if (eventName.length() == 0 || eventDescription.length() == 0) {
             eventView.showError(ErrorType.INVALID_INPUT);
         } else {
             eventView.showProgress();
-            eventInteractor.postEvent(user, location, eventName, eventDescription, points, new SimpleBaseListener() {
+            eventInteractor.postEvent(user, location, eventName, eventDescription, points, dateOutput,timeOutput, city , new SimpleBaseListener() {
                 @Override
                 public void onSuccess() {
                     eventView.hideProgress();

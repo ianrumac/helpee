@@ -89,6 +89,9 @@ dependencies {
     compile 'com.parse.bolts:bolts-android:1.+'
     compile fileTree(dir: 'libs', include: 'Parse-*.jar')
 
+    compile 'com.github.flavienlaurent.datetimepicker:library:0.0.2'
+
+
 }
 
 

@@ -11,5 +11,5 @@ import ee.help.helpee.models.User;
 public interface NewEventInteractor {
 
     void postEvent(User user, LatLng location, String eventName,
-            String eventDescription, int points, SimpleBaseListener simpleListener);
+            String eventDescription, int points, String date, String time, String city, SimpleBaseListener simpleListener);
 }

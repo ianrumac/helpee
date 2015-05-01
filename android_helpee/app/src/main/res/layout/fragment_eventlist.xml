@@ -18,7 +18,7 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_margin="16dp"
-            android:src="@drawable/ic_add"
+            android:src="@drawable/ic_fab_plus"
             fab:fab_colorNormal="@color/main_blue"
             fab:fab_colorPressed="@color/pressed_blue"
             fab:fab_colorRipple="@color/white" />

@@ -5,8 +5,7 @@
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
     android:background="@color/background_gray"
-    android:orientation="vertical"
-    android:padding="@dimen/basic_padding">
+    android:orientation="vertical">
 
 
     <com.pkmmte.view.CircularImageView
@@ -24,6 +23,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/basic_padding"
+        android:layout_marginLeft="@dimen/basic_padding"
+        android:layout_marginRight="@dimen/basic_padding"
+
         app:met_floatingLabelText="Username"
         app:met_floatingLabel="normal" />
 
@@ -31,6 +33,8 @@
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/register_email"
         style="@style/EditTextUserInfo"
+        android:layout_marginRight="@dimen/basic_padding"
+        android:layout_marginLeft="@dimen/basic_padding"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/basic_padding"
@@ -43,6 +47,8 @@
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/basic_padding"
+        android:layout_marginLeft="@dimen/basic_padding"
 
         android:layout_marginBottom="@dimen/basic_padding"
         app:met_floatingLabelText="Password"
@@ -52,6 +58,7 @@
     <TextView
         android:id="@+id/create_account_button"
         style="@style/LargeTextButton"
+        android:clickable="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/md_yellow_800"
