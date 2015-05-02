@@ -10,6 +10,7 @@ import ee.help.helpee.HelpeeApplication;
 import ee.help.helpee.R;
 import ee.help.helpee.errors.ErrorHandler;
 import ee.help.helpee.errors.ErrorType;
+import ee.help.helpee.models.User;
 
 
 /**
@@ -22,6 +23,9 @@ public abstract class BaseFragment extends Fragment {
     Dialog mDialog;
 
 
+    User getUser(){
+        return HelpeeApplication.getUserInstance();
+    }
 
     Application getApplication(){
         return HelpeeApplication.getInstance();

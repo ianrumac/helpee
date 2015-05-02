@@ -1,18 +1,26 @@
 package ee.help.helpee.activities;
 
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
 
 import android.content.Intent;
+import android.location.Address;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.ResultReceiver;
 
 import ee.help.helpee.HelpeeApplication;
 import ee.help.helpee.custom.Constants;
+import ee.help.helpee.errors.ErrorType;
+import ee.help.helpee.listeners.BaseListener;
+import ee.help.helpee.receivers.AddressResultReceiver;
 import ee.help.helpee.services.FetchAddressIntentService;
+
+import static ee.help.helpee.HelpeeApplication.*;
 
 /**
  * Created by ian on 25/04/15.
@@ -39,16 +47,34 @@ public class SplashActivity extends BaseActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        mResultReceiver = new AddressResultReceiver(new Handler());
+        mResultReceiver = new AddressResultReceiver(new Handler(), returnAddressListener );
+        GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
+        if(apiAvailability.isGooglePlayServicesAvailable(this) != ConnectionResult.SUCCESS)
+            apiAvailability.getErrorDialog(this, apiAvailability.isGooglePlayServicesAvailable(this), 0);
 
         buildGoogleApiClient();
 
         super.onCreate(savedInstanceState);
     }
 
+    BaseListener<Address> returnAddressListener = new BaseListener<Address>() {
+        @Override
+        public void onSuccess(Address success) {
+            userCity = success.getLocality();
+            setUserCity(userCity);
+            onSplashFinished();
+        }
+
+        @Override
+        public void onFail(ErrorType errorType) {
+            showError(ErrorType.LOCATION_ERROR);
+        }
+    };
+
     @Override
     public void onConnected(Bundle bundle) {
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        setLastKnownLocation(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude()));
         if (mLastLocation != null) {
             startIntentService();
         }else{
@@ -56,6 +82,8 @@ public class SplashActivity extends BaseActivity implements
         }
 
     }
+
+
 
     @Override
     public void onConnectionSuspended(int i) {
@@ -65,6 +93,7 @@ public class SplashActivity extends BaseActivity implements
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
         mGoogleApiClient.connect();
+        showError("Failed to connect to play services.");
 
     }
 
@@ -95,7 +124,7 @@ public class SplashActivity extends BaseActivity implements
         intent.putExtra(Constants.RECEIVER, mResultReceiver);
 
         // Pass the location data as an extra to the service.
-        intent.putExtra(Constants.LOCATION_DATA_EXTRA, mLastLocation);
+        intent.putExtra(Constants.LOCATION_DATA_EXTRA, new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude()));
 
         // Start the service. If the service isn't already running, it is instantiated and started
         // (creating a process for it if needed); if it is running then it remains running. The
@@ -105,6 +134,7 @@ public class SplashActivity extends BaseActivity implements
 
 
     protected synchronized void buildGoogleApiClient() {
+
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
@@ -122,28 +152,6 @@ public class SplashActivity extends BaseActivity implements
         }
         finish();
 
-    }
-
-    class AddressResultReceiver extends ResultReceiver {
-        public AddressResultReceiver(Handler handler) {
-            super(handler);
-        }
-
-        /**
-         *  Receives data sent from FetchAddressIntentService and updates the UI in MainActivity.
-         */
-        @Override
-        protected void onReceiveResult(int resultCode, Bundle resultData) {
-
-            // Display the address string or an error message sent from the intent service.
-            if (resultCode == Constants.SUCCESS_RESULT) {
-
-                userCity = resultData.getString(Constants.RESULT_DATA_KEY);
-                HelpeeApplication.setUserCity(userCity);
-            }
-            onSplashFinished();
-
-        }
     }
 
 }

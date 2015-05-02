@@ -30,8 +30,8 @@ public class LoginInteractorImpl implements LoginInteractor {
     }
 
     @Override
-    public void receiveUserInfo(String accessToken, final BaseListener<User> userListener) {
-        apiManager.getApiService().postAccountInfo(accessToken, new Callback<User>() {
+    public void receiveUserInfo(String accessToken, String deviceId,  final BaseListener<User> userListener) {
+        apiManager.getApiService().postAccountInfo(accessToken, deviceId, new Callback<User>() {
             @Override
             public void success(User user, Response response) {
                 if (user != null) {
@@ -49,10 +49,8 @@ public class LoginInteractorImpl implements LoginInteractor {
 
     @Override
     public void saveUserToPreferences(User user) {
-        String userAsJson = new Gson().toJson(user);
-        HelpeeApplication.getInstance().getSharedPreferences(Constants.HELPEE_PREFS, Context.MODE_PRIVATE).edit()
-                .putString(Constants.USER_ITEM, userAsJson).commit();
-    }
+                HelpeeApplication.setUserInstance(user);
+            }
 
 
 }

@@ -10,5 +10,5 @@ import ee.help.helpee.models.Event;
  */
 public interface EventFeedInteractor {
 
-    void fetchEvents(BaseListener<List<Event>> eventsListener);
+    void fetchEvents(String city, String userId, String token, BaseListener<List<Event>> eventsListener);
 }

@@ -5,6 +5,7 @@
         <item name="android:colorPrimary">@color/main_blue</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textColorHint">@color/grey_subtitle</item>
+        <item name="vpiTabPageIndicatorStyle">@style/CustomTabPageIndicator</item>
 
         <!-- Customize your theme here. -->
     </style>
@@ -12,7 +13,6 @@
     <style name="LargeTextButton">
         <item name="android:gravity">center</item>
         <item name="android:padding">@dimen/basic_padding</item>
-        <item name="android:layout_margin">@dimen/basic_padding</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:textColor">@color/white</item>
     </style>
@@ -22,4 +22,32 @@
         <item name="android:backgroundTint">@color/md_yellow_800</item>
         <item name="android:padding">@dimen/basic_padding</item>
     </style>
+
+    <style name="DrawerItem">
+
+        <item name="android:paddingTop">@dimen/basic_padding</item>
+        <item name="android:paddingBottom">@dimen/basic_padding</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">@dimen/material_drawer_item_primary_text</item>
+        <item name="android:layout_marginLeft">@dimen/default_padding</item>
+    </style>
+
+    <style name="CardViewStyle" parent="android:Widget.TextView">
+        <item name="android:foreground">@drawable/selector_card</item>
+    </style>
+
+
+    <style name="CustomTabPageIndicator" parent="Widget.TabPageIndicator">
+        <item name="android:background">@drawable/tab_indicator_ab</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:divider">@null</item>
+        <item name="android:dividerPadding">10dp</item>
+        <item name="android:showDividers">middle</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingRight">8dp</item>
+        <item name="android:fadingEdge">horizontal</item>
+        <item name="android:fadingEdgeLength">8dp</item>
+    </style>
+
 </resources>

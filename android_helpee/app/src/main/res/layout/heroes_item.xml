@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/user_img"
+        android:padding="@dimen/basic_padding"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        fresco:placeholderImage="@drawable/ic_helpee"
+        fresco:roundAsCircle="true"
+        />
+
+
+    <TextView
+        android:layout_marginTop="@dimen/basic_padding"
+        android:layout_toRightOf="@id/user_img"
+        android:layout_width="wrap_content"
+        android:id="@+id/user_name"
+        android:layout_height="wrap_content"
+        tools:text="Margie Wolf"/>
+    <TextView
+        android:layout_marginLeft="@dimen/default_padding"
+        android:layout_width="wrap_content"
+        android:id="@+id/user_points"
+        android:textColor="@color/grey_subtitle"
+        android:textSize="@dimen/text_size_material_subtitle"
+        android:layout_below="@id/user_name"
+        android:layout_height="wrap_content"
+        tools:text="20 points"/>
+
+</RelativeLayout>

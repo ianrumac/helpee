@@ -2,26 +2,35 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:background="@color/background_gray"
-                android:padding="@dimen/basic_padding"
                 android:layout_height="match_parent">
 
     <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
               android:textSize="@dimen/extra_large_text"
               android:id="@+id/login_text"
-              android:layout_centerVertical="true"
+        android:padding="@dimen/basic_padding"
+
+        android:layout_centerVertical="true"
               android:layout_marginTop="@dimen/default_padding"
               android:paddingRight="@dimen/default_padding"
               android:text="@string/login_text"
             />
 
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:text="@string/click_to_create_account"
+        android:padding="@dimen/basic_padding"
+        android:textColor="@color/black"
+        android:id="@+id/create_account"
+        android:gravity="center"
+        android:layout_below="@id/login_text"
+/>
+
+
     <com.facebook.login.widget.LoginButton
-            android:layout_below="@id/login_text"
             android:id="@+id/facebook_login_button"
             android:layout_width="match_parent"
+            android:layout_below="@id/create_account"
             android:layout_height="@dimen/default_padding"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/basic_padding"
-            android:layout_marginBottom="@dimen/basic_padding"/>
+            android:layout_gravity="center_horizontal"/>
 
     <TextView
             android:id="@+id/login_button"
@@ -33,18 +42,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
-            android:text="@string/log_in"
-            android:layout_marginTop="@dimen/basic_padding"
-            android:layout_marginBottom="@dimen/basic_padding"/>
 
+            android:text="@string/log_in"/>
 
-    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-              android:text="@string/click_to_create_account"
-              android:padding="@dimen/basic_padding"
-              android:textColor="@color/black"
-              android:id="@+id/create_account"
-            android:gravity="center"
-            android:layout_alignParentBottom="true"/>
 
     <FrameLayout android:layout_width="match_parent"
                  android:id="@+id/fragment_container"

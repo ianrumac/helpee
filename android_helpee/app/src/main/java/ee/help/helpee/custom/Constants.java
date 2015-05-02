@@ -5,7 +5,7 @@ package ee.help.helpee.custom;
  */
 public class Constants {
 
-    public static final String API_ENDPOINT = "http://helpeemc2.azurewebsites.net/api"; //GET
+    public static final String API_ENDPOINT = "http://helpee.azurewebsites.net/api"; //GET
 
     public static final String USER_ITEM = "USER_ITEM";
 
@@ -23,5 +23,15 @@ public class Constants {
 
 
     public static final String LOCATION_DATA_EXTRA =  "LOCATION_DATA_EXTRA";
+
+    public static final String SHOULD_OPEN_CHIP_IN = "should-open-chip-in";
+
+    public static final String EVENT_EXTRA = "extra-event";
+
+    public static final String EVENT_FROM_ID = "extra-event-id";
+
+    public static final String EVENT_LIST_EXTRA = "extra-event-list";
+
+
 
 }

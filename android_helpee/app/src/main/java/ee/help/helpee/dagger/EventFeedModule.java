@@ -16,20 +16,20 @@ import ee.help.helpee.network.ApiManager;
 public class EventFeedModule {
 
 
-    private EventFeedView loginView;
+    private EventFeedView feedView;
 
-    public EventFeedModule(EventFeedView loginView) {
-        this.loginView = loginView;
+    public EventFeedModule(EventFeedView feedView) {
+        this.feedView = feedView;
     }
 
     @Provides
     public EventFeedView provideEventFeedView() {
-        return loginView;
+        return feedView;
     }
 
     @Provides
-    public EventFeedPresenter provideEventFeedPresenter(EventFeedPresenterImpl loginPresenter) {
-        return loginPresenter;
+    public EventFeedPresenter provideEventFeedPresenter(EventFeedPresenterImpl eventFeedPresenter) {
+        return eventFeedPresenter;
     }
 
     @Provides

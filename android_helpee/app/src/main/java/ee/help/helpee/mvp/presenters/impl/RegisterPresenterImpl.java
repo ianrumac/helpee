@@ -2,6 +2,7 @@ package ee.help.helpee.mvp.presenters.impl;
 
 import javax.inject.Inject;
 
+import ee.help.helpee.HelpeeApplication;
 import ee.help.helpee.errors.ErrorType;
 import ee.help.helpee.listeners.BaseListener;
 import ee.help.helpee.listeners.SimpleBaseListener;
@@ -29,10 +30,12 @@ public class RegisterPresenterImpl implements RegisterPresenter {
     @Override
     public void registerUser(String name, String email, String password, final TypedFile typedFile) {
         registerView.showProgress();
-        registerInteractor.sendUserData(name, email, password, new SimpleBaseListener() {
+        registerInteractor.sendUserData(name, email, password, new BaseListener<User>() {
+
             @Override
-            public void onSuccess() {
-                registerInteractor.uploadUserPicture(typedFile, uploadImageBaseListener);
+            public void onSuccess(User success) {
+                registerInteractor.uploadUserPicture(success, success.getUserId(), typedFile, uploadImageBaseListener);
+
             }
 
             @Override
@@ -46,9 +49,10 @@ public class RegisterPresenterImpl implements RegisterPresenter {
     BaseListener<User> uploadImageBaseListener = new BaseListener<User>() {
 
         @Override
-        public void onSuccess(User result) {
+        public void onSuccess(User success) {
             registerView.hideProgress();
-            registerView.userRegistered(result);
+            HelpeeApplication.setUserInstance(success);
+            registerView.userRegistered(success);
 
         }
 

@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main_blue"
+        android:minHeight="?attr/actionBarSize">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/default_padding"
+                android:gravity="center_vertical"
+                android:text="@string/create_new_event"
+                android:textColor="@color/white"
+                android:textSize="@dimen/abc_text_size_title_material_toolbar" />
+
+            <ImageView
+
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:padding="@dimen/basic_padding"
+                android:id="@+id/back_btn"
+                android:src="@drawable/abc_ic_ab_back_mtrl_am_alpha" />
+        </FrameLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_below="@id/toolbar"
+        android:foreground="@drawable/bottom_shadow"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <com.google.android.gms.maps.MapView
+                android:id="@+id/map_view"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:focusableInTouchMode="true"/>
+
+
+            <!-- Points view container-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/details_item_size">
+
+                <ImageView
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_reward"
+                    android:padding="@dimen/basic_padding"/>
+                <TextView
+                    android:id="@+id/event_points"
+                    android:layout_marginLeft="@dimen/default_padding"
+                    android:layout_width="wrap_content"
+                    android:textSize="@dimen/text_size_material_title"
+                    android:layout_centerVertical="true"
+                    android:layout_height="wrap_content"
+                    android:text="@string/one_point_nocaps"/>
+                <View
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="@dimen/default_padding"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/divider_grey"/>
+            </RelativeLayout>
+
+            <!--Is helpee and needs help container-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/details_item_size"
+                android:weightSum="10">
+
+
+            <!--Needs help cointainer-->
+            <RelativeLayout
+                android:layout_weight="5"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_needs_help"
+                    android:padding="@dimen/basic_padding"/>
+                <TextView
+                    android:layout_marginLeft="@dimen/default_padding"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/needs_help"
+                    android:textColor="@color/grey_subtitle"
+                    android:textSize="@dimen/text_size_material_subtitle"
+
+                    android:layout_marginTop="@dimen/basic_padding"
+                    android:layout_height="wrap_content"
+                    android:text="@string/details_needs_help"/>
+                <TextView
+                    android:layout_below="@id/needs_help"
+                    android:layout_marginLeft="@dimen/default_padding"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/needs_help_user"
+                    android:textSize="@dimen/text_size_material_title"
+
+                    android:layout_centerVertical="true"
+                    android:layout_height="wrap_content"
+                    tools:text="Ian Rumac"/>
+                <View
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="@dimen/default_padding"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/divider_grey"/>
+            </RelativeLayout>
+
+                <!-- Helpee container -->
+                <RelativeLayout
+                    android:layout_weight="5"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_centerVertical="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_helpee_none"
+                        android:padding="@dimen/basic_padding"/>
+                    <TextView
+                        android:layout_marginLeft="@dimen/default_padding"
+                        android:layout_width="wrap_content"
+                        android:id="@+id/helpee"
+                        android:textColor="@color/grey_subtitle"
+                        android:textSize="@dimen/text_size_material_subtitle"
+
+                        android:layout_marginTop="@dimen/basic_padding"
+                        android:layout_height="wrap_content"
+                        android:text="@string/helpee"/>
+                    <TextView
+                        android:layout_below="@id/helpee"
+                        android:paddingRight="@dimen/basic_padding"
+                        android:layout_marginLeft="@dimen/default_padding"
+                        android:layout_width="wrap_content"
+                        android:id="@+id/helpee_user"
+                        android:textSize="@dimen/text_size_material_title"
+
+                        android:layout_centerVertical="true"
+                        android:layout_height="wrap_content"
+                        android:text="None yet"/>
+                    <View
+                        android:layout_alignParentBottom="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/divider_grey"/>
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <!-- Event location -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/details_item_size">
+
+                <ImageView
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_location"
+                    android:padding="@dimen/basic_padding"/>
+                <TextView
+                    android:layout_marginLeft="@dimen/default_padding"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/event_street"
+                    android:layout_marginTop="@dimen/basic_padding"
+                    android:textSize="@dimen/text_size_material_title"
+                    android:layout_height="wrap_content"
+                    tools:text="Ilica"/>
+                <TextView
+                    android:layout_below="@id/event_street"
+                    android:layout_marginLeft="@dimen/default_padding"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/event_city"
+                    android:textSize="@dimen/text_size_material_subtitle"
+                    android:layout_centerVertical="true"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/grey_subtitle"
+                    tools:text="Zagreb"/>
+
+                <View
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="@dimen/default_padding"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/divider_grey"/>
+            </RelativeLayout>
+
+
+            <!-- Time and date -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/details_item_size">
+
+                <ImageView
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_time"
+                    android:padding="@dimen/basic_padding"/>
+                <TextView
+                    android:layout_marginLeft="@dimen/default_padding"
+                    android:layout_width="wrap_content"
+                    android:textSize="@dimen/text_size_material_title"
+                    android:id="@+id/event_time_date"
+                    android:layout_centerVertical="true"
+                    android:layout_height="wrap_content"
+                    tools:text="Today 12:00 - 16:00"/>
+                <View
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="@dimen/default_padding"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/divider_grey"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_description"
+                    android:padding="@dimen/basic_padding"/>
+                <TextView
+                    android:layout_marginLeft="@dimen/default_padding"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/event_description"
+                    android:textColor="@color/grey_subtitle"
+                    android:lineSpacingExtra="2dp"
+                    android:paddingTop="@dimen/basic_padding"
+                    android:paddingRight="@dimen/basic_padding"
+                    android:paddingBottom="@dimen/basic_padding"
+                    android:textSize="@dimen/text_size_material_subtitle"
+                    android:layout_centerVertical="true"
+                    android:layout_height="wrap_content"
+                    tools:text="U petak se selim u novi stan i terbala bi mi pomoć, keksi i kava uključeni :) Testni opis koji ide u barem 3 reda i skrola se preko ostatka ekrana"/>
+                <View
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="@dimen/default_padding"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/divider_grey"/>
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:weightSum="10"
+        android:id="@+id/bottom_controls_container"
+        android:layout_height="@dimen/details_item_size">
+
+        <TextView
+            android:text="@string/btn_chip_in"
+            android:layout_weight="5"
+            android:id="@+id/chip_in_button"
+            android:layout_width="0dp"
+            android:background="@color/main_blue"
+            style="@style/LargeTextButton"
+            android:layout_height="match_parent" />
+        <TextView
+            android:text="@string/btn_help_title"
+            android:layout_weight="5"
+            android:layout_width="0dp"
+            android:id="@+id/help_btn"
+            android:background="@color/md_amber_600"
+            style="@style/LargeTextButton"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_marginBottom="-201dp"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:id="@+id/chip_in_container"
+        android:layout_height="200dp"
+        android:background="@color/main_blue">
+
+        <LinearLayout
+            android:id="@+id/dynamic_slider_layout"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="150dp"
+            android:padding="@dimen/basic_padding"></LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

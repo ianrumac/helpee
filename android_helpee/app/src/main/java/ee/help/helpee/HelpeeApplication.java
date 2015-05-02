@@ -1,11 +1,17 @@
 package ee.help.helpee;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 
 import com.facebook.FacebookSdk;
+import com.parse.Parse;
+import com.parse.ParseInstallation;
 
 import android.app.Application;
 import android.content.Context;
+
+import net.danlew.android.joda.JodaTimeAndroid;
 
 import ee.help.helpee.custom.Constants;
 import ee.help.helpee.models.User;
@@ -21,12 +27,20 @@ public class HelpeeApplication extends Application {
 
     public static String userCity;
 
+    public static LatLng lastKnownLocation;
+
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
+        Fresco.initialize(this);
+        JodaTimeAndroid.init(this);
         FacebookSdk.sdkInitialize(this);
+        Parse.initialize(this, "ErveS8KjqjEL6BNhCxXByAeKJOvQoawLdJQrLK9n", "9soIopAA2W7lhp0zfoTWwplrvUyasRshTCfnVIXB");
+        ParseInstallation.getCurrentInstallation().saveInBackground();
+
     }
+
 
     public static HelpeeApplication getInstance() {
         return instance;
@@ -46,7 +60,13 @@ public class HelpeeApplication extends Application {
         return userInstance;
     }
 
+    public static LatLng getLastKnownLocation() {
+        return lastKnownLocation;
+    }
 
+    public static void setLastKnownLocation(LatLng lastKnownLocation) {
+        HelpeeApplication.lastKnownLocation = lastKnownLocation;
+    }
 
     public static String getUserCity() {
         return userCity;
@@ -57,6 +77,10 @@ public class HelpeeApplication extends Application {
     }
 
     public static void setUserInstance(User userInstance) {
+        String userAsJson = new Gson().toJson(userInstance);
+        HelpeeApplication.getInstance().getSharedPreferences(Constants.HELPEE_PREFS, Context.MODE_PRIVATE).edit()
+                .putString(Constants.USER_ITEM, userAsJson).commit();
+
         HelpeeApplication.userInstance = userInstance;
     }
 }
