@@ -25,25 +25,23 @@
 />
 
 
-    <com.facebook.login.widget.LoginButton
-            android:id="@+id/facebook_login_button"
-            android:layout_width="match_parent"
-            android:layout_below="@id/create_account"
-            android:layout_height="@dimen/button_size"
-            android:layout_gravity="center_horizontal"/>
 
     <TextView
+        android:layout_alignParentBottom="true"
             android:id="@+id/login_button"
-            android:layout_below="@id/facebook_login_button"
             android:layout_centerInParent="true"
             android:background="@color/button_bg"
             android:layout_width="match_parent"
-            android:padding="@dimen/basic_padding"
-            android:layout_height="@dimen/button_size"
-            android:layout_gravity="center_horizontal"
+            android:layout_height="56dp"
             android:gravity="center"
             android:text="@string/log_in"
         />
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/facebook_login_button"
+        android:layout_width="match_parent"
+        android:layout_above="@id/login_button"
+        android:layout_height="@dimen/button_size"
+        android:layout_gravity="center_horizontal"/>
 
 
     <FrameLayout android:layout_width="match_parent"

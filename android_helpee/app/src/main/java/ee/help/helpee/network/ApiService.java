@@ -104,6 +104,8 @@ public interface ApiService {
     @POST("/Events/HelpCompleted")
     void failedEvent(@Query("eventid") int eventId, @Header("Authorization") String token, Callback<Response> callback);
 
+    @POST("/Events/ChipIn")
+    void chipIn(@Query("eventid") int eventId, @Query("points") int points, @Query("userid") String userId, @Header("Authorization") String token, Callback<Response> callback );
 
 
 }

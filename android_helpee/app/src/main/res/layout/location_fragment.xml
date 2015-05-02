@@ -26,7 +26,7 @@
         android:id="@+id/ic_close"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:src="@drawable/com_facebook_tooltip_blue_xout"/>
+        android:src="@drawable/ic_close"/>
 
     <TextView
         android:padding="@dimen/basic_padding"
@@ -52,7 +52,7 @@
                 android:id="@+id/ic_pin"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
-                android:src="@drawable/ic_location"/>
+                android:src="@drawable/ic_location_pin"/>
 
             <TextView
                 android:padding="@dimen/basic_padding"
@@ -76,7 +76,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/button_size"
         android:layout_alignParentBottom="true"
-        android:background="@color/md_amber_600"
+        android:background="@color/amber_main"
         android:clickable="true"
         android:text="Confirm location" />
 

@@ -20,16 +20,15 @@ public class TimeUtils {
 
         DateTime dateTimeOfEvent = dateTimeFormatter.parseDateTime(dateParts[0]);
         DateTime hourTimeOfEvent = hourTimeFormatter.parseDateTime(dateParts[1]);
-        Log.e("Date:", dateParts[0]);
         DateTimeFormatter parseDateToShow = DateTimeFormat.forPattern("dd.MM.YYYY");
         dateTimeOfEvent = dateTimeOfEvent.withHourOfDay(hourTimeOfEvent.getHourOfDay()).withMinuteOfHour(hourTimeOfEvent.getMinuteOfHour());
 
 
         StringBuilder eventDateBuilder = new StringBuilder();
         if (dateTimeOfEvent.getDayOfYear() == (DateTime.now().getDayOfYear())) {
-            eventDateBuilder.append("Today at");
+            eventDateBuilder.append("Today at ");
         } else if ((dateTimeOfEvent.getDayOfYear() - 1) == (DateTime.now().getDayOfYear())) {
-            eventDateBuilder.append("Tomorrow at");
+            eventDateBuilder.append("Tomorrow at ");
         } else {
             eventDateBuilder.append(parseDateToShow.print(dateTimeOfEvent)).append(" at ");
         }
@@ -59,7 +58,7 @@ public class TimeUtils {
 
         DateTimeFormatter parseDateToShow = DateTimeFormat.forPattern("dd.MM.YYYY");
         dateTimeOfEvent = dateTimeOfEvent.withHourOfDay(hourTimeOfEvent.getHourOfDay()).withMinuteOfHour(hourTimeOfEvent.getMinuteOfHour());
-        if(dateTimeOfEvent.getMillis()>DateTime.now().getMillis())
+        if(dateTimeOfEvent.getMillis()<DateTime.now().getMillis())
             return true;
         else
         return false;

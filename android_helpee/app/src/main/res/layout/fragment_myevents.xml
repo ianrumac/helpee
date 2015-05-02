@@ -12,7 +12,7 @@
         android:background="@color/main_blue"
         android:textColor="@color/white"
         app:pstsIndicatorHeight="@dimen/sliding_strip_height"
-        app:pstsIndicatorColor="@color/md_amber_600"
+        app:pstsIndicatorColor="@color/amber_main"
         app:pstsShouldExpand="true" />
 
     <android.support.v4.view.ViewPager

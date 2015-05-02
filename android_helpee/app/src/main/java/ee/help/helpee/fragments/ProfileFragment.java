@@ -2,11 +2,13 @@ package ee.help.helpee.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.login.widget.ProfilePictureView;
 
 import butterknife.ButterKnife;
@@ -18,17 +20,16 @@ import ee.help.helpee.mvp.views.ProfileView;
 /**
  * Created by infinum on 02/05/15.
  */
-public class ProfileFragment extends BaseFragment implements ProfileView {
+public class ProfileFragment extends Fragment {
 
 
     User user;
     @InjectView(R.id.profile_name)
     TextView profileUserName;
-    @InjectView(R.id.profile_picture)
-    ProfilePictureView profilePic;
 
-    @InjectView(R.id.profile_points_left)
-    TextView profilePointsLeft;
+    @InjectView(R.id.profile_picture)
+    SimpleDraweeView profilePic;
+
 
 
     @Nullable

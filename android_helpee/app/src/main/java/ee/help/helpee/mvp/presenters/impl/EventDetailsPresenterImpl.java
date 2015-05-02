@@ -45,8 +45,21 @@ public class EventDetailsPresenterImpl implements EventDetailsPresenter {
     }
 
     @Override
-    public void chipIn(int eventId, int points, String userId, String token) {
+    public void chipIn(final int eventId, int points, String userId, String token) {
 
+        eventDetailsView.showProgress();
+        eventDetailsInteractor.sendPoints(eventId, points, userId, token, new SimpleBaseListener() {
+            @Override
+            public void onSuccess() {
+                eventDetailsView.hideProgress();
+                eventDetailsView.hasChippedIn();
+            }
+
+            @Override
+            public void onFail(ErrorType errorType) {
+                eventDetailsView.showError(errorType);
+            }
+        });
     }
 
     @Override

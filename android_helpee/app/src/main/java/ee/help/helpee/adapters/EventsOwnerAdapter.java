@@ -89,6 +89,7 @@ public class EventsOwnerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         });
 
         if(event.isCompleted() || TimeUtils.hasEventPassed(event.getEventDate())){
+            holder.divider.setVisibility(View.GONE);
             holder.cancelEventBtn.setVisibility(View.GONE);
         }
         holder.cancelEventBtn.setOnClickListener(new View.OnClickListener() {
@@ -133,6 +134,8 @@ public class EventsOwnerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         @InjectView(R.id.btn_cancel)
         TextView cancelEventBtn;
 
+        @InjectView(R.id.divider)
+        View divider;
         public EventHolder(View itemView) {
             super(itemView);
             ButterKnife.inject(this, itemView);

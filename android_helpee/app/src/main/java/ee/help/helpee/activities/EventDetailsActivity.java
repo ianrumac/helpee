@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.gc.materialdesign.views.Slider;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -70,8 +71,8 @@ public class EventDetailsActivity extends BaseActivity implements EventDetailsVi
     @InjectView(R.id.event_points)
     TextView eventPoints;
 
-    @InjectView(R.id.dynamic_slider_layout)
-    LinearLayout sliderLayout;
+    @InjectView(R.id.slider)
+    Slider sliderLayout;
 
     @Inject
     EventDetailsPresenter detailsPresenter;
@@ -94,9 +95,19 @@ public class EventDetailsActivity extends BaseActivity implements EventDetailsVi
     @InjectView(R.id.finished_overlay_text)
     TextView finishedOverlayText;
 
+    @InjectView(R.id.event_title_toolbar)
+    TextView toolbarTitle;
+
+    @InjectView(R.id.chip_in_points)
+    TextView chipInModifiedPoints;
+
+    @InjectView(R.id.confirm_btn)
+    TextView confirmBtn;
+
     GoogleMap googleMap;
     Event currentEvent;
 
+    int pointstoChipIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,7 +121,10 @@ public class EventDetailsActivity extends BaseActivity implements EventDetailsVi
 
         DaggerEventDetailsComponent.builder().eventDetailsModule(new EventDetailsModule(this)).build().inject(this);
         setStateFromIntent();
-
+        if (getUser().getPoints() > 1) {
+            sliderLayout.setMax(getUser().getPoints());
+            sliderLayout.setMin(1);
+        }
         super.onCreate(savedInstanceState);
     }
 
@@ -123,6 +137,7 @@ public class EventDetailsActivity extends BaseActivity implements EventDetailsVi
 
     void setStateFromIntent() {
         Event currentEvent = (Event) getIntent().getSerializableExtra(Constants.EVENT_EXTRA);
+        toolbarTitle.setText(currentEvent.getEventTitle());
         if (currentEvent == null) {
             detailsPresenter.fetchEventData(getIntent().getIntExtra(Constants.EVENT_FROM_ID, 0), getUser().getUserId(), getUser().getToken());
         } else {
@@ -144,8 +159,13 @@ public class EventDetailsActivity extends BaseActivity implements EventDetailsVi
             cantHelpBtn.setVisibility(View.VISIBLE);
         } else if (getIntent().getBooleanExtra(Constants.OWNER_OF_EVENT, false) && !currentEvent.isCompleted() && !TimeUtils.hasEventPassed(currentEvent.getEventDate())) {
             cancelBtn.setVisibility(View.VISIBLE);
-        } else if (getIntent().getBooleanExtra(Constants.OWNER_OF_FINISHED_EVENT, false) || TimeUtils.hasEventPassed(currentEvent.getEventDate())) {
-            bottomCompleteButtonsContainer.setVisibility(View.VISIBLE);
+        } else if (getIntent().getBooleanExtra(Constants.OWNER_OF_FINISHED_EVENT, false) && TimeUtils.hasEventPassed(currentEvent.getEventDate())) {
+            if (currentEvent.isCompleted())
+                bottomCompleteButtonsContainer.setVisibility(View.GONE);
+            else
+                bottomCompleteButtonsContainer.setVisibility(View.VISIBLE);
+
+
         } else if (!currentEvent.isCompleted()) {
             bottomControlsContainer.setVisibility(View.VISIBLE);
 
@@ -182,25 +202,26 @@ public class EventDetailsActivity extends BaseActivity implements EventDetailsVi
     void chipInSelected() {
         setChipInOpened(1000);
 
-        List<ImageView> circlesList = new ArrayList<>();
-        for (int i = 1; i <= getUser().getPoints(); i++) {
-            ImageView circleView = new ImageView(this);
-            circleView.setImageDrawable(getResources().getDrawable(R.drawable.slider_circle));
-            circleView.setPadding(16, 16, 16, 16);
-            circleView.setMaxWidth(sliderLayout.getWidth() / getUser().getPoints());
-            circleView.setMaxHeight(sliderLayout.getWidth() / getUser().getPoints());
+        sliderLayout.setOnValueChangedListener(new Slider.OnValueChangedListener() {
+            @Override
+            public void onValueChanged(int i) {
+                pointstoChipIn = i;
+                if (i != 1)
+                    chipInModifiedPoints.setText(String.format(getString(R.string.int_points), i));
+                else
+                    chipInModifiedPoints.setText(getString(R.string.single_point));
+            }
+        });
 
-            circlesList.add(circleView);
-        }
-
-        for (ImageView imageView : circlesList) {
-            sliderLayout.addView(imageView);
-        }
-
-        //TODO slide in chip in container
     }
 
     ;
+
+    @OnClick(R.id.confirm_btn)
+    void confirmPressed() {
+        detailsPresenter.chipIn(currentEvent.getEventId(), pointstoChipIn, getUser().getUserId(), getUser().getToken());
+    }
+
 
     @Override
     public void onDestroy() {
@@ -273,6 +294,10 @@ public class EventDetailsActivity extends BaseActivity implements EventDetailsVi
 
     @Override
     public void hasChippedIn() {
+        HelpeeApplication.changePoints(getUser().getPoints()-pointstoChipIn);
+        finishedOverlayText.setText(getString(R.string.chipped_in));
+
+        animateOverlay(getResources().getColor(R.color.main_blue));
 
 
     }
@@ -280,7 +305,7 @@ public class EventDetailsActivity extends BaseActivity implements EventDetailsVi
     @Override
     public void hasHelped() {
         HelpeeApplication.changePoints(getUser().getPoints() - 1);
-        animateOverlay(getResources().getColor(R.color.md_amber_700));
+        animateOverlay(getResources().getColor(R.color.amber_main));
     }
 
 

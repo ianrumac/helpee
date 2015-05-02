@@ -56,7 +56,7 @@
                     android:id="@+id/event_points"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/md_amber_600"
+                    android:background="@color/amber_main"
                     android:padding="@dimen/half_unit"
                     android:textStyle="bold"
                     android:textSize="@dimen/subtitle_size"
@@ -96,9 +96,11 @@
             android:id="@+id/event_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:lines="2"
+            android:paddingBottom="@dimen/basic_padding"
             android:paddingLeft="16dp"
-            android:textSize="@dimen/subtitle_larger_desc"
             android:paddingRight="16dp"
+            android:textSize="@dimen/subtitle_larger_desc"
             tools:text="U petak se selim u novi stan i trebala bi mi pomoć keksi i kava uključeni u ponudu :)" />
 
 
@@ -118,7 +120,8 @@
             <TextView
                 android:id="@+id/btn_cancel_help"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/button_height"
+                android:gravity="center_vertical"
                 android:layout_alignParentRight="true"
                 android:textAllCaps="true"
                 android:background="@drawable/abc_list_selector_holo_dark"

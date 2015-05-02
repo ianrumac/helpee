@@ -121,7 +121,10 @@ public class EventFeedFragment extends BaseFragment implements EventFeedView {
                 }
             }
             if (view == R.id.btn_chipin) {
+                if (events.size() == 1)
+                    position = 0;
                 Intent startDetailsWithOverlay = new Intent(getActivity(), EventDetailsActivity.class);
+                startDetailsWithOverlay.putExtra(Constants.EVENT_EXTRA, events.get(position));
                 startDetailsWithOverlay.putExtra(Constants.SHOULD_OPEN_CHIP_IN, true);
                 startActivity(startDetailsWithOverlay);
 

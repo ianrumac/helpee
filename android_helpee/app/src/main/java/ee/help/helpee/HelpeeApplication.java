@@ -42,7 +42,6 @@ public class HelpeeApplication extends Application {
         ParseInstallation.getCurrentInstallation().saveInBackground();
         ParsePush.subscribeInBackground("deviceid");
         ParsePush.subscribeInBackground("a".concat(ParseInstallation.getCurrentInstallation().getInstallationId()));
-        Log.e("parse", "a".concat(ParseInstallation.getCurrentInstallation().getInstallationId()));
     }
 
 

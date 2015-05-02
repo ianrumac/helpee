@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
         android:background="@color/main_blue"
         android:minHeight="?attr/actionBarSize">
 
@@ -38,7 +39,21 @@
         </FrameLayout>
     </android.support.v7.widget.Toolbar>
 
+    <TextView
+        android:id="@+id/create_event_btn"
+        style="@style/LargeTextButton"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_size"
+        android:background="@color/md_yellow_800"
+        android:clickable="true"
+        android:text="@string/create_an_event"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
     <ScrollView
+        android:layout_above="@id/create_event_btn"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/toolbar">
@@ -63,10 +78,11 @@
                     android:layout_marginRight="@dimen/basic_padding"
                     android:hint="@string/event_title"
                     app:met_floatingLabel="normal"
-                    app:met_floatingLabelText="Title"
+                    app:met_floatingLabelText="event_title"
                     app:met_floatingLabelTextColor="@color/grey_subtitle"
                     app:met_textColorHint="@color/grey_subtitle"
-                    app:met_underlineColor="@color/md_yellow_800" />
+                    app:met_underlineColor="@color/amber_main"
+                    app:met_clearButton="true" />
 
 
                 <com.rengwuxian.materialedittext.MaterialEditText
@@ -83,7 +99,7 @@
                     app:met_floatingLabelText="Description"
                     app:met_floatingLabelTextColor="@color/grey_subtitle"
                     app:met_textColorHint="@color/grey_subtitle"
-                    app:met_underlineColor="@color/md_yellow_800" />
+                    app:met_underlineColor="@color/amber_main" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -209,14 +225,6 @@
 
     </ScrollView>
 
-    <TextView
-        android:id="@+id/create_event_btn"
-        style="@style/LargeTextButton"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/button_size"
-        android:layout_alignParentBottom="true"
-        android:background="@color/md_yellow_800"
-        android:clickable="true"
-        android:text="@string/create_an_event" />
+
 
 </RelativeLayout>

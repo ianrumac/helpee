@@ -1,26 +1,31 @@
 package ee.help.helpee.activities;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.model.LatLng;
-
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.location.Address;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.ImageView;
 
-import ee.help.helpee.HelpeeApplication;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import ee.help.helpee.R;
 import ee.help.helpee.custom.Constants;
 import ee.help.helpee.errors.ErrorType;
 import ee.help.helpee.listeners.BaseListener;
 import ee.help.helpee.receivers.AddressResultReceiver;
 import ee.help.helpee.services.FetchAddressIntentService;
 
-import static ee.help.helpee.HelpeeApplication.*;
+import static ee.help.helpee.HelpeeApplication.setLastKnownLocation;
+import static ee.help.helpee.HelpeeApplication.setUserCity;
 
 /**
  * Created by ian on 25/04/15.
@@ -40,6 +45,8 @@ public class SplashActivity extends BaseActivity implements
     protected Location mLastLocation;
 
     protected String userCity;
+    @InjectView(R.id.spinning_anim)
+    ImageView splashImageView;
 
     private AddressResultReceiver mResultReceiver;
 
@@ -47,10 +54,15 @@ public class SplashActivity extends BaseActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        mResultReceiver = new AddressResultReceiver(new Handler(), returnAddressListener );
+        mResultReceiver = new AddressResultReceiver(new Handler(), returnAddressListener);
         GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
-        if(apiAvailability.isGooglePlayServicesAvailable(this) != ConnectionResult.SUCCESS)
+        if (apiAvailability.isGooglePlayServicesAvailable(this) != ConnectionResult.SUCCESS)
             apiAvailability.getErrorDialog(this, apiAvailability.isGooglePlayServicesAvailable(this), 0);
+        setContentView(R.layout.layout_splash);
+        ButterKnife.inject(this);
+        splashImageView.setBackgroundResource(R.drawable.splash_anim);
+        AnimationDrawable splashAnim = (AnimationDrawable) splashImageView.getBackground();
+        splashAnim.start();
 
         buildGoogleApiClient();
 
@@ -71,18 +83,18 @@ public class SplashActivity extends BaseActivity implements
         }
     };
 
+
     @Override
     public void onConnected(Bundle bundle) {
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         setLastKnownLocation(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude()));
         if (mLastLocation != null) {
             startIntentService();
-        }else{
+        } else {
             onConnected(bundle);
         }
 
     }
-
 
 
     @Override
@@ -92,8 +104,12 @@ public class SplashActivity extends BaseActivity implements
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
-        mGoogleApiClient.connect();
-        showError("Failed to connect to play services.");
+        GoogleApiAvailability.getInstance().getErrorDialog(this, connectionResult.getErrorCode(), 0, new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                finish();
+            }
+        });
 
     }
 
@@ -101,7 +117,9 @@ public class SplashActivity extends BaseActivity implements
     protected void onStart() {
         super.onStart();
         mGoogleApiClient.connect();
+
     }
+
 
     @Override
     public void onStop() {
@@ -142,16 +160,37 @@ public class SplashActivity extends BaseActivity implements
                 .build();
     }
 
-    void onSplashFinished(){
+    void onSplashFinished() {
+     new Handler().postDelayed(new Runnable() {
+         @Override
+         public void run() {
+
 
         /*Check if user is logged in and start the corresponding activity*/
         if (getUser() != null) {
-            startActivity(new Intent(this, MainActivity.class));
+            startActivity(new Intent(SplashActivity.this, MainActivity.class));
         } else {
-            startActivity(new Intent(this, LoginActivity.class));
+            startActivity(new Intent(SplashActivity.this, LoginActivity.class));
         }
         finish();
+         }
+     },3000);
 
     }
 
+    /**
+     * When API client check if user has services, and he decides to update, this is invoked.
+     */
+
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 0)
+            if (resultCode == RESULT_OK)
+                mGoogleApiClient.connect();
+            else
+                finish();
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 }

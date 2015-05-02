@@ -17,7 +17,6 @@ import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.accountswitcher.AccountHeader;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
-import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
@@ -27,6 +26,7 @@ import ee.help.helpee.R;
 import ee.help.helpee.fragments.EventFeedFragment;
 import ee.help.helpee.fragments.HeroesFragment;
 import ee.help.helpee.fragments.MyEventsFragment;
+import ee.help.helpee.fragments.ProfileFragment;
 
 
 public class MainActivity extends BaseActionBarActivity {
@@ -41,11 +41,10 @@ public class MainActivity extends BaseActionBarActivity {
 
     PrimaryDrawerItem myEventsDrawerItem;
     PrimaryDrawerItem heroesFragmentDrawerItem;
-    SecondaryDrawerItem settingsDrawerItem;
+    SecondaryDrawerItem profileDrawerItem;
 
     AccountHeader.Result accountHeaderResult;
 
-    ProfileDrawerItem profileDrawerItem;
     Drawer navigationDrawerBuilder;
     Drawer.Result navigationDrawer;
 
@@ -109,13 +108,13 @@ public class MainActivity extends BaseActionBarActivity {
                 .withSelectedIcon(R.drawable.ic_heroes_active)
                 .withSelectedTextColor(R.color.main_blue);
 
-        settingsDrawerItem = new SecondaryDrawerItem().withName(R.string.action_settings);
+        profileDrawerItem = new SecondaryDrawerItem().withName(R.string.profile_title);
         navigationDrawerBuilder.addDrawerItems(
                 eventsDrawerItem,
                 myEventsDrawerItem,
                 heroesFragmentDrawerItem,
                 new DividerDrawerItem(),
-                settingsDrawerItem
+                profileDrawerItem
 
         ).withHeader(drawerHeader);
 
@@ -150,8 +149,9 @@ public class MainActivity extends BaseActionBarActivity {
                     fragmentManager.beginTransaction().replace(R.id.fragment_container, new HeroesFragment()).commit();
                 }
 
-                if (iDrawerItem.equals(settingsDrawerItem)) {
-                    Toast.makeText(MainActivity.this, "Help us", Toast.LENGTH_SHORT).show();
+                if (iDrawerItem.equals(profileDrawerItem)) {
+                    fragmentContainer.setForeground(getResources().getDrawable(R.drawable.bottom_shadow));
+                    fragmentManager.beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
                 }
             }
         });

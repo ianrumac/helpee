@@ -87,5 +87,7 @@
     <string name="helpee_sad">This makes Helpee sad :(</string>
     <string name="event_title">Event title</string>
     <string name="event_description">Event description</string>
+    <string name="tap_confirm">TAP HERE TO CONFIRM</string>
+    <string name="chipped_in">Thanks for chipping in! :)</string>
 
 </resources>

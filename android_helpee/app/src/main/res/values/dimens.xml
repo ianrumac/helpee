@@ -21,4 +21,7 @@
     <dimen name="time_date_text">14dp</dimen>
     <dimen name="subtitle_larger_desc">16dp</dimen>
 <dimen name="button_size">56dp</dimen>
+    <dimen name="animation_margin">56dp</dimen>
+    <dimen name="details_title_text_size">16sp</dimen>
+    <dimen name="description_spacing">6dp</dimen>
 </resources>

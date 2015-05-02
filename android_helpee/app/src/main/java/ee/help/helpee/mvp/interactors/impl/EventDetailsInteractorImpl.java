@@ -26,8 +26,18 @@ public class EventDetailsInteractorImpl implements EventDetailsInteractor {
     }
 
     @Override
-    public void sendPoints(int eventId, int points, String userId, String token, SimpleBaseListener successListener) {
+    public void sendPoints(int eventId, int points, String userId, String token, final SimpleBaseListener successListener) {
+        apiManager.getApiService().chipIn(eventId, points, userId, BearerToken.authorize(token), new Callback<Response>() {
+            @Override
+            public void success(Response response, Response response2) {
+                successListener.onSuccess();
+            }
 
+            @Override
+            public void failure(RetrofitError error) {
+                successListener.onFail(ErrorType.CONNECTION_ERROR);
+            }
+        });
     }
 
     @Override
