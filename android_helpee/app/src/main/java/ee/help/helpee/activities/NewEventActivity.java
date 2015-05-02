@@ -83,7 +83,7 @@ public class NewEventActivity extends BaseFragmentActivity implements NewEventVi
     String time;
     String date;
 
-
+    SelectLocationFragment selectLocationFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,7 +124,7 @@ public class NewEventActivity extends BaseFragmentActivity implements NewEventVi
 
     @Override
     public void eventCreated() {
-        new SnackBar(this, getString(R.string.event_created)).show();
+        getUser().setPoints(getUser().getPoints()-eventPoints);
         finish();
     }
 
@@ -169,7 +169,7 @@ public class NewEventActivity extends BaseFragmentActivity implements NewEventVi
 
     @OnClick(R.id.location_output)
     void openLocationPicker() {
-        SelectLocationFragment selectLocationFragment = new SelectLocationFragment();
+        selectLocationFragment = new SelectLocationFragment();
         selectLocationFragment.setStyle(DialogFragment.STYLE_NO_TITLE, android.R.style.Theme_Black);
         selectLocationFragment.show(getFragmentManager(), SelectLocationFragment.TAG);
     }
@@ -198,6 +198,9 @@ public class NewEventActivity extends BaseFragmentActivity implements NewEventVi
     BaseListener<Address> returnAddressListener = new BaseListener<Address>() {
         @Override
         public void onSuccess(Address success) {
+            if(selectLocationFragment!=null){
+                selectLocationFragment.setChosenLocation(success.getAddressLine(0));
+            }
             locationOutput.setText(success.getAddressLine(0));
             locationCity = success.getLocality();
         }

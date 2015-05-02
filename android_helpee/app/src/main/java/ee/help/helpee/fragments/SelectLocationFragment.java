@@ -6,13 +6,16 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.fourmob.datetimepicker.date.DatePickerDialog;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.sleepbot.datetimepicker.time.RadialPickerLayout;
 import com.sleepbot.datetimepicker.time.TimePickerDialog;
 
@@ -24,6 +27,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 import ee.help.helpee.HelpeeApplication;
 import ee.help.helpee.R;
+import ee.help.helpee.activities.EventDetailsActivity;
 import ee.help.helpee.activities.NewEventActivity;
 
 import static ee.help.helpee.HelpeeApplication.*;
@@ -38,8 +42,8 @@ public class SelectLocationFragment extends DialogFragment {
     @InjectView(R.id.map_view)
     MapView mMapView;
 
-
-
+    @InjectView(R.id.location_chosen)
+    TextView chosenLocation;
 
     GoogleMap googleMap;
     @Nullable
@@ -73,13 +77,19 @@ public class SelectLocationFragment extends DialogFragment {
         googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
+
+                googleMap.clear();
+                googleMap.addMarker(new MarkerOptions().position(latLng).icon(BitmapDescriptorFactory.fromResource(R.drawable.map_pin)));
+                chosenLocation.setText(getActivity().getString(R.string.loading));
                 ((NewEventActivity) getActivity()).setLocation(latLng);
-                SelectLocationFragment.this.dismiss();
             }
         });
 
     }
 
+    public void setChosenLocation(String address){
+        chosenLocation.setText(address);
+    }
 
     @Override
     public void onDestroy() {
@@ -88,12 +98,18 @@ public class SelectLocationFragment extends DialogFragment {
 
     }
 
+    @OnClick(R.id.confirm_location)
+    void confirmLocation(){
+        this.dismiss();
+    }
+
     @Override
     public void onSaveInstanceState(Bundle outState) {
         mMapView.onSaveInstanceState(outState);
         super.onSaveInstanceState(outState);
 
     }
+
 
     @Override
     public void onStop() {

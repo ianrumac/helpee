@@ -26,4 +26,12 @@ public class Constants {
 
     public static final String SHOULD_OPEN_CHIP_IN = "should-open-chip-in";
 
+    public static final String EVENT_EXTRA = "extra-event";
+
+    public static final String EVENT_FROM_ID = "extra-event-id";
+
+    public static final String EVENT_LIST_EXTRA = "extra-event-list";
+
+
+
 }

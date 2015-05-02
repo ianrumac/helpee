@@ -5,6 +5,8 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.parse.Parse;
+import com.parse.ParseInstallation;
 
 import android.app.FragmentManager;
 import android.content.Intent;
@@ -30,6 +32,7 @@ import ee.help.helpee.dagger.LoginModule;
 import ee.help.helpee.dagger.components.DaggerLoginComponent;
 import ee.help.helpee.errors.ErrorType;
 import ee.help.helpee.fragments.RegisterFragment;
+import ee.help.helpee.fragments.UserLoginFragment;
 import ee.help.helpee.models.User;
 import ee.help.helpee.mvp.presenters.LoginPresenter;
 import ee.help.helpee.mvp.views.LoginView;
@@ -79,7 +82,9 @@ public class LoginActivity extends BaseActivity implements LoginView {
             @Override
             public void onSuccess(LoginResult loginResult) {
 
-                loginPresenter.loginUserWithFacebookToken(loginResult.getAccessToken().getToken());
+                loginPresenter.loginUserWithFacebookToken(loginResult.getAccessToken().getToken(),
+                        ParseInstallation.getCurrentInstallation().getInstallationId()
+                );
             }
 
             @Override
@@ -91,6 +96,16 @@ public class LoginActivity extends BaseActivity implements LoginView {
                 showError(ErrorType.CONNECTION_ERROR);
             }
         });
+
+    }
+
+
+    @OnClick(R.id.login_button)
+    void openLoginFragment(){
+        fragmentManager.beginTransaction()
+                .add(R.id.fragment_container, new UserLoginFragment())
+                .addToBackStack("")
+                .commit();
 
     }
 

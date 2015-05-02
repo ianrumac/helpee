@@ -23,9 +23,23 @@ import retrofit.mime.TypedFile;
  */
 public interface ApiService {
 
+    /**
+     * Login user via facebook using fbAccessToken and parseDeviceId
+     * */
 
     @POST("/Account/FacebookLogin")
-    void postAccountInfo(@Query("access_token") String accessToken, Callback<User> userResponseCallback);
+    void postAccountInfo(@Query("access_token") String accessToken, @Query("deviceid") String deviceId, Callback<User> userLoginCallback);
+
+    /**
+     * Login user via username and password
+     * */
+
+    @POST("/Account/SignIn")
+    void userSignIn(@Query("username") String username, @Query("password") String password, Callback<User> userLoginCallback);
+
+    /**
+     * Upload image
+     * */
 
     @Multipart
     @POST("/Account/ImageUpload")
@@ -34,12 +48,48 @@ public interface ApiService {
                          @Header("Authorization") String token,
                          Callback<String> urlCallback);
 
+    /**
+     * Create event
+     * */
+
     @POST("/Events/CreateEvent")
     void postEvent(@Body SimpleEvent event, @Header("Authorization") String token, Callback<Response> simpleCallback);
 
+    /**
+     * Register user via username and password
+     * */
+
     @POST("/Account/Register")
-    void registerUster(@Body SimpleUser user, Callback<User> userRegisteredCallback);
+    void registerUser(@Body SimpleUser user, Callback<User> userRegisteredCallback);
+
+    /**
+     * Get events by city, except user created events
+     * */
 
     @GET("/Events/GetEventsByCity")
     void getEventsByCity(@Query("city") String city, @Query("userid") String userId, @Header("Authorization") String token, Callback<List<Event>> eventList);
+
+
+    /**
+    * Get events by user - used to fetch current user events
+    * */
+    @GET("/Events/GetEventsByUser")
+    void getEventsByUser(@Query("userid") String userId, @Header("Authorization") String token, Callback<List<Event>> eventsList);
+
+    /**
+     * Get events where user is helping
+     * */
+
+    @GET("/Events/WhereIHelp")
+    void getEventsWhereUserHelps(@Query("userid") String userId, @Header("Authorization") String token, Callback<List<Event>> eventsList);
+
+    /**
+     * Get top 10 helpees
+    * */
+    @GET("/Events/TopHelpees")
+    void getTopHelpees(@Header("Authorization") String token, Callback<List<User>> heroesCallback);
+
+    @POST("/Events/IntoTheFuckingTrash")
+    void cancelEvent(@Query("eventid") int eventId, @Header("Authorization") String token, Callback<Response> callback );
+
 }

@@ -1,10 +1,16 @@
 package ee.help.helpee.mvp.presenters.impl;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
 import javax.inject.Inject;
 
 import ee.help.helpee.models.Event;
+import ee.help.helpee.mvp.interactors.EventDetailsInteractor;
 import ee.help.helpee.mvp.presenters.EventDetailsPresenter;
 import ee.help.helpee.mvp.views.EventDetailsView;
+import ee.help.helpee.utils.TimeUtils;
 
 /**
  * Created by infinum on 01/05/15.
@@ -12,13 +18,13 @@ import ee.help.helpee.mvp.views.EventDetailsView;
 public class EventDetailsPresenterImpl implements EventDetailsPresenter {
 
 
-    EventDetailsPresenter eventDetailsPresenter;
+    EventDetailsInteractor eventDetailsInteractor;
 
     EventDetailsView eventDetailsView;
 
     @Inject
-    public EventDetailsPresenterImpl(EventDetailsPresenter eventDetailsPresenter, EventDetailsView eventDetailsView) {
-        this.eventDetailsPresenter = eventDetailsPresenter;
+    public EventDetailsPresenterImpl(EventDetailsInteractor eventDetailsInteractor, EventDetailsView eventDetailsView) {
+        this.eventDetailsInteractor = eventDetailsInteractor;
         this.eventDetailsView = eventDetailsView;
     }
 
@@ -30,6 +36,10 @@ public class EventDetailsPresenterImpl implements EventDetailsPresenter {
     @Override
     public void showEventData(Event event) {
 
+        eventDetailsView.showEventData(event);
+
+
+        eventDetailsView.setEventDate(TimeUtils.parseDateTimeIntoShowableString(event.getEventDate()));
     }
 
     @Override

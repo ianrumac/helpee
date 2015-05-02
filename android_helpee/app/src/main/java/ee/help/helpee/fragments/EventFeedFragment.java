@@ -24,6 +24,7 @@ import ee.help.helpee.activities.NewEventActivity;
 import ee.help.helpee.adapters.EventsAdapter;
 import ee.help.helpee.dagger.EventFeedModule;
 import ee.help.helpee.dagger.components.DaggerEventFeedComponent;
+import ee.help.helpee.listeners.AdapterClickListener;
 import ee.help.helpee.models.Event;
 import ee.help.helpee.mvp.presenters.EventFeedPresenter;
 import ee.help.helpee.mvp.views.EventFeedView;
@@ -87,7 +88,7 @@ public class EventFeedFragment extends BaseFragment implements EventFeedView {
     @Override
     public void showEventList(List<Event> eventResults) {
         events = eventResults;
-        eventsAdapter = new EventsAdapter(events, getActivity());
+        eventsAdapter = new EventsAdapter(events, getActivity(), adapterClickListener);
         eventList.setAdapter(eventsAdapter);
     }
 
@@ -97,4 +98,10 @@ public class EventFeedFragment extends BaseFragment implements EventFeedView {
 
     }
 
+    AdapterClickListener adapterClickListener = new AdapterClickListener() {
+        @Override
+        public void onClick(int view, int position) {
+
+        }
+    };
 }

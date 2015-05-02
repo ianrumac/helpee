@@ -1,6 +1,6 @@
 package ee.help.helpee.fragments;
 
-import com.pkmmte.view.CircularImageView;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import android.app.Activity;
@@ -32,6 +32,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 import ee.help.helpee.R;
 import ee.help.helpee.activities.MainActivity;
+import ee.help.helpee.custom.RoundImageView;
 import ee.help.helpee.dagger.RegisterModule;
 import ee.help.helpee.dagger.components.DaggerRegisterComponent;
 import ee.help.helpee.models.User;
@@ -58,7 +59,7 @@ public class RegisterFragment extends BaseFragment implements RegisterView {
     MaterialEditText registerPassword;
 
     @InjectView(R.id.profile_picture)
-    CircularImageView profilePicture;
+    RoundImageView profilePicture;
 
 
     @Inject
@@ -176,8 +177,7 @@ public class RegisterFragment extends BaseFragment implements RegisterView {
                     selectedImagePath = cursor.getString(column_index);
                 }
                 cursor.close();
-
-                Bitmap bm;
+                Bitmap resultingBitmap;
                 BitmapFactory.Options options = new BitmapFactory.Options();
                 options.inJustDecodeBounds = true;
                 BitmapFactory.decodeFile(selectedImagePath, options);
@@ -189,9 +189,8 @@ public class RegisterFragment extends BaseFragment implements RegisterView {
                 }
                 options.inSampleSize = scale;
                 options.inJustDecodeBounds = false;
-                bm = BitmapFactory.decodeFile(selectedImagePath, options);
-
-                profilePicture.setImageBitmap(bm);
+                resultingBitmap = BitmapFactory.decodeFile(selectedImagePath, options);
+                profilePicture.setImageBitmap(resultingBitmap);
             }
 
 

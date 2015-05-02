@@ -1,5 +1,7 @@
 package ee.help.helpee.mvp.interactors;
 
+import java.util.List;
+
 import ee.help.helpee.listeners.BaseListener;
 import ee.help.helpee.models.Event;
 
@@ -9,8 +11,8 @@ import ee.help.helpee.models.Event;
 public interface MyEventsInteractor {
 
 
-    void fetchGoingEvents(String token, BaseListener<Event> eventBaseListener);
+    void fetchUserEvents(String token, String userId, BaseListener<List<Event>> eventBaseListener);
 
-    void fetchHelpingEvents(String token, BaseListener<Event> eventBaseListener);
+    void fetchHelpingEvents(String token, String userId, BaseListener<List<Event>> eventBaseListener);
 
 }

@@ -26,9 +26,9 @@ public class LoginPresenterImpl implements LoginPresenter {
     }
 
     @Override
-    public void loginUserWithFacebookToken(String token) {
+    public void loginUserWithFacebookToken(String token,String deviceId) {
         loginView.showProgress();
-        loginInteractor.receiveUserInfo(token, userListener);
+        loginInteractor.receiveUserInfo(token, deviceId, userListener);
     }
 
     @Override

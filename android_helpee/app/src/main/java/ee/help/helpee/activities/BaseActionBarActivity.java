@@ -3,6 +3,7 @@ package ee.help.helpee.activities;
 import com.gc.materialdesign.widgets.Dialog;
 import com.gc.materialdesign.widgets.ProgressDialog;
 
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
 
 import ee.help.helpee.HelpeeApplication;

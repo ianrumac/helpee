@@ -30,8 +30,8 @@ public class LoginInteractorImpl implements LoginInteractor {
     }
 
     @Override
-    public void receiveUserInfo(String accessToken, final BaseListener<User> userListener) {
-        apiManager.getApiService().postAccountInfo(accessToken, new Callback<User>() {
+    public void receiveUserInfo(String accessToken, String deviceId,  final BaseListener<User> userListener) {
+        apiManager.getApiService().postAccountInfo(accessToken, deviceId, new Callback<User>() {
             @Override
             public void success(User user, Response response) {
                 if (user != null) {

@@ -1,15 +1,18 @@
 package ee.help.helpee.activities;
 
 import android.app.FragmentManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.accountswitcher.AccountHeader;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
@@ -22,6 +25,8 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import ee.help.helpee.R;
 import ee.help.helpee.fragments.EventFeedFragment;
+import ee.help.helpee.fragments.HeroesFragment;
+import ee.help.helpee.fragments.MyEventsFragment;
 
 
 public class MainActivity extends BaseActionBarActivity {
@@ -29,9 +34,12 @@ public class MainActivity extends BaseActionBarActivity {
     @InjectView(R.id.toolbar)
     Toolbar toolbar;
 
+    @InjectView(R.id.fragment_container)
+    FrameLayout fragmentContainer;
+
     PrimaryDrawerItem eventsDrawerItem;
 
-    PrimaryDrawerItem profileFragmentDrawerItem;
+    PrimaryDrawerItem myEventsDrawerItem;
     PrimaryDrawerItem heroesFragmentDrawerItem;
     SecondaryDrawerItem settingsDrawerItem;
 
@@ -56,6 +64,7 @@ public class MainActivity extends BaseActionBarActivity {
         fragmentManager.beginTransaction().add(R.id.fragment_container, new EventFeedFragment()).addToBackStack(EventFeedFragment.TAG).commit();
 
     }
+
 
 
     void buildDrawer() {
@@ -88,7 +97,7 @@ public class MainActivity extends BaseActionBarActivity {
                 .withIcon(R.drawable.ic_events)
                 .withSelectedIcon(R.drawable.ic_events_active)
                 .withSelectedTextColor(R.color.main_blue);
-        profileFragmentDrawerItem = new PrimaryDrawerItem().withName(R.string.my_events)
+        myEventsDrawerItem = new PrimaryDrawerItem().withName(R.string.my_events)
                 .withIcon(R.drawable.ic_myevents)
                 .withSelectedIcon(R.drawable.ic_myevents_active)
                 .withSelectedTextColor(R.color.main_blue);
@@ -102,7 +111,7 @@ public class MainActivity extends BaseActionBarActivity {
         settingsDrawerItem = new SecondaryDrawerItem().withName(R.string.action_settings);
         navigationDrawerBuilder.addDrawerItems(
                 eventsDrawerItem,
-                profileFragmentDrawerItem,
+                myEventsDrawerItem,
                 heroesFragmentDrawerItem,
                 new DividerDrawerItem(),
                 settingsDrawerItem
@@ -121,14 +130,20 @@ public class MainActivity extends BaseActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l, IDrawerItem iDrawerItem) {
                 if (iDrawerItem.equals(eventsDrawerItem)) {
-                    Toast.makeText(MainActivity.this, "Events", Toast.LENGTH_SHORT).show();
+                    fragmentManager.beginTransaction().replace(R.id.fragment_container, new EventFeedFragment(),EventFeedFragment.TAG).commit();
+                    fragmentContainer.setForeground(getResources().getDrawable(R.drawable.bottom_shadow));
+
                 }
 
-                if (iDrawerItem.equals(profileFragmentDrawerItem)) {
-                    Toast.makeText(MainActivity.this, "Profile", Toast.LENGTH_SHORT).show();
+                if (iDrawerItem.equals(myEventsDrawerItem)) {
+                    fragmentManager.beginTransaction().replace(R.id.fragment_container, new MyEventsFragment()).commit();
+                    fragmentContainer.setForeground(null);
+
                 }
                 if (iDrawerItem.equals(heroesFragmentDrawerItem)) {
-                    Toast.makeText(MainActivity.this, "Heroes", Toast.LENGTH_SHORT).show();
+                    fragmentContainer.setForeground(getResources().getDrawable(R.drawable.bottom_shadow));
+
+                    fragmentManager.beginTransaction().replace(R.id.fragment_container, new HeroesFragment()).commit();
                 }
 
                 if (iDrawerItem.equals(settingsDrawerItem)) {
@@ -136,6 +151,7 @@ public class MainActivity extends BaseActionBarActivity {
                 }
             }
         });
+
     }
 
     void setupHeader() {
@@ -148,6 +164,9 @@ public class MainActivity extends BaseActionBarActivity {
         /*How many chips does user have?*/
         TextView drawerChips = (TextView) drawerHeader.findViewById(R.id.user_chips_left);
         drawerChips.setText(String.format(getString(R.string.chips_left), getUser().getPoints()));
+
+        SimpleDraweeView profilePicture = (SimpleDraweeView) drawerHeader.findViewById(R.id.profile_image_view);
+        profilePicture.setImageURI(Uri.parse(getUser().getImageUri()));
     }
 
     @Override
@@ -155,6 +174,8 @@ public class MainActivity extends BaseActionBarActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -165,5 +186,11 @@ public class MainActivity extends BaseActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ((TextView) navigationDrawer.getHeader().findViewById(R.id.user_chips_left)).setText(String.format(getString(R.string.chips_left), getUser().getPoints()));
     }
 }

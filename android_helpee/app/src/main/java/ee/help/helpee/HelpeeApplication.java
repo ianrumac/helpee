@@ -11,6 +11,8 @@ import com.parse.ParseInstallation;
 import android.app.Application;
 import android.content.Context;
 
+import net.danlew.android.joda.JodaTimeAndroid;
+
 import ee.help.helpee.custom.Constants;
 import ee.help.helpee.models.User;
 
@@ -32,6 +34,7 @@ public class HelpeeApplication extends Application {
         super.onCreate();
         instance = this;
         Fresco.initialize(this);
+        JodaTimeAndroid.init(this);
         FacebookSdk.sdkInitialize(this);
         Parse.initialize(this, "ErveS8KjqjEL6BNhCxXByAeKJOvQoawLdJQrLK9n", "9soIopAA2W7lhp0zfoTWwplrvUyasRshTCfnVIXB");
         ParseInstallation.getCurrentInstallation().saveInBackground();

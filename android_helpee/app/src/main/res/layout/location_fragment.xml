@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/map_view"
@@ -9,17 +11,22 @@
         android:focusableInTouchMode="true"/>
 
     <RelativeLayout
+        android:background="@color/main_blue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:id="@+id/close_container"
+    android:layout_height="wrap_content">
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/basic_padding"
+        android:layout_centerVertical="true"
         android:id="@+id/ic_close"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:src="@drawable/com_facebook_close"/>
+        android:src="@drawable/com_facebook_tooltip_blue_xout"/>
 
     <TextView
         android:padding="@dimen/basic_padding"
@@ -29,6 +36,48 @@
         android:layout_toRightOf="@id/ic_close"
         android:textSize="@dimen/abc_text_size_title_material_toolbar"
         android:text="@string/click_for_location"
-        android:layout_height="wrap_content"></TextView>
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>
+
+        <RelativeLayout
+            android:layout_below="@id/close_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/basic_padding"
+                android:layout_centerVertical="true"
+                android:id="@+id/ic_pin"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/ic_location"/>
+
+            <TextView
+                android:padding="@dimen/basic_padding"
+                android:layout_width="wrap_content"
+                android:id="@+id/location_chosen"
+                android:textColor="@color/white"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/ic_pin"
+                android:textSize="@dimen/abc_text_size_subtitle_material_toolbar"
+                tools:text="Strojarska 22"
+                android:layout_height="wrap_content"/>
+
+        </RelativeLayout>
+
+
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/confirm_location"
+        style="@style/LargeTextButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/md_amber_600"
+        android:clickable="true"
+        android:text="Confirm location" />
+
 </RelativeLayout>

@@ -30,6 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:padding="@dimen/basic_padding"
+                android:id="@+id/back_btn"
                 android:src="@drawable/abc_ic_ab_back_mtrl_am_alpha" />
         </FrameLayout>
     </android.support.v7.widget.Toolbar>
@@ -63,12 +64,13 @@
                     android:src="@drawable/ic_reward"
                     android:padding="@dimen/basic_padding"/>
                 <TextView
+                    android:id="@+id/event_points"
                     android:layout_marginLeft="@dimen/default_padding"
                     android:layout_width="wrap_content"
                     android:textSize="@dimen/text_size_material_title"
                     android:layout_centerVertical="true"
                     android:layout_height="wrap_content"
-                    tools:text="3 points"/>
+                    android:text="@string/one_point_nocaps"/>
                 <View
                     android:layout_alignParentBottom="true"
                     android:layout_marginLeft="@dimen/default_padding"
@@ -220,6 +222,7 @@
                     android:layout_marginLeft="@dimen/default_padding"
                     android:layout_width="wrap_content"
                     android:textSize="@dimen/text_size_material_title"
+                    android:id="@+id/event_time_date"
                     android:layout_centerVertical="true"
                     android:layout_height="wrap_content"
                     tools:text="Today 12:00 - 16:00"/>
@@ -242,6 +245,7 @@
                 <TextView
                     android:layout_marginLeft="@dimen/default_padding"
                     android:layout_width="wrap_content"
+                    android:id="@+id/event_description"
                     android:textColor="@color/grey_subtitle"
                     android:lineSpacingExtra="2dp"
                     android:paddingTop="@dimen/basic_padding"
@@ -273,6 +277,7 @@
         <TextView
             android:text="@string/btn_chip_in"
             android:layout_weight="5"
+            android:id="@+id/chip_in_button"
             android:layout_width="0dp"
             android:background="@color/main_blue"
             style="@style/LargeTextButton"
@@ -281,16 +286,26 @@
             android:text="@string/btn_help_title"
             android:layout_weight="5"
             android:layout_width="0dp"
+            android:id="@+id/help_btn"
             android:background="@color/md_amber_600"
             style="@style/LargeTextButton"
             android:layout_height="match_parent" />
 
     </LinearLayout>
     <RelativeLayout
-        android:layout_below="@id/bottom_controls_container"
+        android:layout_marginBottom="-201dp"
+        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:id="@+id/chip_in_container"
         android:layout_height="200dp"
-        android:background="@color/main_blue"/>
+        android:background="@color/main_blue">
+
+        <LinearLayout
+            android:id="@+id/dynamic_slider_layout"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="150dp"
+            android:padding="@dimen/basic_padding"></LinearLayout>
+    </RelativeLayout>
 
 </RelativeLayout>

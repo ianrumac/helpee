@@ -10,7 +10,7 @@ import ee.help.helpee.models.User;
 public interface LoginPresenter {
 
 
-    void loginUserWithFacebookToken(String token);
+    void loginUserWithFacebookToken(String token,String deviceId);
 
     void saveUser(User user);
 

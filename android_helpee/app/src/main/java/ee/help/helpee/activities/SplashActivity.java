@@ -1,6 +1,8 @@
 package ee.help.helpee.activities;
 
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
@@ -46,6 +48,9 @@ public class SplashActivity extends BaseActivity implements
     protected void onCreate(Bundle savedInstanceState) {
 
         mResultReceiver = new AddressResultReceiver(new Handler(), returnAddressListener );
+        GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
+        if(apiAvailability.isGooglePlayServicesAvailable(this) != ConnectionResult.SUCCESS)
+            apiAvailability.getErrorDialog(this, apiAvailability.isGooglePlayServicesAvailable(this), 0);
 
         buildGoogleApiClient();
 
@@ -88,6 +93,7 @@ public class SplashActivity extends BaseActivity implements
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
         mGoogleApiClient.connect();
+        showError("Failed to connect to play services.");
 
     }
 
@@ -128,6 +134,7 @@ public class SplashActivity extends BaseActivity implements
 
 
     protected synchronized void buildGoogleApiClient() {
+
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
@@ -139,7 +146,7 @@ public class SplashActivity extends BaseActivity implements
 
         /*Check if user is logged in and start the corresponding activity*/
         if (getUser() != null) {
-            startActivity(new Intent(this, LoginActivity.class));
+            startActivity(new Intent(this, MainActivity.class));
         } else {
             startActivity(new Intent(this, LoginActivity.class));
         }

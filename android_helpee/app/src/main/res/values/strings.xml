@@ -42,7 +42,7 @@
     <string name="service_not_available">The service is not available</string>
     <string name="invalid_lat_long_used">Invalid latitude or longitude used</string>
     <string name="single_point">1 POINT</string>
-    <string name="int_points">%s POINTS</string>
+    <string name="int_points">%s points</string>
     <string name="chips_left">%s LEFT</string>
     <string name="reward">Reward</string>
     <string name="select_date">Select date</string>
@@ -66,5 +66,15 @@
     <string name="select_location_error">Where should your helpees come? Psst, there\'s a select location button!</string>
     <string name="details_needs_help">Needs help</string>
     <string name="helpee">Helpee</string>
+    <string name="one_point_nocaps">1 Point</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign in</string>
+    <string name="loading">Loading ...</string>
+    <string name="getting_help">GETTING HELP</string>
+    <string name="helping">HELPING</string>
+    <string name="no_events">Sorry, but there\'s no events for you :(</string>
+    <string name="cancel_event">CANCEL EVENT</string>
+    <string name="cant_help">I can\'t help</string>
 
 </resources>

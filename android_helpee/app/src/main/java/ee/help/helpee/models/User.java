@@ -2,10 +2,12 @@ package ee.help.helpee.models;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by ian on 12/04/15.
  */
-public class User {
+public class User implements Serializable{
 
 
     @SerializedName("Name")

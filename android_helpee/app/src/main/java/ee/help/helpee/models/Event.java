@@ -2,12 +2,13 @@ package ee.help.helpee.models;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by ian on 12/04/15.
  */
-public class Event {
+public class Event implements Serializable {
 
     @SerializedName("ID")
     int eventId;
@@ -18,6 +19,9 @@ public class Event {
     @SerializedName("City")
     String location;
 
+    @SerializedName("Address")
+    String address;
+
     @SerializedName("Description")
     String description;
 
@@ -26,6 +30,9 @@ public class Event {
 
     @SerializedName("Latitude")
     double latitude;
+
+    @SerializedName("EventDate")
+    String eventDate;
 
 
     @SerializedName("Creator")
@@ -45,6 +52,22 @@ public class Event {
 
     int points;
 
+
+    public String getEventDate() {
+        return eventDate;
+    }
+
+    public void setEventDate(String eventDate) {
+        this.eventDate = eventDate;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public int getEventId() {
         return eventId;
