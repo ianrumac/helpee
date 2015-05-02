@@ -55,12 +55,12 @@ public class CurrentHelpeeEventsFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         eventList.setLayoutManager(layoutManager);
-        eventsAdapter = new EventsAdapter(events, getActivity(), cancelHelpClickListener);
-        eventList.setAdapter(eventsAdapter);
 
-        if(events.size()==0){
-            noEvents.setVisibility(View.VISIBLE);
-        }
+
+        eventsAdapter = new EventsAdapter(events, getActivity(), cancelHelpClickListener);
+
+
+        eventList.setAdapter(eventsAdapter);
 
         return content;
     }
@@ -71,4 +71,16 @@ public class CurrentHelpeeEventsFragment extends Fragment {
 
         }
     };
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+                /*No events, so let's drop a text that tells that*/
+        if(events.size()==0){
+            noEvents.setVisibility(View.VISIBLE);
+        }
+
+
+    }
 }

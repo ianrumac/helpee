@@ -19,6 +19,7 @@ import ee.help.helpee.HelpeeApplication;
 import ee.help.helpee.R;
 import ee.help.helpee.activities.BaseActionBarActivity;
 import ee.help.helpee.adapters.EventsAdapter;
+import ee.help.helpee.adapters.EventsOwnerAdapter;
 import ee.help.helpee.custom.Constants;
 import ee.help.helpee.dagger.EventFeedModule;
 import ee.help.helpee.dagger.UserEventsModule;
@@ -54,7 +55,7 @@ public class CurrentUserEventsFragment extends Fragment implements UserEventsVie
 
     List<Event> events;
 
-    EventsAdapter eventsAdapter;
+    EventsOwnerAdapter eventsAdapter;
 
     @Inject
     UserEventsPresenter userEventsPresenter;
@@ -70,12 +71,9 @@ public class CurrentUserEventsFragment extends Fragment implements UserEventsVie
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
         eventList.setLayoutManager(layoutManager);
-        eventsAdapter = new EventsAdapter(events, getActivity(), cancelEventListener);
+        eventsAdapter = new EventsOwnerAdapter(events, getActivity(), cancelEventListener);
         eventList.setAdapter(eventsAdapter);
 
-        if(events.size()==0){
-            noEvents.setVisibility(View.VISIBLE);
-        }
 
         return content;
     }
@@ -89,7 +87,7 @@ public class CurrentUserEventsFragment extends Fragment implements UserEventsVie
     };
     @Override
     public void removeEvent(int eventId) {
-
+            
     }
 
     @Override
@@ -107,4 +105,16 @@ public class CurrentUserEventsFragment extends Fragment implements UserEventsVie
     public void hideProgress() {
         ((BaseActionBarActivity) getActivity()).hideProgress();
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+                /*No events, so let's drop a text that tells that*/
+        if(events.size()==0){
+            noEvents.setVisibility(View.VISIBLE);
+        }
+
+
+    }
+
 }
