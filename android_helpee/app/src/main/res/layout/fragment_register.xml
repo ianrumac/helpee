@@ -23,7 +23,10 @@
         android:id="@+id/register_username"
         style="@style/EditTextUserInfo"
         android:layout_width="match_parent"
+        app:met_underlineColor="@color/md_yellow_800"
         android:layout_height="wrap_content"
+        android:singleLine="true"
+
         android:layout_marginBottom="@dimen/basic_padding"
         android:layout_marginLeft="@dimen/basic_padding"
         android:layout_marginRight="@dimen/basic_padding"
@@ -38,6 +41,9 @@
         android:layout_marginRight="@dimen/basic_padding"
         android:layout_marginLeft="@dimen/basic_padding"
         android:layout_width="match_parent"
+        android:singleLine="true"
+
+        app:met_underlineColor="@color/md_yellow_800"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/basic_padding"
         app:met_floatingLabelText="E-mail"
@@ -46,12 +52,13 @@
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/register_password"
         style="@style/EditTextUserInfo"
-
+android:singleLine="true"
+        app:met_underlineColor="@color/md_yellow_800"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/basic_padding"
         android:layout_marginLeft="@dimen/basic_padding"
-
+        android:inputType="textWebPassword"
         android:layout_marginBottom="@dimen/basic_padding"
         app:met_floatingLabelText="Password"
         app:met_floatingLabel="normal" />
@@ -62,7 +69,7 @@
         style="@style/LargeTextButton"
         android:clickable="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/button_size"
         android:background="@color/md_yellow_800"
         android:text="@string/create_account" />
 

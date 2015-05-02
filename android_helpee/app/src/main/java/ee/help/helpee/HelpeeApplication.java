@@ -7,9 +7,11 @@ import com.google.gson.Gson;
 import com.facebook.FacebookSdk;
 import com.parse.Parse;
 import com.parse.ParseInstallation;
+import com.parse.ParsePush;
 
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
 
 import net.danlew.android.joda.JodaTimeAndroid;
 
@@ -38,7 +40,9 @@ public class HelpeeApplication extends Application {
         FacebookSdk.sdkInitialize(this);
         Parse.initialize(this, "ErveS8KjqjEL6BNhCxXByAeKJOvQoawLdJQrLK9n", "9soIopAA2W7lhp0zfoTWwplrvUyasRshTCfnVIXB");
         ParseInstallation.getCurrentInstallation().saveInBackground();
-
+        ParsePush.subscribeInBackground("deviceid");
+        ParsePush.subscribeInBackground("a".concat(ParseInstallation.getCurrentInstallation().getInstallationId()));
+        Log.e("parse", "a".concat(ParseInstallation.getCurrentInstallation().getInstallationId()));
     }
 
 

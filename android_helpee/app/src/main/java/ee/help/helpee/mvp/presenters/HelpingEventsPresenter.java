@@ -6,4 +6,6 @@ package ee.help.helpee.mvp.presenters;
 public interface HelpingEventsPresenter {
 
    void cancelHelp(int position, int eventId,String userId, String token);
+
+   void fetchUserEvents(String userId, String token);
 }

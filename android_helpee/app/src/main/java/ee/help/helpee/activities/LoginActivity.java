@@ -8,12 +8,12 @@ import com.facebook.login.widget.LoginButton;
 import com.parse.Parse;
 import com.parse.ParseInstallation;
 
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.util.Base64;
 import android.util.Log;
 import android.widget.TextView;
@@ -51,7 +51,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
     LoginPresenter loginPresenter;
 
 
-    FragmentManager fragmentManager = getFragmentManager();
+    FragmentManager fragmentManager = getSupportFragmentManager();
 
     @InjectView(R.id.login_text)
     TextView loginText;
@@ -61,9 +61,6 @@ public class LoginActivity extends BaseActivity implements LoginView {
 
     @InjectView(R.id.create_account)
     TextView createAccount;
-
-
-
 
 
     @Override
@@ -101,7 +98,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
 
 
     @OnClick(R.id.login_button)
-    void openLoginFragment(){
+    void openLoginFragment() {
         fragmentManager.beginTransaction()
                 .add(R.id.fragment_container, new UserLoginFragment())
                 .addToBackStack("")

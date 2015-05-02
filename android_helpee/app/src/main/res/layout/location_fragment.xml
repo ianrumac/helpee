@@ -74,7 +74,7 @@
         android:id="@+id/confirm_location"
         style="@style/LargeTextButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/button_size"
         android:layout_alignParentBottom="true"
         android:background="@color/md_amber_600"
         android:clickable="true"

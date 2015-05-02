@@ -80,5 +80,12 @@
     <string name="oh_no">Oh no!</string>
     <string name="not_enough_points">You don\'t have enough points!</string>
     <string name="helped_msg">YOU ARE AWESOME!</string>
+    <string name="no_helpee">no helpee</string>
+    <string name="helpee_failed">HELPEE FAILED</string>
+    <string name="completed">completed</string>
+    <string name="event_done">Hope you had a great time!</string>
+    <string name="helpee_sad">This makes Helpee sad :(</string>
+    <string name="event_title">Event title</string>
+    <string name="event_description">Event description</string>
 
 </resources>

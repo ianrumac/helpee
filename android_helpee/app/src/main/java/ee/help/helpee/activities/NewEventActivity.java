@@ -237,7 +237,7 @@ public class NewEventActivity extends BaseFragmentActivity implements NewEventVi
                 datePickerDialog.show(getSupportFragmentManager(), DATEPICKER_TAG);
 
 
-            date = dateBuilder.append(timeToString(day)).append("-").append(timeToString(month)).append("-").append(year).toString();
+            date = dateBuilder.append(timeToString(day)).append("-").append(timeToString(month+1)).append("-").append(year).toString();
             dateOutput.setText(date);
         }
     };
@@ -258,5 +258,11 @@ public class NewEventActivity extends BaseFragmentActivity implements NewEventVi
         } else
             return String.valueOf(time);
 
+    }
+
+
+    @OnClick(R.id.ic_back)
+    void backPressed(){
+        super.onBackPressed();
     }
 }

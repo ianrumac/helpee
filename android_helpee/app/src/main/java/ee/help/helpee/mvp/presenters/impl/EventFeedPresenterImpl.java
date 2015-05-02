@@ -12,6 +12,7 @@ import ee.help.helpee.models.User;
 import ee.help.helpee.mvp.interactors.EventFeedInteractor;
 import ee.help.helpee.mvp.presenters.EventFeedPresenter;
 import ee.help.helpee.mvp.views.EventFeedView;
+import ee.help.helpee.utils.TimeUtils;
 
 /**
  * Created by ian on 24/04/15.
@@ -60,6 +61,17 @@ public class EventFeedPresenterImpl implements EventFeedPresenter {
         @Override
         public void onSuccess(List<Event> success) {
                 feedView.hideProgress();
+
+            for(int i=0; i<success.size();i++){
+                Event currentEvent = success.get(i);
+                if(TimeUtils.hasEventPassed(currentEvent.getEventDate())){
+                    success.remove(i);
+                    i--;
+                }
+
+
+            }
+
                 feedView.showEventList(success);
 
         }

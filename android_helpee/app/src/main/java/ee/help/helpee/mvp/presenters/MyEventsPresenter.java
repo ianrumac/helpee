@@ -5,5 +5,4 @@ package ee.help.helpee.mvp.presenters;
  */
 public interface MyEventsPresenter {
 
-   void fetchUserEvents(String userId, String token);
 }

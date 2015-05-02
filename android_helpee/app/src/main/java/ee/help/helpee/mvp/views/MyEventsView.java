@@ -7,5 +7,4 @@ import ee.help.helpee.models.DoubleEventListContainer;
  */
 public interface MyEventsView extends BaseView {
 
-    void createFragmentsAndPager(DoubleEventListContainer eventsContainer);
 }

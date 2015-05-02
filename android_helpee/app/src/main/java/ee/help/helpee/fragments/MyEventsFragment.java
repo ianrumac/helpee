@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.viewpagerindicator.TabPageIndicator;
+import com.astuetz.PagerSlidingTabStrip;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,8 +30,10 @@ import ee.help.helpee.mvp.views.MyEventsView;
  */
 public class MyEventsFragment extends BaseFragment implements MyEventsView {
 
+    public final static String TAG = "my-events-fragment";
+
     @InjectView(R.id.viewpageindicator)
-    TabPageIndicator pagerIndicator;
+    PagerSlidingTabStrip pagerIndicator;
 
     @InjectView(R.id.viewpager)
     ViewPager viewPager;
@@ -43,38 +45,46 @@ public class MyEventsFragment extends BaseFragment implements MyEventsView {
     HelpingEventsFragment helpeeEventsFragment;
     CurrentUserEventsFragment userEventsFragment;
     FragmentActivity fragmentActivity;
+    List<android.support.v4.app.Fragment> fragmentList;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
 
-
         DaggerMyEventsComponent.builder().myEventsModule(new MyEventsModule(this)).build().inject(this);
         View contentView = inflater.inflate(R.layout.fragment_myevents, container, false);
-        eventsPresenter.fetchUserEvents(getUser().getUserId(), getUser().getToken());
         ButterKnife.inject(this, contentView);
         fragmentActivity = (FragmentActivity) getActivity();
         viewPager.setVisibility(View.GONE);
         pagerIndicator.setVisibility(View.GONE);
+        createFragmentsAndPager();
 
         return contentView;
     }
 
     @Override
-    public void createFragmentsAndPager(DoubleEventListContainer eventsContainer) {
+    public void onResume() {
+        super.onResume();
 
-        helpeeEventsFragment = HelpingEventsFragment.newInstance(eventsContainer.getUserHelpingEvents());
+    }
 
-        userEventsFragment = CurrentUserEventsFragment.newInstance(eventsContainer.getUsersEvents());
-        List<android.support.v4.app.Fragment> fragmentList = new ArrayList<>();
+    public void createFragmentsAndPager() {
+        fragmentList = new ArrayList<>();
+        helpeeEventsFragment = new HelpingEventsFragment();
+        userEventsFragment = new CurrentUserEventsFragment();
         fragmentList.add(userEventsFragment);
         fragmentList.add(helpeeEventsFragment);
-        viewpagerAdapter = new MyEventsPagerAdapter(fragmentActivity.getSupportFragmentManager(), fragmentList);
+        viewpagerAdapter = new MyEventsPagerAdapter(getChildFragmentManager(), fragmentList);
         viewPager.setAdapter(viewpagerAdapter);
         pagerIndicator.setViewPager(viewPager);
         viewPager.setVisibility(View.VISIBLE);
         pagerIndicator.setVisibility(View.VISIBLE);
 
 
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
     }
 }

@@ -11,8 +11,4 @@ import ee.help.helpee.models.Event;
 public interface MyEventsInteractor {
 
 
-    void fetchUserEvents(String token, String userId, BaseListener<List<Event>> eventBaseListener);
-
-    void fetchHelpingEvents(String token, String userId, BaseListener<List<Event>> eventBaseListener);
-
 }

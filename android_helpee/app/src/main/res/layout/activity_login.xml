@@ -29,7 +29,7 @@
             android:id="@+id/facebook_login_button"
             android:layout_width="match_parent"
             android:layout_below="@id/create_account"
-            android:layout_height="@dimen/default_padding"
+            android:layout_height="@dimen/button_size"
             android:layout_gravity="center_horizontal"/>
 
     <TextView
@@ -39,11 +39,11 @@
             android:background="@color/button_bg"
             android:layout_width="match_parent"
             android:padding="@dimen/basic_padding"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/button_size"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
-
-            android:text="@string/log_in"/>
+            android:text="@string/log_in"
+        />
 
 
     <FrameLayout android:layout_width="match_parent"

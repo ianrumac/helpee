@@ -27,29 +27,30 @@
 
             <ImageView
 
+                android:id="@+id/back_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:padding="@dimen/basic_padding"
-                android:id="@+id/back_btn"
                 android:src="@drawable/abc_ic_ab_back_mtrl_am_alpha" />
         </FrameLayout>
     </android.support.v7.widget.Toolbar>
 
     <FrameLayout
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_below="@id/toolbar"
-        android:foreground="@drawable/bottom_shadow"
-        android:layout_height="match_parent">
+        android:foreground="@drawable/bottom_shadow">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <com.google.android.gms.maps.MapView
                 android:id="@+id/map_view"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:focusableInTouchMode="true"/>
+                android:focusableInTouchMode="true" />
 
 
             <!-- Points view container-->
@@ -58,25 +59,27 @@
                 android:layout_height="@dimen/details_item_size">
 
                 <ImageView
-                    android:layout_centerVertical="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_reward"
-                    android:padding="@dimen/basic_padding"/>
+                    android:layout_centerVertical="true"
+                    android:padding="@dimen/basic_padding"
+                    android:src="@drawable/ic_reward" />
+
                 <TextView
                     android:id="@+id/event_points"
-                    android:layout_marginLeft="@dimen/default_padding"
                     android:layout_width="wrap_content"
-                    android:textSize="@dimen/text_size_material_title"
-                    android:layout_centerVertical="true"
                     android:layout_height="wrap_content"
-                    android:text="@string/one_point_nocaps"/>
-                <View
-                    android:layout_alignParentBottom="true"
+                    android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/default_padding"
+                    android:text="@string/one_point_nocaps"
+                    android:textSize="@dimen/text_size_material_title" />
+
+                <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/divider_grey"/>
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="@dimen/default_padding"
+                    android:background="@color/divider_grey" />
             </RelativeLayout>
 
             <!--Is helpee and needs help container-->
@@ -86,84 +89,90 @@
                 android:weightSum="10">
 
 
-            <!--Needs help cointainer-->
-            <RelativeLayout
-                android:layout_weight="5"
-                android:layout_width="0dp"
-                android:layout_height="match_parent">
+                <!--Needs help cointainer-->
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5">
 
-                <ImageView
-                    android:layout_centerVertical="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_needs_help"
-                    android:padding="@dimen/basic_padding"/>
-                <TextView
-                    android:layout_marginLeft="@dimen/default_padding"
-                    android:layout_width="wrap_content"
-                    android:id="@+id/needs_help"
-                    android:textColor="@color/grey_subtitle"
-                    android:textSize="@dimen/text_size_material_subtitle"
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:padding="@dimen/basic_padding"
+                        android:src="@drawable/ic_needs_help" />
 
-                    android:layout_marginTop="@dimen/basic_padding"
-                    android:layout_height="wrap_content"
-                    android:text="@string/details_needs_help"/>
-                <TextView
-                    android:layout_below="@id/needs_help"
-                    android:layout_marginLeft="@dimen/default_padding"
-                    android:layout_width="wrap_content"
-                    android:id="@+id/needs_help_user"
-                    android:textSize="@dimen/text_size_material_title"
+                    <TextView
+                        android:id="@+id/needs_help"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/default_padding"
+                        android:layout_marginTop="@dimen/basic_padding"
 
-                    android:layout_centerVertical="true"
-                    android:layout_height="wrap_content"
-                    tools:text="Ian Rumac"/>
-                <View
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="@dimen/default_padding"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/divider_grey"/>
-            </RelativeLayout>
+                        android:text="@string/details_needs_help"
+                        android:textColor="@color/grey_subtitle"
+                        android:textSize="@dimen/text_size_material_subtitle" />
+
+                    <TextView
+                        android:id="@+id/needs_help_user"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/needs_help"
+                        android:layout_centerVertical="true"
+
+                        android:layout_marginLeft="@dimen/default_padding"
+                        android:textSize="@dimen/text_size_material_title"
+                        tools:text="Ian Rumac" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="@dimen/default_padding"
+                        android:background="@color/divider_grey" />
+                </RelativeLayout>
 
                 <!-- Helpee container -->
                 <RelativeLayout
-                    android:layout_weight="5"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_weight="5">
 
                     <ImageView
-                        android:layout_centerVertical="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_helpee_none"
-                        android:padding="@dimen/basic_padding"/>
+                        android:layout_centerVertical="true"
+                        android:padding="@dimen/basic_padding"
+                        android:src="@drawable/ic_helpee_none" />
+
                     <TextView
-                        android:layout_marginLeft="@dimen/default_padding"
-                        android:layout_width="wrap_content"
                         android:id="@+id/helpee"
-                        android:textColor="@color/grey_subtitle"
-                        android:textSize="@dimen/text_size_material_subtitle"
-
-                        android:layout_marginTop="@dimen/basic_padding"
-                        android:layout_height="wrap_content"
-                        android:text="@string/helpee"/>
-                    <TextView
-                        android:layout_below="@id/helpee"
-                        android:paddingRight="@dimen/basic_padding"
-                        android:layout_marginLeft="@dimen/default_padding"
                         android:layout_width="wrap_content"
-                        android:id="@+id/helpee_user"
-                        android:textSize="@dimen/text_size_material_title"
-
-                        android:layout_centerVertical="true"
                         android:layout_height="wrap_content"
-                        android:text="None yet"/>
+                        android:layout_marginLeft="@dimen/default_padding"
+                        android:layout_marginTop="@dimen/basic_padding"
+
+                        android:text="@string/helpee"
+                        android:textColor="@color/grey_subtitle"
+                        android:textSize="@dimen/text_size_material_subtitle" />
+
+                    <TextView
+                        android:id="@+id/helpee_user"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/helpee"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/default_padding"
+
+                        android:paddingRight="@dimen/basic_padding"
+                        android:text="None yet"
+                        android:textSize="@dimen/text_size_material_title" />
+
                     <View
-                        android:layout_alignParentBottom="true"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="@color/divider_grey"/>
+                        android:layout_alignParentBottom="true"
+                        android:background="@color/divider_grey" />
                 </RelativeLayout>
 
             </LinearLayout>
@@ -174,36 +183,38 @@
                 android:layout_height="@dimen/details_item_size">
 
                 <ImageView
-                    android:layout_centerVertical="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_location"
-                    android:padding="@dimen/basic_padding"/>
+                    android:layout_centerVertical="true"
+                    android:padding="@dimen/basic_padding"
+                    android:src="@drawable/ic_location" />
+
                 <TextView
-                    android:layout_marginLeft="@dimen/default_padding"
-                    android:layout_width="wrap_content"
                     android:id="@+id/event_street"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/default_padding"
                     android:layout_marginTop="@dimen/basic_padding"
                     android:textSize="@dimen/text_size_material_title"
-                    android:layout_height="wrap_content"
-                    tools:text="Ilica"/>
+                    tools:text="Ilica" />
+
                 <TextView
-                    android:layout_below="@id/event_street"
-                    android:layout_marginLeft="@dimen/default_padding"
-                    android:layout_width="wrap_content"
                     android:id="@+id/event_city"
-                    android:textSize="@dimen/text_size_material_subtitle"
-                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/event_street"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/default_padding"
                     android:textColor="@color/grey_subtitle"
-                    tools:text="Zagreb"/>
+                    android:textSize="@dimen/text_size_material_subtitle"
+                    tools:text="Zagreb" />
 
                 <View
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="@dimen/default_padding"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/divider_grey"/>
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="@dimen/default_padding"
+                    android:background="@color/divider_grey" />
             </RelativeLayout>
 
 
@@ -213,26 +224,29 @@
                 android:layout_height="@dimen/details_item_size">
 
                 <ImageView
-                    android:layout_centerVertical="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_time"
-                    android:padding="@dimen/basic_padding"/>
+                    android:layout_centerVertical="true"
+                    android:padding="@dimen/basic_padding"
+                    android:src="@drawable/ic_time" />
+
                 <TextView
-                    android:layout_marginLeft="@dimen/default_padding"
-                    android:layout_width="wrap_content"
-                    android:textSize="@dimen/text_size_material_title"
                     android:id="@+id/event_time_date"
-                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="Today 12:00 - 16:00"/>
-                <View
-                    android:layout_alignParentBottom="true"
+                    android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/default_padding"
+                    android:textSize="@dimen/text_size_material_title"
+                    tools:text="Today 12:00 - 16:00" />
+
+                <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/divider_grey"/>
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="@dimen/default_padding"
+                    android:background="@color/divider_grey" />
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -240,27 +254,29 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_description"
-                    android:padding="@dimen/basic_padding"/>
+                    android:padding="@dimen/basic_padding"
+                    android:src="@drawable/ic_description" />
+
                 <TextView
-                    android:layout_marginLeft="@dimen/default_padding"
-                    android:layout_width="wrap_content"
                     android:id="@+id/event_description"
-                    android:textColor="@color/grey_subtitle"
-                    android:lineSpacingExtra="2dp"
-                    android:paddingTop="@dimen/basic_padding"
-                    android:paddingRight="@dimen/basic_padding"
-                    android:paddingBottom="@dimen/basic_padding"
-                    android:textSize="@dimen/text_size_material_subtitle"
-                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="U petak se selim u novi stan i terbala bi mi pomoć, keksi i kava uključeni :) Testni opis koji ide u barem 3 reda i skrola se preko ostatka ekrana"/>
-                <View
-                    android:layout_alignParentBottom="true"
+                    android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/default_padding"
+                    android:lineSpacingExtra="2dp"
+                    android:paddingBottom="@dimen/basic_padding"
+                    android:paddingRight="@dimen/basic_padding"
+                    android:paddingTop="@dimen/basic_padding"
+                    android:textColor="@color/grey_subtitle"
+                    android:textSize="@dimen/text_size_material_subtitle"
+                    tools:text="U petak se selim u novi stan i terbala bi mi pomoć, keksi i kava uključeni :) Testni opis koji ide u barem 3 reda i skrola se preko ostatka ekrana" />
+
+                <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/divider_grey"/>
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="@dimen/default_padding"
+                    android:background="@color/divider_grey" />
             </RelativeLayout>
 
 
@@ -268,72 +284,116 @@
     </FrameLayout>
 
     <TextView
-        android:text="@string/cant_help"
-        android:layout_alignParentBottom="true"
         android:id="@+id/btn_cant_help"
-        android:layout_width="match_parent"
-        android:background="@color/md_red_700"
         style="@style/LargeTextButton"
-        android:layout_height="@dimen/details_item_size" />
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_size"
+        android:layout_alignParentBottom="true"
+        android:background="@color/md_red_700"
+        android:text="@string/cant_help"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/btn_cancel"
+        style="@style/LargeTextButton"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_size"
+        android:layout_alignParentBottom="true"
+        android:background="@color/md_red_700"
+        android:text="@string/cancel_event"
+        android:visibility="gone" />
 
     <LinearLayout
-
-        android:layout_alignParentBottom="true"
+        android:visibility="gone"
+        android:id="@+id/bottom_complete_container"
         android:layout_width="match_parent"
-        android:weightSum="10"
-        android:id="@+id/bottom_controls_container"
-        android:layout_height="@dimen/details_item_size">
+        android:layout_height="@dimen/button_size"
+        android:layout_alignParentBottom="true"
+        android:weightSum="10">
 
         <TextView
-            android:text="@string/btn_chip_in"
-            android:layout_weight="5"
-            android:id="@+id/chip_in_button"
-            android:layout_width="0dp"
-            android:background="@color/main_blue"
+            android:id="@+id/failed_btn"
             style="@style/LargeTextButton"
-            android:layout_height="match_parent" />
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:background="@color/md_red_500"
+            android:text="@string/helpee_failed" />
+
         <TextView
-            android:text="@string/btn_help_title"
-            android:layout_weight="5"
-            android:layout_width="0dp"
-            android:id="@+id/help_btn"
-            android:background="@color/md_amber_600"
+            android:id="@+id/completed_btn"
             style="@style/LargeTextButton"
-            android:layout_height="match_parent" />
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:background="@color/md_green_500"
+            android:text="@string/completed" />
 
     </LinearLayout>
 
 
+    <LinearLayout
+        android:id="@+id/bottom_controls_container"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_size"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"
+        android:weightSum="10">
+
+        <TextView
+            android:id="@+id/chip_in_button"
+            style="@style/LargeTextButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:background="@color/main_blue"
+            android:text="@string/btn_chip_in" />
+
+        <TextView
+            android:id="@+id/help_btn"
+            style="@style/LargeTextButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:background="@color/md_amber_600"
+            android:text="@string/btn_help_title" />
+
+    </LinearLayout>
+
 
     <RelativeLayout
-        android:layout_marginBottom="-201dp"
-        android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
         android:id="@+id/chip_in_container"
+        android:layout_width="match_parent"
         android:layout_height="200dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="-201dp"
         android:background="@color/main_blue">
 
         <LinearLayout
             android:id="@+id/dynamic_slider_layout"
             android:layout_width="match_parent"
-            android:orientation="horizontal"
             android:layout_height="150dp"
+            android:orientation="horizontal"
             android:padding="@dimen/basic_padding"></LinearLayout>
     </RelativeLayout>
 
     <FrameLayout
-        android:visibility="gone"
-        android:alpha="0"
         android:id="@+id/helped_overlay"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0"
         android:background="@color/md_amber_700"
-        android:layout_height="match_parent">
+        android:visibility="gone">
 
         <TextView
+            android:textSize="@dimen/abc_text_size_title_material"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:id="@+id/finished_overlay_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/helped_msg"/>
+            android:text="@string/helped_msg" />
 
 
     </FrameLayout>

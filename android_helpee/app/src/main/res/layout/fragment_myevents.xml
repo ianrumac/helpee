@@ -1,27 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
-    <com.viewpagerindicator.TabPageIndicator
-
+    <com.astuetz.PagerSlidingTabStrip
         android:id="@+id/viewpageindicator"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
         android:background="@color/main_blue"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"></com.viewpagerindicator.TabPageIndicator>
-
+        android:textColor="@color/white"
+        app:pstsIndicatorHeight="@dimen/sliding_strip_height"
+        app:pstsIndicatorColor="@color/md_amber_600"
+        app:pstsShouldExpand="true" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
-        android:layout_below="@id/viewpageindicator"
+
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </android.support.v4.view.ViewPager>
+        android:layout_height="match_parent"
+        android:layout_below="@id/viewpageindicator"/>
 
     <FrameLayout
-        android:layout_below="@id/viewpageindicator"
-        android:foreground="@drawable/bottom_shadow"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></FrameLayout>
+        android:layout_height="match_parent"
+        android:layout_below="@id/viewpageindicator"
+        android:foreground="@drawable/bottom_shadow"></FrameLayout>
 
 
 </RelativeLayout>

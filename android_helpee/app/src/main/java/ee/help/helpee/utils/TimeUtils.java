@@ -1,5 +1,7 @@
 package ee.help.helpee.utils;
 
+import android.util.Log;
+
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -13,13 +15,13 @@ public class TimeUtils {
 
         String[] dateParts = eventDate.split("T");
 
-        DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("YYYY-MM-DD");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("YYYY-MM-dd");
         DateTimeFormatter hourTimeFormatter = DateTimeFormat.forPattern("HH:mm:ss");
 
         DateTime dateTimeOfEvent = dateTimeFormatter.parseDateTime(dateParts[0]);
         DateTime hourTimeOfEvent = hourTimeFormatter.parseDateTime(dateParts[1]);
-
-        DateTimeFormatter parseDateToShow = DateTimeFormat.forPattern("DD.MM.YYYY");
+        Log.e("Date:", dateParts[0]);
+        DateTimeFormatter parseDateToShow = DateTimeFormat.forPattern("dd.MM.YYYY");
         dateTimeOfEvent = dateTimeOfEvent.withHourOfDay(hourTimeOfEvent.getHourOfDay()).withMinuteOfHour(hourTimeOfEvent.getMinuteOfHour());
 
 
@@ -32,9 +34,36 @@ public class TimeUtils {
             eventDateBuilder.append(parseDateToShow.print(dateTimeOfEvent)).append(" at ");
         }
 
-        eventDateBuilder.append(hourTimeOfEvent.getHourOfDay()).append(":").append(dateTimeOfEvent.getMinuteOfHour());
+        if(hourTimeOfEvent.getHourOfDay()<10)
+            eventDateBuilder.append("0");
+        eventDateBuilder.append(hourTimeOfEvent.getHourOfDay()).append(":");
+
+        if(hourTimeOfEvent.getMinuteOfHour()<10)
+            eventDateBuilder.append("0");
+
+        eventDateBuilder.append(dateTimeOfEvent.getMinuteOfHour());
 
         return eventDateBuilder.toString();
 
     }
+
+    public static boolean hasEventPassed(String eventDate) {
+
+        String[] dateParts = eventDate.split("T");
+
+        DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("YYYY-MM-dd");
+        DateTimeFormatter hourTimeFormatter = DateTimeFormat.forPattern("HH:mm:ss");
+
+        DateTime dateTimeOfEvent = dateTimeFormatter.parseDateTime(dateParts[0]);
+        DateTime hourTimeOfEvent = hourTimeFormatter.parseDateTime(dateParts[1]);
+
+        DateTimeFormatter parseDateToShow = DateTimeFormat.forPattern("dd.MM.YYYY");
+        dateTimeOfEvent = dateTimeOfEvent.withHourOfDay(hourTimeOfEvent.getHourOfDay()).withMinuteOfHour(hourTimeOfEvent.getMinuteOfHour());
+        if(dateTimeOfEvent.getMillis()>DateTime.now().getMillis())
+            return true;
+        else
+        return false;
+
+    }
+
 }

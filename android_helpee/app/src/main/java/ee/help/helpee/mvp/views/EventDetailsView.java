@@ -14,4 +14,10 @@ public interface EventDetailsView extends BaseView{
     void hasHelped();
 
     void setEventDate(String dateTime);
+
+    void cancelHelp();
+
+    void cancelEvent();
+
+    void completeEvent();
 }

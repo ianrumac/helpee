@@ -98,4 +98,13 @@ public interface ApiService {
     @POST("/Events/CantHelp")
     void cancelHelp(@Query("eventid") int eventId,@Query("userid") String userId, @Header("Authorization") String token, Callback<Response> callback );
 
+    @POST("/Events/HelpCompleted")
+    void completeEvent(@Query("eventid") int eventId, @Header("Authorization") String token, Callback<Response> callback);
+
+    @POST("/Events/HelpCompleted")
+    void failedEvent(@Query("eventid") int eventId, @Header("Authorization") String token, Callback<Response> callback);
+
+
+
 }
+

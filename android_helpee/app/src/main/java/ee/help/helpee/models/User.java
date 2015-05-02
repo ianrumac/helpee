@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * Created by ian on 12/04/15.
  */
-public class User implements Serializable{
+public class User implements Serializable {
 
 
     @SerializedName("Name")
@@ -60,7 +60,11 @@ public class User implements Serializable{
     }
 
     public String getImageUri() {
-        return imageUri;
+
+        if (imageUri != null)
+            return "http://helpee.azurewebsites.net/Images/".concat(imageUri);
+        else
+            return imageUri;
     }
 
     public void setImageUri(String imageUri) {

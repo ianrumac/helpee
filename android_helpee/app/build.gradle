@@ -107,7 +107,7 @@ dependencies {
 
     compile 'com.facebook.fresco:fresco:0.4.0+'
 
-    compile 'com.viewpagerindicator:library:2.4.1@aar'
+    compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
 
 
 }

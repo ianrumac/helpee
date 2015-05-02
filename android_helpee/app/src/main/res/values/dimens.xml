@@ -14,5 +14,11 @@
 
     <dimen name="drawer_width">320dp</dimen>
     <dimen name="details_item_size">72dp</dimen>
-
+    <dimen name="corner_radius_card">2dp</dimen>
+    <dimen name="sliding_strip_height">2dp</dimen>
+    <dimen name="button_height">56dp</dimen>
+    <dimen name="subtitle_size">12sp</dimen>
+    <dimen name="time_date_text">14dp</dimen>
+    <dimen name="subtitle_larger_desc">16dp</dimen>
+<dimen name="button_size">56dp</dimen>
 </resources>

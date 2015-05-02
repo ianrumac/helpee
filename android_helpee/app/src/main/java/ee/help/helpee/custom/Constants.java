@@ -34,4 +34,6 @@ public class Constants {
 
 
     public static final String FROM_HELPING = "FROM_HELPING";
+    public static final String OWNER_OF_EVENT = "owner-of-event";
+    public static final String OWNER_OF_FINISHED_EVENT = "owener-of-finished-event";
 }

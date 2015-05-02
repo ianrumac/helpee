@@ -60,6 +60,7 @@
         android:layout_above="@id/login_button"
         android:inputType="textWebPassword"
         android:singleLine="true"
+        app:met_underlineColor="@color/md_yellow_800"
         android:layout_marginBottom="@dimen/default_padding"
         android:layout_marginLeft="@dimen/basic_padding"
         android:layout_marginRight="@dimen/basic_padding"
@@ -72,6 +73,7 @@
 
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/user_name"
+        app:met_underlineColor="@color/md_yellow_800"
         style="@style/EditTextUserInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

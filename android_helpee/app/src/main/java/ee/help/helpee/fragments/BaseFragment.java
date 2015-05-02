@@ -16,7 +16,7 @@ import ee.help.helpee.models.User;
 /**
  * Created by ian on 23/04/15.
  */
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends android.support.v4.app.Fragment {
 
     ProgressDialog mProgressDialog;
 

@@ -4,11 +4,13 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -40,14 +42,6 @@ public class CurrentUserEventsFragment extends Fragment implements UserEventsVie
 
 
 
-    public static CurrentUserEventsFragment newInstance(List<Event> eventList) {
-        Bundle passEventsBundle = new Bundle();
-        passEventsBundle.putSerializable(Constants.EVENT_LIST_EXTRA, new EventListContainer(eventList));
-        CurrentUserEventsFragment fragment = new CurrentUserEventsFragment();
-        fragment.setArguments(passEventsBundle);
-        return fragment;
-    }
-
     @InjectView(R.id.event_list)
     RecyclerView eventList;
 
@@ -67,38 +61,46 @@ public class CurrentUserEventsFragment extends Fragment implements UserEventsVie
 
         DaggerUserEventsComponent.builder().userEventsModule(new UserEventsModule(this)).build().inject(this);
         ButterKnife.inject(this, content);
-        events = ((EventListContainer) getArguments().getSerializable(Constants.EVENT_LIST_EXTRA)).getEventList();
+
         setUpRecyclerView();
+        userEventsPresenter.fetchUserEvents(HelpeeApplication.getUserInstance().getUserId(), HelpeeApplication.getUserInstance().getToken());
         return content;
     }
 
-    void setUpRecyclerView(){
+    void setUpRecyclerView() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         eventList.setLayoutManager(layoutManager);
-        eventsAdapter = new EventsOwnerAdapter(events, getActivity(), cancelEventListener);
-        eventList.setAdapter(eventsAdapter);
 
 
     }
 
+
     /**
      * Hooks into recycler view adapter for onClick function
-     * */
+     */
     AdapterClickListener cancelEventListener = new AdapterClickListener() {
         @Override
         public void onClick(int view, int position) {
-            userEventsPresenter.cancelEvent( position, events.get(position).getEventId(), HelpeeApplication.getUserInstance().getToken());
+            userEventsPresenter.cancelEvent(position, events.get(position).getEventId(), HelpeeApplication.getUserInstance().getToken());
         }
     };
 
     @Override
     public void removeEvent(int position) {
-            events.remove(position);
-            eventsAdapter.notifyItemRemoved(position);
-        if(events.size()==0){
+        events.remove(position);
+        eventsAdapter.notifyItemRemoved(position);
+        if (events.size() == 0) {
             noEvents.setVisibility(View.VISIBLE);
         }
+
+    }
+
+    @Override
+    public void showEvents(List<Event> eventResultList) {
+        events = eventResultList;
+        eventsAdapter = new EventsOwnerAdapter(events, getActivity(), cancelEventListener);
+        eventList.setAdapter(eventsAdapter);
 
     }
 
@@ -121,11 +123,6 @@ public class CurrentUserEventsFragment extends Fragment implements UserEventsVie
     @Override
     public void onResume() {
         super.onResume();
-                /*No events, so let's drop a text that tells that*/
-        if(events.size()==0){
-            noEvents.setVisibility(View.VISIBLE);
-        }
-
 
     }
 

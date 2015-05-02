@@ -5,7 +5,6 @@
         <item name="android:colorPrimary">@color/main_blue</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textColorHint">@color/grey_subtitle</item>
-        <item name="vpiTabPageIndicatorStyle">@style/CustomTabPageIndicator</item>
 
         <!-- Customize your theme here. -->
     </style>
@@ -37,17 +36,5 @@
     </style>
 
 
-    <style name="CustomTabPageIndicator" parent="Widget.TabPageIndicator">
-        <item name="android:background">@drawable/tab_indicator_ab</item>
-        <item name="android:textColor">#FFFFFF</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:divider">@null</item>
-        <item name="android:dividerPadding">10dp</item>
-        <item name="android:showDividers">middle</item>
-        <item name="android:paddingLeft">8dp</item>
-        <item name="android:paddingRight">8dp</item>
-        <item name="android:fadingEdge">horizontal</item>
-        <item name="android:fadingEdgeLength">8dp</item>
-    </style>
 
 </resources>

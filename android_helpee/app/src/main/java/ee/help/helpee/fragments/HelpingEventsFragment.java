@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -64,9 +65,9 @@ public class HelpingEventsFragment extends Fragment implements HelpingEventsView
         View content = inflater.inflate(R.layout.fragment_myevents_child, container, false);
         DaggerHelpingEventComponent.builder().helpingEventsModule(new HelpingEventsModule(this)).build().inject(this);
         ButterKnife.inject(this, content);
-        events = ((EventListContainer) getArguments().getSerializable(Constants.EVENT_LIST_EXTRA)).getEventList();
         setUpRecyclerView();
 
+        eventsPresenter.fetchUserEvents(HelpeeApplication.getUserInstance().getUserId(), HelpeeApplication.getUserInstance().getToken());
         return content;
     }
 
@@ -74,14 +75,6 @@ public class HelpingEventsFragment extends Fragment implements HelpingEventsView
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         eventList.setLayoutManager(layoutManager);
-
-
-        eventsAdapter = new EventsHelpeeAdapter(events, getActivity(), cancelHelpClickListener);
-
-
-        eventList.setAdapter(eventsAdapter);
-
-
     }
 
     /**
@@ -108,6 +101,17 @@ public class HelpingEventsFragment extends Fragment implements HelpingEventsView
     }
 
     @Override
+    public void showEvents(List<Event> eventResultList) {
+        events = eventResultList;
+        eventsAdapter = new EventsHelpeeAdapter(events, getActivity(), cancelHelpClickListener);
+        eventList.setAdapter(eventsAdapter);
+        eventsAdapter.notifyDataSetChanged();
+
+
+
+    }
+
+    @Override
     public void showError(ErrorType message) {
         ((BaseActionBarActivity) getActivity()).showError(message);
     }
@@ -126,11 +130,6 @@ public class HelpingEventsFragment extends Fragment implements HelpingEventsView
     @Override
     public void onResume() {
         super.onResume();
-                /*No events, so let's drop a text that tells that*/
-        if(events.size()==0){
-            noEvents.setVisibility(View.VISIBLE);
-        }
-
 
     }
 }

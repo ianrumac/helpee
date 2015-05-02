@@ -1,9 +1,16 @@
 package ee.help.helpee.mvp.presenters.impl;
 
+import android.util.Log;
+
+import java.util.List;
+
 import javax.inject.Inject;
 
 import ee.help.helpee.errors.ErrorType;
+import ee.help.helpee.listeners.BaseListener;
 import ee.help.helpee.listeners.SimpleBaseListener;
+import ee.help.helpee.models.DoubleEventListContainer;
+import ee.help.helpee.models.Event;
 import ee.help.helpee.mvp.interactors.UserEventsInteractor;
 import ee.help.helpee.mvp.presenters.UserEventsPresenter;
 import ee.help.helpee.mvp.views.UserEventsView;
@@ -26,19 +33,43 @@ public class UserEventsPresenterImpl implements UserEventsPresenter {
     @Override
     public void cancelEvent(final int position, final int eventId, String token) {
         userEventsView.showProgress();
-            eventsInteractor.cancelEvent(eventId, token, new SimpleBaseListener() {
-                @Override
-                public void onSuccess() {
-                    userEventsView.hideProgress();
-                    userEventsView.removeEvent(position);
-                    //TODO usereventsview remove event
-                }
+        eventsInteractor.cancelEvent(eventId, token, new SimpleBaseListener() {
+            @Override
+            public void onSuccess() {
+                userEventsView.hideProgress();
+                userEventsView.removeEvent(position);
+                //TODO usereventsview remove event
+            }
 
-                @Override
-                public void onFail(ErrorType errorType) {
-                    userEventsView.hideProgress();
+            @Override
+            public void onFail(ErrorType errorType) {
+                userEventsView.hideProgress();
                 userEventsView.showError(errorType);
-                }
-            });
+            }
+        });
     }
+
+
+    @Override
+    public void fetchUserEvents(String userId, String token) {
+        eventsInteractor.fetchUserEvents(token, userId, userEventsListener);
+
+    }
+
+
+    BaseListener<List<Event>> userEventsListener = new BaseListener<List<Event>>() {
+        @Override
+        public void onSuccess(List<Event> success) {
+            userEventsView.hideProgress();
+            userEventsView.showEvents(success);
+        }
+
+        @Override
+        public void onFail(ErrorType errorType) {
+            userEventsView.hideProgress();
+            userEventsView.showError(errorType);
+
+        }
+    };
+
 }

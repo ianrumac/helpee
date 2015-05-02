@@ -1,9 +1,13 @@
 package ee.help.helpee.mvp.presenters.impl;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import ee.help.helpee.errors.ErrorType;
+import ee.help.helpee.listeners.BaseListener;
 import ee.help.helpee.listeners.SimpleBaseListener;
+import ee.help.helpee.models.Event;
 import ee.help.helpee.mvp.interactors.HelpingEventsInteractor;
 import ee.help.helpee.mvp.presenters.HelpingEventsPresenter;
 import ee.help.helpee.mvp.views.HelpingEventsView;
@@ -40,4 +44,29 @@ public class HelpingEventsPresenterImpl implements HelpingEventsPresenter {
                 }
             });
     }
+
+    @Override
+    public void fetchUserEvents(String userId, String token) {
+        helpingEventsView.showProgress();
+        eventsInteractor.fetchHelpingEvents(token, userId, userEventsListener);
+
+    }
+
+
+    BaseListener<List<Event>> userEventsListener = new BaseListener<List<Event>>() {
+        @Override
+        public void onSuccess(List<Event> success) {
+            helpingEventsView.hideProgress();
+
+            helpingEventsView.showEvents(success);
+        }
+
+        @Override
+        public void onFail(ErrorType errorType) {
+            helpingEventsView.hideProgress();
+            helpingEventsView.showError(errorType);
+
+        }
+    };
+
 }

@@ -57,7 +57,8 @@ public class EventsOwnerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     void bindDataToEventView(EventHolder holder, final Event event, final int position) {
 
         holder.title.setText(event.getEventTitle());
-        holder.userName.setText(String.format(context.getString(R.string.needs_help), event.getCreator().getFullName()));
+        String[] eventCreatorSplitStrings = event.getCreator().getFullName().split(" ");
+        holder.userName.setText(String.format(context.getString(R.string.needs_help), eventCreatorSplitStrings[0]));
         /*Parse image URL and sent it into the drawee - if URL exists*/
 
         if (event.getCreator().getImageUri() != null && !"".equals(event.getCreator().getImageUri())) {
@@ -78,10 +79,18 @@ public class EventsOwnerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             public void onClick(View v) {
                 Intent openEventDetails = new Intent(context, EventDetailsActivity.class);
                 openEventDetails.putExtra(Constants.EVENT_EXTRA, event);
+                if(TimeUtils.hasEventPassed(event.getEventDate()))
+                    openEventDetails.putExtra(Constants.OWNER_OF_FINISHED_EVENT, true);
+                else
+                    openEventDetails.putExtra(Constants.OWNER_OF_EVENT, true);
+
                 context.startActivity(openEventDetails);
             }
         });
 
+        if(event.isCompleted() || TimeUtils.hasEventPassed(event.getEventDate())){
+            holder.cancelEventBtn.setVisibility(View.GONE);
+        }
         holder.cancelEventBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

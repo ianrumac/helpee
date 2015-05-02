@@ -1,8 +1,8 @@
 package ee.help.helpee.activities;
 
-import android.app.FragmentManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -49,11 +49,12 @@ public class MainActivity extends BaseActionBarActivity {
     Drawer navigationDrawerBuilder;
     Drawer.Result navigationDrawer;
 
-    FragmentManager fragmentManager = getFragmentManager();
+    FragmentManager fragmentManager = getSupportFragmentManager();
     View drawerHeader;
     TextView drawerTitle;
-    TextView drawerChips;
+    TextView toolbarChips;
 
+    MyEventsFragment myEventsFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +63,8 @@ public class MainActivity extends BaseActionBarActivity {
         setSupportActionBar(toolbar);
         buildDrawer();
         fragmentManager.beginTransaction().add(R.id.fragment_container, new EventFeedFragment()).addToBackStack(EventFeedFragment.TAG).commit();
-
+        toolbarChips = ((TextView) toolbar.findViewById(R.id.toolbar_chips));
+        toolbarChips.setText(String.format(getString(R.string.chips_left), getUser().getPoints()));
     }
 
 
@@ -130,18 +132,21 @@ public class MainActivity extends BaseActionBarActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l, IDrawerItem iDrawerItem) {
                 if (iDrawerItem.equals(eventsDrawerItem)) {
                     fragmentManager.beginTransaction().replace(R.id.fragment_container, new EventFeedFragment(), EventFeedFragment.TAG).commit();
+
                     fragmentContainer.setForeground(getResources().getDrawable(R.drawable.bottom_shadow));
 
                 }
 
                 if (iDrawerItem.equals(myEventsDrawerItem)) {
-                    fragmentManager.beginTransaction().replace(R.id.fragment_container, new MyEventsFragment()).commit();
+
+                    fragmentManager.beginTransaction().replace(R.id.fragment_container,new MyEventsFragment() ,MyEventsFragment.TAG).addToBackStack(MyEventsFragment.TAG).commit();
                     fragmentContainer.setForeground(null);
 
                 }
                 if (iDrawerItem.equals(heroesFragmentDrawerItem)) {
-                    fragmentContainer.setForeground(getResources().getDrawable(R.drawable.bottom_shadow));
 
+
+                    fragmentContainer.setForeground(getResources().getDrawable(R.drawable.bottom_shadow));
                     fragmentManager.beginTransaction().replace(R.id.fragment_container, new HeroesFragment()).commit();
                 }
 
@@ -155,6 +160,7 @@ public class MainActivity extends BaseActionBarActivity {
 
     void setupHeader() {
         drawerHeader = getLayoutInflater().inflate(R.layout.drawer_layout, null);
+
 
 
         TextView drawerTitle = (TextView) drawerHeader.findViewById(R.id.user_name);
@@ -171,7 +177,6 @@ public class MainActivity extends BaseActionBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -195,5 +200,7 @@ public class MainActivity extends BaseActionBarActivity {
 
     public void updatePoints() {
         ((TextView) navigationDrawer.getHeader().findViewById(R.id.user_chips_left)).setText(String.format(getString(R.string.chips_left), getUser().getPoints()));
+        toolbarChips.setText(String.format(getString(R.string.chips_left), getUser().getPoints()));
+
     }
 }

@@ -4,6 +4,7 @@ import com.gc.materialdesign.widgets.Dialog;
 import com.gc.materialdesign.widgets.ProgressDialog;
 
 import android.app.Activity;
+import android.support.v4.app.FragmentActivity;
 
 import ee.help.helpee.HelpeeApplication;
 import ee.help.helpee.R;
@@ -14,7 +15,7 @@ import ee.help.helpee.models.User;
 /**
  * Created by ian on 12/04/15.
  */
-public abstract class BaseActivity extends Activity {
+public abstract class BaseActivity extends FragmentActivity {
 
     ProgressDialog mProgressDialog;
 

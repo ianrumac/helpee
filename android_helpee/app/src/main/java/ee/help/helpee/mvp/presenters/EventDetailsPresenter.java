@@ -16,9 +16,9 @@ public interface EventDetailsPresenter {
 
     void sendHelp(int eventId, String userId, String token);
 
-    void cancelHelp( int position, int eventId, String userId, String token);
+    void cancelHelp(int eventId, String userId, String token);
 
     void completeEvent(boolean eventSuccess, int eventId, String userToken);
 
-    void cancelEvent(int eventId, String userToken);
+    void cancelEvent(int eventId, String token);
 }

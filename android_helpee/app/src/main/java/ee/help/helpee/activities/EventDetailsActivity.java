@@ -33,7 +33,9 @@ import ee.help.helpee.dagger.components.DaggerEventDetailsComponent;
 import ee.help.helpee.models.Event;
 import ee.help.helpee.mvp.presenters.EventDetailsPresenter;
 import ee.help.helpee.mvp.views.EventDetailsView;
+import ee.help.helpee.utils.TimeUtils;
 
+import static ee.help.helpee.HelpeeApplication.changePoints;
 import static ee.help.helpee.HelpeeApplication.getInstance;
 
 /**
@@ -43,16 +45,19 @@ public class EventDetailsActivity extends BaseActivity implements EventDetailsVi
 
     @InjectView(R.id.map_view)
     MapView mapView;
+
     @InjectView(R.id.needs_help_user)
     TextView needsHelpUser;
+
     @InjectView(R.id.helpee_user)
     TextView helpeeUser;
+
     @InjectView(R.id.event_street)
     TextView eventStreet;
+
     @InjectView(R.id.event_city)
     TextView eventCity;
-    @InjectView(R.id.bottom_controls_container)
-    LinearLayout bottomControlsContainer;
+
     @InjectView(R.id.chip_in_container)
     RelativeLayout chipInContainer;
 
@@ -71,14 +76,27 @@ public class EventDetailsActivity extends BaseActivity implements EventDetailsVi
     @Inject
     EventDetailsPresenter detailsPresenter;
 
-
-    GoogleMap googleMap;
-    Event currentEvent;
     @InjectView(R.id.helped_overlay)
     FrameLayout helpedOverlay;
 
     @InjectView(R.id.btn_cant_help)
     TextView cantHelpBtn;
+
+    @InjectView(R.id.btn_cancel)
+    TextView cancelBtn;
+
+    @InjectView(R.id.bottom_controls_container)
+    LinearLayout bottomControlsContainer;
+
+    @InjectView(R.id.bottom_complete_container)
+    LinearLayout bottomCompleteButtonsContainer;
+
+    @InjectView(R.id.finished_overlay_text)
+    TextView finishedOverlayText;
+
+    GoogleMap googleMap;
+    Event currentEvent;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,13 +129,28 @@ public class EventDetailsActivity extends BaseActivity implements EventDetailsVi
             detailsPresenter.showEventData(currentEvent);
         }
 
+        /**
+         * This checks where the details came from and decides which controls to show based upon that.
+         * FROM_HELPING = from screen where you are a helpee
+         * OWNER_OF_EVENT = your event, still not finished
+         * OWNER_OF_FINISHED_EVENT = your event, finished - also if event time has passed
+         * !currentEvent.isCompleted = if current event isnt completed show controls, else everything remains hidden
+         * **/
+
 
         if (getIntent().getBooleanExtra(Constants.SHOULD_OPEN_CHIP_IN, false)) {
             setChipInOpened(0);
-        }else if(getIntent().getBooleanExtra(Constants.FROM_HELPING, false)){
-            bottomControlsContainer.setVisibility(View.GONE);
+        } else if (getIntent().getBooleanExtra(Constants.FROM_HELPING, false)) {
             cantHelpBtn.setVisibility(View.VISIBLE);
+        } else if (getIntent().getBooleanExtra(Constants.OWNER_OF_EVENT, false) && !currentEvent.isCompleted() && !TimeUtils.hasEventPassed(currentEvent.getEventDate())) {
+            cancelBtn.setVisibility(View.VISIBLE);
+        } else if (getIntent().getBooleanExtra(Constants.OWNER_OF_FINISHED_EVENT, false) || TimeUtils.hasEventPassed(currentEvent.getEventDate())) {
+            bottomCompleteButtonsContainer.setVisibility(View.VISIBLE);
+        } else if (!currentEvent.isCompleted()) {
+            bottomControlsContainer.setVisibility(View.VISIBLE);
+
         }
+
 
     }
 
@@ -247,8 +280,71 @@ public class EventDetailsActivity extends BaseActivity implements EventDetailsVi
     @Override
     public void hasHelped() {
         HelpeeApplication.changePoints(getUser().getPoints() - 1);
+        animateOverlay(getResources().getColor(R.color.md_amber_700));
+    }
+
+
+    @OnClick(R.id.btn_cant_help)
+    void helpCancelPressed() {
+        detailsPresenter.cancelHelp(currentEvent.getEventId(), getUser().getUserId(), getUser().getToken());
+    }
+
+    @OnClick(R.id.btn_cancel)
+    void cancelEventPressed() {
+        detailsPresenter.cancelEvent(currentEvent.getEventId(), getUser().getToken());
+    }
+
+    @OnClick(R.id.failed_btn)
+    void failedEventPressed() {
+        detailsPresenter.completeEvent(false, currentEvent.getEventId(), getUser().getToken());
+    }
+
+    @OnClick(R.id.completed_btn)
+    void completedEventPressed() {
+        detailsPresenter.completeEvent(true, currentEvent.getEventId(), getUser().getToken());
+    }
+
+
+    @OnClick(R.id.back_btn)
+    void backPressed() {
+        super.onBackPressed();
+    }
+
+    @Override
+    public void setEventDate(String dateTime) {
+        eventTimeAndDate.setText(dateTime);
+    }
+
+    @Override
+    public void cancelHelp() {
+
+        changePoints(getUser().getPoints() + 1);
+        finishedOverlayText.setText(getString(R.string.helpee_sad));
+        animateOverlay(getResources().getColor(R.color.md_red_500));
+
+    }
+
+    @Override
+    public void cancelEvent() {
+        changePoints(getUser().getPoints() + currentEvent.getPoints());
+        finishedOverlayText.setText(getString(R.string.helpee_sad));
+        animateOverlay(getResources().getColor(R.color.md_red_500));
+
+
+    }
+
+    @Override
+    public void completeEvent() {
+        finishedOverlayText.setText(getString(R.string.event_done));
+        animateOverlay(getResources().getColor(R.color.md_green_500));
+
+
+    }
+
+    void animateOverlay(int backgroundColor) {
         helpedOverlay.setVisibility(View.VISIBLE);
-        helpedOverlay.animate().alpha(1).setListener(new Animator.AnimatorListener() {
+        helpedOverlay.setBackgroundColor(backgroundColor);
+        helpedOverlay.animate().alpha(1).setDuration(1200).setListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
 
@@ -270,21 +366,5 @@ public class EventDetailsActivity extends BaseActivity implements EventDetailsVi
             }
         });
 
-
-    }
-
-    @OnClick(R.id.btn_cant_help)
-    void cancelHelp(){
-        detailsPresenter.s
-    }
-
-    @OnClick(R.id.back_btn)
-    void backPressed() {
-        super.onBackPressed();
-    }
-
-    @Override
-    public void setEventDate(String dateTime) {
-        eventTimeAndDate.setText(dateTime);
     }
 }

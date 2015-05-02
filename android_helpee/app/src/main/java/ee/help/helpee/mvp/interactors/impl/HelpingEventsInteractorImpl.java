@@ -1,9 +1,13 @@
 package ee.help.helpee.mvp.interactors.impl;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import ee.help.helpee.errors.ErrorType;
+import ee.help.helpee.listeners.BaseListener;
 import ee.help.helpee.listeners.SimpleBaseListener;
+import ee.help.helpee.models.Event;
 import ee.help.helpee.mvp.interactors.HelpingEventsInteractor;
 import ee.help.helpee.mvp.interactors.UserEventsInteractor;
 import ee.help.helpee.network.ApiManager;
@@ -39,4 +43,24 @@ public class HelpingEventsInteractorImpl implements HelpingEventsInteractor{
             }
         });
     }
+
+    @Override
+    public void fetchHelpingEvents(String token, String userId, final BaseListener<List<Event>> userHelpingEventListener) {
+        apiManager.getApiService().getEventsWhereUserHelps(userId, BearerToken.authorize(token), new Callback<List<Event>>() {
+            @Override
+            public void success(List<Event> eventList, Response response) {
+                userHelpingEventListener.onSuccess(eventList);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+                userHelpingEventListener.onFail(ErrorType.CONNECTION_ERROR);
+            }
+        });
+
+    }
+
+
+
 }

@@ -66,13 +66,67 @@ public class EventDetailsPresenterImpl implements EventDetailsPresenter {
     }
 
     @Override
-    public void cancelHelp(final int position, final int eventId, String userId, String token) {
+    public void cancelHelp(final int eventId, String userId, String token) {
         eventDetailsView.showProgress();
         eventDetailsInteractor.cancelHelp(eventId, userId, token, new SimpleBaseListener() {
             @Override
             public void onSuccess() {
                 eventDetailsView.hideProgress();
-                eventDetailsView.removeEvent(position);
+                eventDetailsView.cancelHelp();
+            }
+
+            @Override
+            public void onFail(ErrorType errorType) {
+                eventDetailsView.hideProgress();
+                eventDetailsView.showError(errorType);
+            }
+        });
+    }
+
+    @Override
+    public void completeEvent(boolean eventSuccess, int eventId, String userToken) {
+        eventDetailsView.showProgress();
+
+        if(eventSuccess)
+            eventDetailsInteractor.completeEvent(eventId, userToken, new SimpleBaseListener() {
+                @Override
+                public void onSuccess() {
+                    eventDetailsView.hideProgress();
+                    eventDetailsView.completeEvent();
+                }
+
+                @Override
+                public void onFail(ErrorType errorType) {
+                    eventDetailsView.hideProgress();
+                    eventDetailsView.showError(errorType);
+                }
+            });
+        else
+            eventDetailsInteractor.failedEvent(eventId, userToken, new SimpleBaseListener() {
+                @Override
+                public void onSuccess() {
+                    eventDetailsView.hideProgress();
+                    eventDetailsView.cancelEvent();
+                }
+
+                @Override
+                public void onFail(ErrorType errorType) {
+                    eventDetailsView.hideProgress();
+                    eventDetailsView.showError(errorType);
+                }
+            });
+
+    }
+
+    @Override
+    public void cancelEvent( int eventId, String token) {
+        eventDetailsView.showProgress();
+        eventDetailsInteractor.cancelEvent(eventId, token, new SimpleBaseListener() {
+            @Override
+            public void onSuccess() {
+                eventDetailsView.hideProgress();
+                eventDetailsView.cancelEvent();
+                //TODO usereventsview remove event
             }
 
             @Override
