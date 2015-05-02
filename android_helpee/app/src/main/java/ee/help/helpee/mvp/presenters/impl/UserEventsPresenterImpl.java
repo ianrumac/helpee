@@ -24,13 +24,13 @@ public class UserEventsPresenterImpl implements UserEventsPresenter {
     }
 
     @Override
-    public void cancelEvent(final int eventId, String token) {
+    public void cancelEvent(final int position, final int eventId, String token) {
         userEventsView.showProgress();
             eventsInteractor.cancelEvent(eventId, token, new SimpleBaseListener() {
                 @Override
                 public void onSuccess() {
                     userEventsView.hideProgress();
-                    userEventsView.removeEvent(eventId);
+                    userEventsView.removeEvent(position);
                     //TODO usereventsview remove event
                 }
 

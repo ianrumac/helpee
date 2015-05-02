@@ -38,6 +38,7 @@
 
         <activity
                 android:name=".activities.MainActivity"
+            android:windowSoftInputMode="adjustResize"
                 android:label="@string/app_name">
         </activity>
         <activity
@@ -54,11 +55,13 @@
 
         <activity
                 android:name=".activities.LoginActivity"
+            android:windowSoftInputMode="adjustResize"
                 android:label="@string/app_name">
         </activity>
 
         <activity
             android:name=".activities.NewEventActivity"
+            android:windowSoftInputMode="adjustResize"
             android:label="@string/app_name">
         </activity>
 

@@ -52,11 +52,11 @@ public class EventsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof EventHolder) {
-            bindDataToEventView((EventHolder) holder, eventList.get(position));
+            bindDataToEventView((EventHolder) holder, eventList.get(position), position);
         }
     }
 
-    void bindDataToEventView(EventHolder holder, final Event event) {
+    void bindDataToEventView(EventHolder holder, final Event event, final int position) {
 
         holder.title.setText(event.getEventTitle());
         holder.userName.setText(String.format(context.getString(R.string.needs_help), event.getCreator().getFullName()));
@@ -84,6 +84,19 @@ public class EventsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             }
         });
 
+        holder.helpBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                itemClickListener.onClick(v.getId(), position);
+            }
+        });
+
+        holder.chipInBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                itemClickListener.onClick(v.getId(), position);
+            }
+        });
 
     }
 
@@ -117,7 +130,11 @@ public class EventsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         @InjectView(R.id.event_card)
         CardView wholeCard;
 
+        @InjectView(R.id.btn_help)
+        TextView helpBtn;
 
+        @InjectView(R.id.btn_chipin)
+        TextView chipInBtn;
 
         public EventHolder(View itemView) {
             super(itemView);

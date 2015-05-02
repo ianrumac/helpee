@@ -11,7 +11,27 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:minHeight="?attr/actionBarSize"
-            android:background="@color/main_blue"/>
+            android:background="@color/main_blue">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/toolbar_chips"
+
+            android:layout_marginRight="@dimen/basic_padding"
+            android:layout_width="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/chip_icon"
+            android:drawablePadding="@dimen/half_unit"
+            android:padding="@dimen/half_unit"
+            android:gravity="center"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            tools:text="5 left" />
+    </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
 
     <FrameLayout android:layout_width="match_parent"
                  android:layout_height="match_parent"

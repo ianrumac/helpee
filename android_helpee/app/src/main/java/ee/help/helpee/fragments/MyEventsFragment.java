@@ -1,6 +1,5 @@
 package ee.help.helpee.fragments;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
@@ -19,7 +18,6 @@ import javax.inject.Inject;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import ee.help.helpee.R;
-import ee.help.helpee.activities.BaseActionBarActivity;
 import ee.help.helpee.adapters.MyEventsPagerAdapter;
 import ee.help.helpee.dagger.MyEventsModule;
 import ee.help.helpee.dagger.components.DaggerMyEventsComponent;
@@ -42,7 +40,7 @@ public class MyEventsFragment extends BaseFragment implements MyEventsView {
 
     @Inject
     MyEventsPresenter eventsPresenter;
-    CurrentHelpeeEventsFragment helpeeEventsFragment;
+    HelpingEventsFragment helpeeEventsFragment;
     CurrentUserEventsFragment userEventsFragment;
     FragmentActivity fragmentActivity;
     @Nullable
@@ -65,7 +63,7 @@ public class MyEventsFragment extends BaseFragment implements MyEventsView {
     @Override
     public void createFragmentsAndPager(DoubleEventListContainer eventsContainer) {
 
-        helpeeEventsFragment = CurrentHelpeeEventsFragment.newInstance(eventsContainer.getUserHelpingEvents());
+        helpeeEventsFragment = HelpingEventsFragment.newInstance(eventsContainer.getUserHelpingEvents());
 
         userEventsFragment = CurrentUserEventsFragment.newInstance(eventsContainer.getUsersEvents());
         List<android.support.v4.app.Fragment> fragmentList = new ArrayList<>();

@@ -33,5 +33,5 @@ public class Constants {
     public static final String EVENT_LIST_EXTRA = "extra-event-list";
 
 
-
+    public static final String FROM_HELPING = "FROM_HELPING";
 }

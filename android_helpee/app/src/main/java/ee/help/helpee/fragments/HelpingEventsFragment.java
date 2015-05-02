@@ -18,35 +18,33 @@ import butterknife.InjectView;
 import ee.help.helpee.HelpeeApplication;
 import ee.help.helpee.R;
 import ee.help.helpee.activities.BaseActionBarActivity;
-import ee.help.helpee.adapters.EventsAdapter;
+import ee.help.helpee.activities.MainActivity;
 import ee.help.helpee.adapters.EventsHelpeeAdapter;
-import ee.help.helpee.adapters.EventsOwnerAdapter;
 import ee.help.helpee.custom.Constants;
-import ee.help.helpee.dagger.EventFeedModule;
-import ee.help.helpee.dagger.UserEventsModule;
-import ee.help.helpee.dagger.components.DaggerEventFeedComponent;
-import ee.help.helpee.dagger.components.DaggerUserEventsComponent;
+import ee.help.helpee.dagger.HelpingEventsModule;
+import ee.help.helpee.dagger.components.DaggerHelpingEventComponent;
 import ee.help.helpee.errors.ErrorType;
 import ee.help.helpee.listeners.AdapterClickListener;
 import ee.help.helpee.models.Event;
 import ee.help.helpee.models.EventListContainer;
-import ee.help.helpee.mvp.presenters.UserEventsPresenter;
-import ee.help.helpee.mvp.views.UserEventsView;
+import ee.help.helpee.mvp.presenters.HelpingEventsPresenter;
+import ee.help.helpee.mvp.views.HelpingEventsView;
 
 /**
  * Created by infinum on 02/05/15.
  */
-public class CurrentUserEventsFragment extends Fragment implements UserEventsView {
+public class HelpingEventsFragment extends Fragment implements HelpingEventsView {
 
 
-
-    public static CurrentUserEventsFragment newInstance(List<Event> eventList) {
+    public static HelpingEventsFragment newInstance(List<Event> eventList) {
         Bundle passEventsBundle = new Bundle();
         passEventsBundle.putSerializable(Constants.EVENT_LIST_EXTRA, new EventListContainer(eventList));
-        CurrentUserEventsFragment fragment = new CurrentUserEventsFragment();
+        HelpingEventsFragment fragment = new HelpingEventsFragment();
         fragment.setArguments(passEventsBundle);
         return fragment;
     }
+
+
 
     @InjectView(R.id.event_list)
     RecyclerView eventList;
@@ -56,19 +54,19 @@ public class CurrentUserEventsFragment extends Fragment implements UserEventsVie
 
     List<Event> events;
 
-    EventsOwnerAdapter eventsAdapter;
-
     @Inject
-    UserEventsPresenter userEventsPresenter;
+    HelpingEventsPresenter eventsPresenter;
+
+    EventsHelpeeAdapter eventsAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View content = inflater.inflate(R.layout.fragment_myevents_child, container, false);
-
-        DaggerUserEventsComponent.builder().userEventsModule(new UserEventsModule(this)).build().inject(this);
+        DaggerHelpingEventComponent.builder().helpingEventsModule(new HelpingEventsModule(this)).build().inject(this);
         ButterKnife.inject(this, content);
         events = ((EventListContainer) getArguments().getSerializable(Constants.EVENT_LIST_EXTRA)).getEventList();
         setUpRecyclerView();
+
         return content;
     }
 
@@ -76,7 +74,11 @@ public class CurrentUserEventsFragment extends Fragment implements UserEventsVie
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         eventList.setLayoutManager(layoutManager);
-        eventsAdapter = new EventsOwnerAdapter(events, getActivity(), cancelEventListener);
+
+
+        eventsAdapter = new EventsHelpeeAdapter(events, getActivity(), cancelHelpClickListener);
+
+
         eventList.setAdapter(eventsAdapter);
 
 
@@ -85,19 +87,22 @@ public class CurrentUserEventsFragment extends Fragment implements UserEventsVie
     /**
      * Hooks into recycler view adapter for onClick function
      * */
-    AdapterClickListener cancelEventListener = new AdapterClickListener() {
+    AdapterClickListener cancelHelpClickListener = new AdapterClickListener() {
         @Override
         public void onClick(int view, int position) {
-            userEventsPresenter.cancelEvent( position, events.get(position).getEventId(), HelpeeApplication.getUserInstance().getToken());
+                eventsPresenter.cancelHelp(position,events.get(position).getEventId(), HelpeeApplication.getUserInstance().getUserId(), HelpeeApplication.getUserInstance().getToken());
         }
     };
 
+
     @Override
     public void removeEvent(int position) {
-            events.remove(position);
-            eventsAdapter.notifyItemRemoved(position);
+        events.remove(position);
+        eventsAdapter.notifyItemRemoved(position);
         if(events.size()==0){
             noEvents.setVisibility(View.VISIBLE);
+            HelpeeApplication.changePoints(HelpeeApplication.getUserInstance().getPoints() + 1);
+            ((MainActivity)getActivity()).updatePoints();
         }
 
     }
@@ -128,5 +133,4 @@ public class CurrentUserEventsFragment extends Fragment implements UserEventsVie
 
 
     }
-
 }

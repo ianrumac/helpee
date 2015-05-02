@@ -12,8 +12,6 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -22,7 +20,6 @@ import ee.help.helpee.R;
 import ee.help.helpee.activities.EventDetailsActivity;
 import ee.help.helpee.custom.Constants;
 import ee.help.helpee.listeners.AdapterClickListener;
-import ee.help.helpee.listeners.SimpleBaseListener;
 import ee.help.helpee.models.Event;
 import ee.help.helpee.utils.TimeUtils;
 
@@ -45,7 +42,7 @@ public class EventsHelpeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        return new EventHolder(LayoutInflater.from(context).inflate(R.layout.card_event, parent, false));
+        return new EventHolder(LayoutInflater.from(context).inflate(R.layout.card_event_helpee, parent, false));
     }
 
     @Override
@@ -79,6 +76,7 @@ public class EventsHelpeeAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             public void onClick(View v) {
                 Intent openEventDetails = new Intent(context, EventDetailsActivity.class);
                 openEventDetails.putExtra(Constants.EVENT_EXTRA, event);
+                openEventDetails.putExtra(Constants.FROM_HELPING, true);
                 context.startActivity(openEventDetails);
             }
         });

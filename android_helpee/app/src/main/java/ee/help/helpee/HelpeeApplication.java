@@ -60,6 +60,15 @@ public class HelpeeApplication extends Application {
         return userInstance;
     }
 
+    public static void changePoints(int points){
+        userInstance.setPoints(points);
+        String userAsJson = new Gson().toJson(userInstance);
+        HelpeeApplication.getInstance().getSharedPreferences(Constants.HELPEE_PREFS, Context.MODE_PRIVATE).edit()
+                .putString(Constants.USER_ITEM, userAsJson).commit();
+
+        HelpeeApplication.userInstance = userInstance;
+
+    }
     public static LatLng getLastKnownLocation() {
         return lastKnownLocation;
     }

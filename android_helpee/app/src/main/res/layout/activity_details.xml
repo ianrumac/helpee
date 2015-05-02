@@ -267,7 +267,17 @@
         </LinearLayout>
     </FrameLayout>
 
+    <TextView
+        android:text="@string/cant_help"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/btn_cant_help"
+        android:layout_width="match_parent"
+        android:background="@color/md_red_700"
+        style="@style/LargeTextButton"
+        android:layout_height="@dimen/details_item_size" />
+
     <LinearLayout
+
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:weightSum="10"
@@ -292,6 +302,9 @@
             android:layout_height="match_parent" />
 
     </LinearLayout>
+
+
+
     <RelativeLayout
         android:layout_marginBottom="-201dp"
         android:layout_alignParentBottom="true"
@@ -308,4 +321,20 @@
             android:padding="@dimen/basic_padding"></LinearLayout>
     </RelativeLayout>
 
+    <FrameLayout
+        android:visibility="gone"
+        android:alpha="0"
+        android:id="@+id/helped_overlay"
+        android:layout_width="match_parent"
+        android:background="@color/md_amber_700"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/helped_msg"/>
+
+
+    </FrameLayout>
 </RelativeLayout>

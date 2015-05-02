@@ -1,9 +1,9 @@
 package ee.help.helpee.activities;
 
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.OvalShape;
+import android.animation.Animator;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -13,7 +13,6 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -26,6 +25,7 @@ import javax.inject.Inject;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import ee.help.helpee.HelpeeApplication;
 import ee.help.helpee.R;
 import ee.help.helpee.custom.Constants;
 import ee.help.helpee.dagger.EventDetailsModule;
@@ -35,7 +35,6 @@ import ee.help.helpee.mvp.presenters.EventDetailsPresenter;
 import ee.help.helpee.mvp.views.EventDetailsView;
 
 import static ee.help.helpee.HelpeeApplication.getInstance;
-import static ee.help.helpee.HelpeeApplication.getLastKnownLocation;
 
 /**
  * Created by infinum on 29/04/15.
@@ -75,6 +74,11 @@ public class EventDetailsActivity extends BaseActivity implements EventDetailsVi
 
     GoogleMap googleMap;
     Event currentEvent;
+    @InjectView(R.id.helped_overlay)
+    FrameLayout helpedOverlay;
+
+    @InjectView(R.id.btn_cant_help)
+    TextView cantHelpBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +92,6 @@ public class EventDetailsActivity extends BaseActivity implements EventDetailsVi
 
         DaggerEventDetailsComponent.builder().eventDetailsModule(new EventDetailsModule(this)).build().inject(this);
         setStateFromIntent();
-        setChipInOpened(0);
 
         super.onCreate(savedInstanceState);
     }
@@ -108,8 +111,12 @@ public class EventDetailsActivity extends BaseActivity implements EventDetailsVi
             detailsPresenter.showEventData(currentEvent);
         }
 
+
         if (getIntent().getBooleanExtra(Constants.SHOULD_OPEN_CHIP_IN, false)) {
             setChipInOpened(0);
+        }else if(getIntent().getBooleanExtra(Constants.FROM_HELPING, false)){
+            bottomControlsContainer.setVisibility(View.GONE);
+            cantHelpBtn.setVisibility(View.VISIBLE);
         }
 
     }
@@ -202,7 +209,7 @@ public class EventDetailsActivity extends BaseActivity implements EventDetailsVi
 
     @Override
     public void showEventData(Event event) {
-
+        currentEvent = event;
         eventCity.setText(event.getLocation());
         eventStreet.setText(event.getAddress());
         if (event.getHelpeesList().size() > 0)
@@ -221,18 +228,58 @@ public class EventDetailsActivity extends BaseActivity implements EventDetailsVi
 
     }
 
+    @OnClick(R.id.help_btn)
+    void helpUser() {
+        if (getUser().getPoints() > 0) {
+            detailsPresenter.sendHelp(currentEvent.getEventId(), getUser().getUserId(), getUser().getToken());
+        } else {
+            showDialog(getString(R.string.oh_no), getString(R.string.not_enough_points));
+        }
+    }
+
 
     @Override
     public void hasChippedIn() {
+
+
     }
 
     @Override
     public void hasHelped() {
+        HelpeeApplication.changePoints(getUser().getPoints() - 1);
+        helpedOverlay.setVisibility(View.VISIBLE);
+        helpedOverlay.animate().alpha(1).setListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                EventDetailsActivity.this.onBackPressed();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+
 
     }
 
+    @OnClick(R.id.btn_cant_help)
+    void cancelHelp(){
+        detailsPresenter.s
+    }
+
     @OnClick(R.id.back_btn)
-    void backPressed(){
+    void backPressed() {
         super.onBackPressed();
     }
 

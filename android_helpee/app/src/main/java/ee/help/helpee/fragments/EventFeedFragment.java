@@ -1,5 +1,6 @@
 package ee.help.helpee.fragments;
 
+import com.gc.materialdesign.widgets.SnackBar;
 import com.melnykov.fab.FloatingActionButton;
 
 import android.content.Intent;
@@ -20,8 +21,11 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 import ee.help.helpee.HelpeeApplication;
 import ee.help.helpee.R;
+import ee.help.helpee.activities.EventDetailsActivity;
+import ee.help.helpee.activities.MainActivity;
 import ee.help.helpee.activities.NewEventActivity;
 import ee.help.helpee.adapters.EventsAdapter;
+import ee.help.helpee.custom.Constants;
 import ee.help.helpee.dagger.EventFeedModule;
 import ee.help.helpee.dagger.components.DaggerEventFeedComponent;
 import ee.help.helpee.listeners.AdapterClickListener;
@@ -75,7 +79,7 @@ public class EventFeedFragment extends BaseFragment implements EventFeedView {
     @Override
     public void onResume() {
         super.onResume();
-        eventsPresenter.loadEventList(HelpeeApplication.getUserCity(), getUser());
+        eventsPresenter.loadEventList(HelpeeApplication.getUserCity(), getUser().getUserId(), getUser().getToken());
 
     }
 
@@ -93,15 +97,35 @@ public class EventFeedFragment extends BaseFragment implements EventFeedView {
     }
 
     @Override
-    public void eventJoined(int id) {
-        //TODO animate event
-
+    public void eventJoined(int position) {
+        new SnackBar(getActivity(), getActivity().getString(R.string.thanks_for_help)).show();
+        events.remove(position);
+        HelpeeApplication.changePoints(getUser().getPoints() - 1);
+        ((MainActivity) getActivity()).updatePoints();
+        eventsAdapter.notifyItemRemoved(position);
     }
 
     AdapterClickListener adapterClickListener = new AdapterClickListener() {
         @Override
         public void onClick(int view, int position) {
+            if (view == R.id.btn_help) {
+                if (events.size() == 1)
+                    position = 0;
 
+                if (getUser().getPoints() > 0) {
+                    eventsPresenter.tryJoiningEvent(position, events.get(position).getEventId(), getUser().getUserId(), getUser().getToken());
+                }
+                else {
+                    showDialog(HelpeeApplication.getInstance().getString(R.string.oh_no),
+                            HelpeeApplication.getInstance().getString(R.string.not_enough_points));
+                }
+            }
+            if (view == R.id.btn_chipin) {
+                Intent startDetailsWithOverlay = new Intent(getActivity(), EventDetailsActivity.class);
+                startDetailsWithOverlay.putExtra(Constants.SHOULD_OPEN_CHIP_IN, true);
+                startActivity(startDetailsWithOverlay);
+
+            }
         }
     };
 }

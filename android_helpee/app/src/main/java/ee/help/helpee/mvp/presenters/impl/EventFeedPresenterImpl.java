@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import ee.help.helpee.errors.ErrorType;
 import ee.help.helpee.listeners.BaseListener;
+import ee.help.helpee.listeners.SimpleBaseListener;
 import ee.help.helpee.models.Event;
 import ee.help.helpee.models.User;
 import ee.help.helpee.mvp.interactors.EventFeedInteractor;
@@ -28,27 +29,38 @@ public class EventFeedPresenterImpl implements EventFeedPresenter {
     }
 
     @Override
-    public void loadEventList(String city, User user) {
+    public void loadEventList(String city, String userId, String token) {
         feedView.showProgress();
-        eventFeedInteractor.fetchEvents(city, user.getUserId(), user.getToken(), eventListListenerImplementation);
+        eventFeedInteractor.fetchEvents(city, userId, token, eventListListenerImplementation);
 
     }
 
     @Override
-    public void tryJoiningEvent(int id) {
+    public void tryJoiningEvent(final int position, int id, String userId, String token) {
 
-        feedView.eventJoined(id);
+        feedView.showProgress();
+        eventFeedInteractor.joinEvent(id, userId, token, new SimpleBaseListener() {
+            @Override
+            public void onSuccess() {
+                feedView.hideProgress();
+                feedView.eventJoined(position);
+            }
+
+            @Override
+            public void onFail(ErrorType errorType) {
+                feedView.hideProgress();
+                feedView.showError(errorType);
+            }
+        });
+
+
     }
 
     BaseListener<List<Event>> eventListListenerImplementation = new BaseListener<List<Event>>() {
         @Override
         public void onSuccess(List<Event> success) {
-            if (success.size() > 0) {
                 feedView.hideProgress();
                 feedView.showEventList(success);
-            } else {
-                onFail(ErrorType.NO_DATA);
-            }
 
         }
 

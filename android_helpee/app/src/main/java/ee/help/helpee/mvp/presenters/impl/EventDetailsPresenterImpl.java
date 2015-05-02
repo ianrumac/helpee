@@ -6,6 +6,8 @@ import org.joda.time.format.DateTimeFormatter;
 
 import javax.inject.Inject;
 
+import ee.help.helpee.errors.ErrorType;
+import ee.help.helpee.listeners.SimpleBaseListener;
 import ee.help.helpee.models.Event;
 import ee.help.helpee.mvp.interactors.EventDetailsInteractor;
 import ee.help.helpee.mvp.presenters.EventDetailsPresenter;
@@ -49,6 +51,36 @@ public class EventDetailsPresenterImpl implements EventDetailsPresenter {
 
     @Override
     public void sendHelp(int eventId, String userId, String token) {
+        eventDetailsInteractor.sendHelp(eventId, userId, token, new SimpleBaseListener() {
+            @Override
+            public void onSuccess() {
+                eventDetailsView.hasHelped();
+            }
+
+            @Override
+            public void onFail(ErrorType errorType) {
+                eventDetailsView.showError(errorType);
+            }
+        });
 
     }
+
+    @Override
+    public void cancelHelp(final int position, final int eventId, String userId, String token) {
+        eventDetailsView.showProgress();
+        eventDetailsInteractor.cancelHelp(eventId, userId, token, new SimpleBaseListener() {
+            @Override
+            public void onSuccess() {
+                eventDetailsView.hideProgress();
+                eventDetailsView.removeEvent(position);
+            }
+
+            @Override
+            public void onFail(ErrorType errorType) {
+                eventDetailsView.hideProgress();
+                eventDetailsView.showError(errorType);
+            }
+        });
+    }
+
 }

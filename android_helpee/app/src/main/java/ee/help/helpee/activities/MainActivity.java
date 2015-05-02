@@ -66,7 +66,6 @@ public class MainActivity extends BaseActionBarActivity {
     }
 
 
-
     void buildDrawer() {
 
         navigationDrawerBuilder = new Drawer().withActivity(this)
@@ -130,7 +129,7 @@ public class MainActivity extends BaseActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l, IDrawerItem iDrawerItem) {
                 if (iDrawerItem.equals(eventsDrawerItem)) {
-                    fragmentManager.beginTransaction().replace(R.id.fragment_container, new EventFeedFragment(),EventFeedFragment.TAG).commit();
+                    fragmentManager.beginTransaction().replace(R.id.fragment_container, new EventFeedFragment(), EventFeedFragment.TAG).commit();
                     fragmentContainer.setForeground(getResources().getDrawable(R.drawable.bottom_shadow));
 
                 }
@@ -155,7 +154,7 @@ public class MainActivity extends BaseActionBarActivity {
     }
 
     void setupHeader() {
-        drawerHeader = getLayoutInflater().inflate(R.layout.drawer_layout,null );
+        drawerHeader = getLayoutInflater().inflate(R.layout.drawer_layout, null);
 
 
         TextView drawerTitle = (TextView) drawerHeader.findViewById(R.id.user_name);
@@ -166,6 +165,7 @@ public class MainActivity extends BaseActionBarActivity {
         drawerChips.setText(String.format(getString(R.string.chips_left), getUser().getPoints()));
 
         SimpleDraweeView profilePicture = (SimpleDraweeView) drawerHeader.findViewById(R.id.profile_image_view);
+        if(getUser().getImageUri()!=null && !"".equals(getUser().getImageUri()))
         profilePicture.setImageURI(Uri.parse(getUser().getImageUri()));
     }
 
@@ -174,7 +174,6 @@ public class MainActivity extends BaseActionBarActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
-
 
 
     @Override
@@ -191,6 +190,10 @@ public class MainActivity extends BaseActionBarActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        ((TextView) navigationDrawer.getHeader().findViewById(R.id.user_chips_left)).setText(String.format(getString(R.string.chips_left), getUser().getPoints()));
+    }
+
+    public void updatePoints() {
         ((TextView) navigationDrawer.getHeader().findViewById(R.id.user_chips_left)).setText(String.format(getString(R.string.chips_left), getUser().getPoints()));
     }
 }

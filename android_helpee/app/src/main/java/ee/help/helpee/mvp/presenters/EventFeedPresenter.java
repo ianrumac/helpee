@@ -8,9 +8,9 @@ import ee.help.helpee.models.User;
 public interface EventFeedPresenter {
 
 
-    void loadEventList(String city, User user);
+    void loadEventList(String city, String userId, String token);
 
-    void tryJoiningEvent(int id);
+    void tryJoiningEvent(int position, int id, String userId, String token);
 
 
 

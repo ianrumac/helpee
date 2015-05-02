@@ -22,6 +22,7 @@ import javax.inject.Inject;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import ee.help.helpee.HelpeeApplication;
 import ee.help.helpee.R;
 import ee.help.helpee.custom.Constants;
 import ee.help.helpee.dagger.NewEventModule;
@@ -124,7 +125,7 @@ public class NewEventActivity extends BaseFragmentActivity implements NewEventVi
 
     @Override
     public void eventCreated() {
-        getUser().setPoints(getUser().getPoints()-eventPoints);
+        HelpeeApplication.changePoints(getUser().getPoints() - eventPoints);
         finish();
     }
 
@@ -247,8 +248,6 @@ public class NewEventActivity extends BaseFragmentActivity implements NewEventVi
             timeBuilder = new StringBuilder();
             time = timeBuilder.append(timeToString(hourOfDay)).append(":").append(timeToString(minute)).toString();
             timeOutput.setText(time);
-
-
         }
     };
 

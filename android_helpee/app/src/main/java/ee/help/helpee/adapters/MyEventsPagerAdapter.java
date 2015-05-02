@@ -36,13 +36,17 @@ public class MyEventsPagerAdapter extends android.support.v4.app.FragmentPagerAd
     public String getPageTitle(int position) {
         switch (position) {
             case 0:
-                return HelpeeApplication.getInstance().getString(R.string.helping);
-            case 1:
                 return HelpeeApplication.getInstance().getString(R.string.getting_help);
+
+            case 1:
+                return HelpeeApplication.getInstance().getString(R.string.helping);
+
             default:
                 return HelpeeApplication.getInstance().getString(R.string.helping);
 
         }
-    };
+    }
+
+    ;
 
 }

@@ -29,15 +29,18 @@ public abstract class BaseActionBarActivity extends ActionBarActivity {
     public void showProgress() {
 
         mProgressDialog = new ProgressDialog(this, HelpeeApplication.getInstance().getString(R.string.loading_msg),
-                R.color.maroon);
+                R.color.main_blue);
         mProgressDialog.setCancelable(false);
         mProgressDialog.show();
 
     }
 
+    /**
+     * Progress dialog with a custom message
+     * */
     public void showProgress(int message) {
 
-        mProgressDialog = new ProgressDialog(this, HelpeeApplication.getInstance().getString(message), R.color.maroon);
+        mProgressDialog = new ProgressDialog(this, HelpeeApplication.getInstance().getString(message), R.color.main_blue);
         mProgressDialog.setCancelable(false);
         mProgressDialog.show();
 
@@ -50,6 +53,7 @@ public abstract class BaseActionBarActivity extends ActionBarActivity {
             mProgressDialog.dismiss();
         }
     }
+
 
     public void showError(String message) {
 

@@ -76,5 +76,9 @@
     <string name="no_events">Sorry, but there\'s no events for you :(</string>
     <string name="cancel_event">CANCEL EVENT</string>
     <string name="cant_help">I can\'t help</string>
+    <string name="thanks_for_help">Thanks for your help!</string>
+    <string name="oh_no">Oh no!</string>
+    <string name="not_enough_points">You don\'t have enough points!</string>
+    <string name="helped_msg">YOU ARE AWESOME!</string>
 
 </resources>

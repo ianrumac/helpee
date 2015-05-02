@@ -5,5 +5,5 @@ package ee.help.helpee.mvp.presenters;
  */
 public interface UserEventsPresenter {
 
-   void cancelEvent(int eventId, String token);
+   void cancelEvent(int position, int eventId, String token);
 }

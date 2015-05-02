@@ -92,4 +92,10 @@ public interface ApiService {
     @POST("/Events/IntoTheFuckingTrash")
     void cancelEvent(@Query("eventid") int eventId, @Header("Authorization") String token, Callback<Response> callback );
 
+    @POST("/Events/BeAHelpee")
+    void joinEvent(@Query("eventid") int eventid, @Query("userid") String userId, @Header("Authorization") String token, Callback<Response> callback );
+
+    @POST("/Events/CantHelp")
+    void cancelHelp(@Query("eventid") int eventId,@Query("userid") String userId, @Header("Authorization") String token, Callback<Response> callback );
+
 }

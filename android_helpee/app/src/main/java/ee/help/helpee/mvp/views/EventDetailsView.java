@@ -5,7 +5,7 @@ import ee.help.helpee.models.Event;
 /**
  * Created by infinum on 01/05/15.
  */
-public interface EventDetailsView {
+public interface EventDetailsView extends BaseView{
 
     void showEventData(Event event);
 
