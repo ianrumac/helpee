@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.util.Base64;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import java.security.MessageDigest;
@@ -104,10 +105,29 @@ public class LoginActivity extends BaseActivity implements LoginView {
                 .addToBackStack("")
                 .commit();
 
+        enableDisableButtons();
+
+    }
+
+
+    public void enableDisableButtons() {
+
+        if (normalLoginButton.getVisibility() != View.GONE) {
+            normalLoginButton.setVisibility(View.GONE);
+            createAccount.setVisibility(View.GONE);
+            loginButton.setVisibility(View.GONE);
+        } else {
+            normalLoginButton.setVisibility(View.VISIBLE);
+            createAccount.setVisibility(View.VISIBLE);
+            loginButton.setVisibility(View.VISIBLE);
+        }
+
+
     }
 
     @OnClick(R.id.create_account)
     void openRegistration() {
+        enableDisableButtons();
         fragmentManager.beginTransaction()
                 .add(R.id.fragment_container, new RegisterFragment())
                 .addToBackStack("")

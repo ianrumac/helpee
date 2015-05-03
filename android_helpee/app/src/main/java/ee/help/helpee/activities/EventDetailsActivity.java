@@ -2,6 +2,7 @@ package ee.help.helpee.activities;
 
 import android.animation.Animator;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -121,9 +122,13 @@ public class EventDetailsActivity extends BaseActivity implements EventDetailsVi
 
         DaggerEventDetailsComponent.builder().eventDetailsModule(new EventDetailsModule(this)).build().inject(this);
         setStateFromIntent();
-        if (getUser().getPoints() > 1) {
+        if (getUser().getPoints() > 0) {
             sliderLayout.setMax(getUser().getPoints());
             sliderLayout.setMin(1);
+        }else{
+            sliderLayout.setVisibility(View.GONE);
+            chipInModifiedPoints.setText(getString(R.string.not_enough_points_to_chip));
+            confirmBtn.setVisibility(View.GONE);
         }
         super.onCreate(savedInstanceState);
     }
@@ -154,7 +159,13 @@ public class EventDetailsActivity extends BaseActivity implements EventDetailsVi
 
 
         if (getIntent().getBooleanExtra(Constants.SHOULD_OPEN_CHIP_IN, false)) {
-            setChipInOpened(0);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    chipInSelected();
+
+                }
+            },100);
         } else if (getIntent().getBooleanExtra(Constants.FROM_HELPING, false)) {
             cantHelpBtn.setVisibility(View.VISIBLE);
         } else if (getIntent().getBooleanExtra(Constants.OWNER_OF_EVENT, false) && !currentEvent.isCompleted() && !TimeUtils.hasEventPassed(currentEvent.getEventDate())) {

@@ -50,7 +50,7 @@ public class MainActivity extends BaseActionBarActivity {
 
     FragmentManager fragmentManager = getSupportFragmentManager();
     View drawerHeader;
-    TextView drawerTitle;
+    TextView toolbarTitle;
     TextView toolbarChips;
 
     MyEventsFragment myEventsFragment;
@@ -64,6 +64,7 @@ public class MainActivity extends BaseActionBarActivity {
         fragmentManager.beginTransaction().add(R.id.fragment_container, new EventFeedFragment()).addToBackStack(EventFeedFragment.TAG).commit();
         toolbarChips = ((TextView) toolbar.findViewById(R.id.toolbar_chips));
         toolbarChips.setText(String.format(getString(R.string.chips_left), getUser().getPoints()));
+        toolbarTitle = (TextView) toolbar.findViewById(R.id.main_title_toolbar);
     }
 
 
@@ -131,25 +132,26 @@ public class MainActivity extends BaseActionBarActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l, IDrawerItem iDrawerItem) {
                 if (iDrawerItem.equals(eventsDrawerItem)) {
                     fragmentManager.beginTransaction().replace(R.id.fragment_container, new EventFeedFragment(), EventFeedFragment.TAG).commit();
-
+                    toolbarTitle.setText(getString(R.string.event_feed));
                     fragmentContainer.setForeground(getResources().getDrawable(R.drawable.bottom_shadow));
 
                 }
 
                 if (iDrawerItem.equals(myEventsDrawerItem)) {
-
+                    toolbarTitle.setText(getString(R.string.my_events));
                     fragmentManager.beginTransaction().replace(R.id.fragment_container,new MyEventsFragment() ,MyEventsFragment.TAG).addToBackStack(MyEventsFragment.TAG).commit();
                     fragmentContainer.setForeground(null);
 
                 }
                 if (iDrawerItem.equals(heroesFragmentDrawerItem)) {
 
-
+                    toolbarTitle.setText(getString(R.string.heroes));
                     fragmentContainer.setForeground(getResources().getDrawable(R.drawable.bottom_shadow));
                     fragmentManager.beginTransaction().replace(R.id.fragment_container, new HeroesFragment()).commit();
                 }
 
                 if (iDrawerItem.equals(profileDrawerItem)) {
+                    toolbarTitle.setText(getString(R.string.profile_title));
                     fragmentContainer.setForeground(getResources().getDrawable(R.drawable.bottom_shadow));
                     fragmentManager.beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
                 }

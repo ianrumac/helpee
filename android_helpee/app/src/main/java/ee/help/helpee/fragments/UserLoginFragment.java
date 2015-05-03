@@ -30,11 +30,13 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 import ee.help.helpee.HelpeeApplication;
 import ee.help.helpee.R;
+import ee.help.helpee.activities.LoginActivity;
 import ee.help.helpee.activities.MainActivity;
 import ee.help.helpee.dagger.RegisterModule;
 import ee.help.helpee.dagger.UserLoginModule;
 import ee.help.helpee.dagger.components.DaggerRegisterComponent;
 import ee.help.helpee.dagger.components.DaggerUserLoginComponent;
+import ee.help.helpee.errors.ErrorType;
 import ee.help.helpee.models.User;
 import ee.help.helpee.mvp.presenters.LoginPresenter;
 import ee.help.helpee.mvp.presenters.RegisterPresenter;
@@ -74,11 +76,26 @@ public class UserLoginFragment extends BaseFragment implements LoginView {
         loginPresenter.loginUser(usernameInput.getText().toString(), passwordInput.getText().toString());
     }
 
+    @OnClick(R.id.ic_back)
+    void onBackPressed(){
+        ((LoginActivity)getActivity()).enableDisableButtons();
+        getFragmentManager().popBackStackImmediate();
+    }
+
 
     @Override
     public void userLoggedIn(User user) {
         HelpeeApplication.setUserInstance(user);
         startActivity(new Intent(getActivity(), MainActivity.class));
         getActivity().finish();
+    }
+
+    @Override
+    public void showError(ErrorType type) {
+
+        if(type==ErrorType.AUTH_ERROR)
+            showError(getString(R.string.wrong_user_pass));
+        else
+        super.showError(type);
     }
 }

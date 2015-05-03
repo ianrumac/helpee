@@ -27,7 +27,7 @@
                 android:textSize="@dimen/abc_text_size_title_material_toolbar" />
 
             <ImageView
-
+                android:id="@id/ic_back"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:padding="@dimen/basic_padding"

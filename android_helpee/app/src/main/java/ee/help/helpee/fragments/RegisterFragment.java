@@ -31,10 +31,12 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import ee.help.helpee.R;
+import ee.help.helpee.activities.LoginActivity;
 import ee.help.helpee.activities.MainActivity;
 import ee.help.helpee.custom.RoundImageView;
 import ee.help.helpee.dagger.RegisterModule;
 import ee.help.helpee.dagger.components.DaggerRegisterComponent;
+import ee.help.helpee.errors.ErrorType;
 import ee.help.helpee.models.User;
 import ee.help.helpee.mvp.presenters.RegisterPresenter;
 import ee.help.helpee.mvp.views.RegisterView;
@@ -197,10 +199,26 @@ public class RegisterFragment extends BaseFragment implements RegisterView {
         }
     }
 
+
+    @OnClick(R.id.back_btn)
+    void onBackPressed(){
+        ((LoginActivity)getActivity()).enableDisableButtons();
+        getFragmentManager().popBackStackImmediate();
+    }
+
+
     @Override
     public void userRegistered(User user) {
 
         startActivity(new Intent(getActivity(), MainActivity.class));
         getActivity().finish();
+    }
+
+    @Override
+    public void showError(ErrorType type) {
+        if(type==ErrorType.AUTH_ERROR)
+            showError(getActivity().getString(R.string.user_pass_req));
+        else
+            super.showError(type);
     }
 }

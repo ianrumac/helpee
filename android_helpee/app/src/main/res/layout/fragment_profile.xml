@@ -57,6 +57,7 @@
     <TextView
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
+        android:id="@+id/sign_out_btn"
         android:background="@color/disabled_gray"
         style="@style/LargeTextButton"
         android:textColor="@color/black"

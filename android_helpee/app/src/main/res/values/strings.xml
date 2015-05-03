@@ -89,5 +89,8 @@
     <string name="event_description">Event description</string>
     <string name="tap_confirm">TAP HERE TO CONFIRM</string>
     <string name="chipped_in">Thanks for chipping in! :)</string>
+    <string name="not_enough_points_to_chip">You don\'t have enough points to chip in.</string>
+    <string name="wrong_user_pass">Wrong username or password, are you sure that\'s it?</string>
+    <string name="user_pass_req">Please ensure your email is valid, username longer than 3 letters and password contains at least one uppercase and lowercase letter, a number, special sign, and is longer than 6 characters.</string>
 
 </resources>

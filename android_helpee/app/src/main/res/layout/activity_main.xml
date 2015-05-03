@@ -20,6 +20,15 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/default_padding"
+                android:gravity="center_vertical"
+                android:id="@+id/main_title_toolbar"
+                android:textColor="@color/white"
+                android:textSize="@dimen/abc_text_size_title_material_toolbar" />
+
+            <TextView
                 android:id="@+id/toolbar_chips"
 
                 android:layout_width="wrap_content"

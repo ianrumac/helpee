@@ -39,6 +39,11 @@ public class RegisterInteractorImpl implements RegisterInteractor {
             @Override
             public void failure(RetrofitError error) {
 
+                if(error.getResponse().getStatus()==400){
+                    registeredListener.onFail(ErrorType.AUTH_ERROR);
+                }else
+                    registeredListener.onFail(ErrorType.CONNECTION_ERROR);
+
             }
         });
 
