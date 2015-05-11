@@ -1,16 +1,17 @@
 package ee.help.helpee.fragments;
 
-import com.gc.materialdesign.widgets.SnackBar;
-import com.melnykov.fab.FloatingActionButton;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.gc.materialdesign.widgets.SnackBar;
+import com.melnykov.fab.FloatingActionButton;
 
 import java.util.List;
 
@@ -53,6 +54,8 @@ public class EventFeedFragment extends BaseFragment implements EventFeedView {
     EventFeedPresenter eventsPresenter;
 
     List<Event> events;
+    @InjectView(R.id.swipe_refresh)
+    SwipeRefreshLayout swipeRefresh;
 
     @Nullable
     @Override
@@ -66,6 +69,13 @@ public class EventFeedFragment extends BaseFragment implements EventFeedView {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         eventList.setLayoutManager(layoutManager);
         newEventButton.attachToRecyclerView(eventList);
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                eventsPresenter.loadEventList(HelpeeApplication.getUserCity(), getUser().getUserId(), getUser().getToken());
+            }
+        });
+        swipeRefresh.setColorSchemeColors(R.color.main_blue, R.color.amber_main);
         return contentView;
 
 
@@ -91,6 +101,7 @@ public class EventFeedFragment extends BaseFragment implements EventFeedView {
 
     @Override
     public void showEventList(List<Event> eventResults) {
+        swipeRefresh.setRefreshing(false);
         events = eventResults;
         eventsAdapter = new EventsAdapter(events, getActivity(), adapterClickListener);
         eventList.setAdapter(eventsAdapter);
@@ -114,8 +125,7 @@ public class EventFeedFragment extends BaseFragment implements EventFeedView {
 
                 if (getUser().getPoints() > 0) {
                     eventsPresenter.tryJoiningEvent(position, events.get(position).getEventId(), getUser().getUserId(), getUser().getToken());
-                }
-                else {
+                } else {
                     showDialog(HelpeeApplication.getInstance().getString(R.string.oh_no),
                             HelpeeApplication.getInstance().getString(R.string.not_enough_points));
                 }

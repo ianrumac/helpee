@@ -1,6 +1,5 @@
 package ee.help.helpee.fragments;
 
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import android.app.Activity;
@@ -18,7 +17,6 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -33,7 +31,7 @@ import butterknife.OnClick;
 import ee.help.helpee.R;
 import ee.help.helpee.activities.LoginActivity;
 import ee.help.helpee.activities.MainActivity;
-import ee.help.helpee.custom.RoundImageView;
+import de.hdodenhof.circleimageview.CircleImageView;
 import ee.help.helpee.dagger.RegisterModule;
 import ee.help.helpee.dagger.components.DaggerRegisterComponent;
 import ee.help.helpee.errors.ErrorType;
@@ -61,7 +59,7 @@ public class RegisterFragment extends BaseFragment implements RegisterView {
     MaterialEditText registerPassword;
 
     @InjectView(R.id.profile_picture)
-    RoundImageView profilePicture;
+    CircleImageView profilePicture;
 
 
     @Inject

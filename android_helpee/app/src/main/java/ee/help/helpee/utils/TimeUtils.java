@@ -56,7 +56,6 @@ public class TimeUtils {
         DateTime dateTimeOfEvent = dateTimeFormatter.parseDateTime(dateParts[0]);
         DateTime hourTimeOfEvent = hourTimeFormatter.parseDateTime(dateParts[1]);
 
-        DateTimeFormatter parseDateToShow = DateTimeFormat.forPattern("dd.MM.YYYY");
         dateTimeOfEvent = dateTimeOfEvent.withHourOfDay(hourTimeOfEvent.getHourOfDay()).withMinuteOfHour(hourTimeOfEvent.getMinuteOfHour());
         if(dateTimeOfEvent.getMillis()<DateTime.now().getMillis())
             return true;

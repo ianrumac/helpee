@@ -1,7 +1,5 @@
 package ee.help.helpee.mvp.presenters.impl;
 
-import android.util.Log;
-
 import java.util.List;
 
 import javax.inject.Inject;
@@ -9,7 +7,6 @@ import javax.inject.Inject;
 import ee.help.helpee.errors.ErrorType;
 import ee.help.helpee.listeners.BaseListener;
 import ee.help.helpee.listeners.SimpleBaseListener;
-import ee.help.helpee.models.DoubleEventListContainer;
 import ee.help.helpee.models.Event;
 import ee.help.helpee.mvp.interactors.UserEventsInteractor;
 import ee.help.helpee.mvp.presenters.UserEventsPresenter;
@@ -38,7 +35,6 @@ public class UserEventsPresenterImpl implements UserEventsPresenter {
             public void onSuccess() {
                 userEventsView.hideProgress();
                 userEventsView.removeEvent(position);
-                //TODO usereventsview remove event
             }
 
             @Override

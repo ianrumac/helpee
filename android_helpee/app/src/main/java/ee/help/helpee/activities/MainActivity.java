@@ -1,6 +1,5 @@
 package ee.help.helpee.activities;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
@@ -10,11 +9,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.bumptech.glide.Glide;
 import com.mikepenz.materialdrawer.Drawer;
-import com.mikepenz.materialdrawer.accountswitcher.AccountHeader;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
@@ -23,6 +20,7 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import ee.help.helpee.R;
+import de.hdodenhof.circleimageview.CircleImageView;
 import ee.help.helpee.fragments.EventFeedFragment;
 import ee.help.helpee.fragments.HeroesFragment;
 import ee.help.helpee.fragments.MyEventsFragment;
@@ -43,7 +41,6 @@ public class MainActivity extends BaseActionBarActivity {
     PrimaryDrawerItem heroesFragmentDrawerItem;
     SecondaryDrawerItem profileDrawerItem;
 
-    AccountHeader.Result accountHeaderResult;
 
     Drawer navigationDrawerBuilder;
     Drawer.Result navigationDrawer;
@@ -51,6 +48,7 @@ public class MainActivity extends BaseActionBarActivity {
     FragmentManager fragmentManager = getSupportFragmentManager();
     View drawerHeader;
     TextView toolbarTitle;
+    @InjectView(R.id.toolbar_chips)
     TextView toolbarChips;
 
     MyEventsFragment myEventsFragment;
@@ -62,9 +60,9 @@ public class MainActivity extends BaseActionBarActivity {
         setSupportActionBar(toolbar);
         buildDrawer();
         fragmentManager.beginTransaction().add(R.id.fragment_container, new EventFeedFragment()).addToBackStack(EventFeedFragment.TAG).commit();
-        toolbarChips = ((TextView) toolbar.findViewById(R.id.toolbar_chips));
         toolbarChips.setText(String.format(getString(R.string.chips_left), getUser().getPoints()));
-        toolbarTitle = (TextView) toolbar.findViewById(R.id.main_title_toolbar);
+        getSupportActionBar().setTitle(getString(R.string.event_feed));
+
     }
 
 
@@ -80,19 +78,6 @@ public class MainActivity extends BaseActionBarActivity {
     }
 
     void createDrawerItems() {
-/*
-        accountHeaderResult = new AccountHeader().withActivity(this)
-                .withHeaderBackground(R.color.main_blue)
-                .with
-
-                build();
-*/
-/*
-        profileDrawerItem = new ProfileDrawerItem().withName(getUser().getFullName()).withIcon(
-                getResources().getDrawable(R.drawable.ic_launcher)).with;
-        accountHeaderResult.addProfile(profileDrawerItem, 0);
-
-*/
 
         eventsDrawerItem = new PrimaryDrawerItem().withName(R.string.event_feed)
                 .withIcon(R.drawable.ic_events)
@@ -132,26 +117,26 @@ public class MainActivity extends BaseActionBarActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l, IDrawerItem iDrawerItem) {
                 if (iDrawerItem.equals(eventsDrawerItem)) {
                     fragmentManager.beginTransaction().replace(R.id.fragment_container, new EventFeedFragment(), EventFeedFragment.TAG).commit();
-                    toolbarTitle.setText(getString(R.string.event_feed));
+                    getSupportActionBar().setTitle(getString(R.string.event_feed));
                     fragmentContainer.setForeground(getResources().getDrawable(R.drawable.bottom_shadow));
 
                 }
 
                 if (iDrawerItem.equals(myEventsDrawerItem)) {
-                    toolbarTitle.setText(getString(R.string.my_events));
+                    getSupportActionBar().setTitle(getString(R.string.my_events));
                     fragmentManager.beginTransaction().replace(R.id.fragment_container,new MyEventsFragment() ,MyEventsFragment.TAG).addToBackStack(MyEventsFragment.TAG).commit();
                     fragmentContainer.setForeground(null);
 
                 }
                 if (iDrawerItem.equals(heroesFragmentDrawerItem)) {
 
-                    toolbarTitle.setText(getString(R.string.heroes));
+                    getSupportActionBar().setTitle(getString(R.string.heroes));
                     fragmentContainer.setForeground(getResources().getDrawable(R.drawable.bottom_shadow));
                     fragmentManager.beginTransaction().replace(R.id.fragment_container, new HeroesFragment()).commit();
                 }
 
                 if (iDrawerItem.equals(profileDrawerItem)) {
-                    toolbarTitle.setText(getString(R.string.profile_title));
+                    getSupportActionBar().setTitle(getString(R.string.profile_title));
                     fragmentContainer.setForeground(getResources().getDrawable(R.drawable.bottom_shadow));
                     fragmentManager.beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
                 }
@@ -172,9 +157,8 @@ public class MainActivity extends BaseActionBarActivity {
         TextView drawerChips = (TextView) drawerHeader.findViewById(R.id.user_chips_left);
         drawerChips.setText(String.format(getString(R.string.chips_left), getUser().getPoints()));
 
-        SimpleDraweeView profilePicture = (SimpleDraweeView) drawerHeader.findViewById(R.id.profile_image_view);
-        if(getUser().getImageUri()!=null && !"".equals(getUser().getImageUri()))
-        profilePicture.setImageURI(Uri.parse(getUser().getImageUri()));
+        CircleImageView profilePicture = (CircleImageView) drawerHeader.findViewById(R.id.profile_image_view);
+        Glide.with(this).load(getUser().getImageUri()).into(profilePicture);
     }
 
     @Override
@@ -198,6 +182,8 @@ public class MainActivity extends BaseActionBarActivity {
     protected void onResume() {
         super.onResume();
         ((TextView) navigationDrawer.getHeader().findViewById(R.id.user_chips_left)).setText(String.format(getString(R.string.chips_left), getUser().getPoints()));
+        toolbarChips.setText(String.format(getString(R.string.chips_left), getUser().getPoints()));
+
     }
 
     public void updatePoints() {

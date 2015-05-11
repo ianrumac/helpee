@@ -55,7 +55,7 @@
     <ScrollView
         android:layout_above="@id/create_event_btn"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/toolbar">
 
         <FrameLayout
@@ -77,12 +77,14 @@
                     android:layout_marginLeft="@dimen/basic_padding"
                     android:layout_marginRight="@dimen/basic_padding"
                     android:hint="@string/event_title"
+                    android:singleLine="true"
                     app:met_floatingLabel="normal"
-                    app:met_floatingLabelText="event_title"
+                    app:met_floatingLabelText="@string/event_title"
                     app:met_floatingLabelTextColor="@color/grey_subtitle"
                     app:met_textColorHint="@color/grey_subtitle"
                     app:met_underlineColor="@color/amber_main"
-                    app:met_clearButton="true" />
+                    app:met_clearButton="true"
+                     />
 
 
                 <com.rengwuxian.materialedittext.MaterialEditText
@@ -96,7 +98,7 @@
                     android:hint="@string/event_description"
                     android:lines="2"
                     app:met_floatingLabel="normal"
-                    app:met_floatingLabelText="Description"
+                    app:met_floatingLabelText="@string/event_description"
                     app:met_floatingLabelTextColor="@color/grey_subtitle"
                     app:met_textColorHint="@color/grey_subtitle"
                     app:met_underlineColor="@color/amber_main" />

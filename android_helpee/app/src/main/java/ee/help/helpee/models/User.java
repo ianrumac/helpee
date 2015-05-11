@@ -4,6 +4,8 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
+import ee.help.helpee.custom.Constants;
+
 /**
  * Created by ian on 12/04/15.
  */
@@ -64,7 +66,7 @@ public class User implements Serializable {
         if (imageUri != null)
             return "http://helpee.azurewebsites.net/Images/".concat(imageUri);
         else
-            return imageUri;
+            return Constants.PLACEHOLDER_URL;
     }
 
     public void setImageUri(String imageUri) {

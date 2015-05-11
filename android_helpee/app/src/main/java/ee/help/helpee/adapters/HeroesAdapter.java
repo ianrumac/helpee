@@ -1,23 +1,20 @@
 package ee.help.helpee.adapters;
 
-import android.app.Activity;
 import android.content.Context;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.facebook.drawee.view.SimpleDraweeView;
-
+import com.bumptech.glide.Glide;
 import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import ee.help.helpee.HelpeeApplication;
 import ee.help.helpee.R;
-import ee.help.helpee.models.DrawerItemModel;
+import de.hdodenhof.circleimageview.CircleImageView;
 import ee.help.helpee.models.User;
 
 public class HeroesAdapter extends BaseAdapter {
@@ -62,8 +59,8 @@ public class HeroesAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        if (user.getImageUri() != null && !"".equals(user.getImageUri()))
-            viewHolder.userImg.setImageURI(Uri.parse(user.getImageUri()));
+
+        Glide.with(context).load(user.getImageUri()).into(viewHolder.userImg);
         viewHolder.userName.setText(user.getFullName());
         viewHolder.userPoints.setText(String.format(HelpeeApplication.getInstance().getString(R.string.int_points), user.getPoints()));
 
@@ -73,7 +70,7 @@ public class HeroesAdapter extends BaseAdapter {
 
     static class ViewHolder {
         @InjectView(R.id.user_img)
-        SimpleDraweeView userImg;
+        CircleImageView userImg;
         @InjectView(R.id.user_name)
         TextView userName;
         @InjectView(R.id.user_points)

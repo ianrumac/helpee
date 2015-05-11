@@ -1,6 +1,5 @@
 package ee.help.helpee;
 
-import com.facebook.drawee.backends.pipeline.Fresco;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 
@@ -25,17 +24,16 @@ public class HelpeeApplication extends Application {
 
     private static HelpeeApplication instance;
 
-    public static User userInstance;
+    private static User userInstance;
 
-    public static String userCity;
+    private static String userCity;
 
-    public static LatLng lastKnownLocation;
+    private static LatLng lastKnownLocation;
 
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
-        Fresco.initialize(this);
         JodaTimeAndroid.init(this);
         FacebookSdk.sdkInitialize(this);
         Parse.initialize(this, "ErveS8KjqjEL6BNhCxXByAeKJOvQoawLdJQrLK9n", "9soIopAA2W7lhp0zfoTWwplrvUyasRshTCfnVIXB");

@@ -14,12 +14,10 @@
         android:orientation="vertical"
         android:layout_marginTop="@dimen/basic_padding">
 
-        <com.facebook.drawee.view.SimpleDraweeView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_image_view"
             android:layout_width="72dp"
-            android:layout_height="72dp"
-            fresco:placeholderImage="@drawable/ic_helpee"
-            fresco:roundAsCircle="true" />
+            android:layout_height="72dp" />
 
 
         <TextView

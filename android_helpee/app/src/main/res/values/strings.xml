@@ -67,7 +67,7 @@
     <string name="details_needs_help">Needs help</string>
     <string name="helpee">Helpee</string>
     <string name="one_point_nocaps">1 Point</string>
-    <string name="username">Username</string>
+    <string name="username">Username or e-mail</string>
     <string name="password">Password</string>
     <string name="sign_in">Sign in</string>
     <string name="loading">Loading ...</string>
@@ -92,5 +92,7 @@
     <string name="not_enough_points_to_chip">You don\'t have enough points to chip in.</string>
     <string name="wrong_user_pass">Wrong username or password, are you sure that\'s it?</string>
     <string name="user_pass_req">Please ensure your email is valid, username longer than 3 letters and password contains at least one uppercase and lowercase letter, a number, special sign, and is longer than 6 characters.</string>
+    <string name="email">E-mail</string>
+    <string name="user_name">Username</string>
 
 </resources>

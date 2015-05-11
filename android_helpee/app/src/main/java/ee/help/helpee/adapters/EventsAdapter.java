@@ -2,16 +2,14 @@ package ee.help.helpee.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.facebook.drawee.view.SimpleDraweeView;
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -20,8 +18,8 @@ import butterknife.InjectView;
 import ee.help.helpee.R;
 import ee.help.helpee.activities.EventDetailsActivity;
 import ee.help.helpee.custom.Constants;
+import de.hdodenhof.circleimageview.CircleImageView;
 import ee.help.helpee.listeners.AdapterClickListener;
-import ee.help.helpee.listeners.SimpleBaseListener;
 import ee.help.helpee.models.Event;
 import ee.help.helpee.utils.TimeUtils;
 
@@ -62,10 +60,7 @@ public class EventsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         holder.userName.setText(String.format(context.getString(R.string.needs_help), event.getCreator().getFullName()));
         /*Parse image URL and sent it into the drawee - if URL exists*/
 
-        if (event.getCreator().getImageUri() != null && !"".equals(event.getCreator().getImageUri())) {
-            Uri uri = Uri.parse(event.getCreator().getImageUri());
-            holder.image.setImageURI(uri);
-        }
+        Glide.with(context).load(event.getCreator().getImageUri()).into(holder.image);
         holder.time.setText(TimeUtils.parseDateTimeIntoShowableString(event.getEventDate()));
 
         holder.description.setText(event.getDescription());
@@ -110,7 +105,7 @@ public class EventsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
 
         @InjectView(R.id.event_img)
-        SimpleDraweeView image;
+        CircleImageView image;
 
         @InjectView(R.id.event_time)
         TextView time;

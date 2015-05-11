@@ -22,14 +22,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <com.facebook.drawee.view.SimpleDraweeView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/event_img"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_gravity="bottom"
                 android:layout_margin="@dimen/basic_padding"
-                fresco:placeholderImage="@drawable/ic_helpee"
-                fresco:roundAsCircle="true" />
+                android:layout_width="48dp"
+                android:layout_gravity="bottom"
+                android:layout_height="48dp"
+                />
 
             <TextView
                 android:id="@+id/event_title"

@@ -1,6 +1,5 @@
 package ee.help.helpee.mvp.presenters;
 
-import ee.help.helpee.models.DoubleEventListContainer;
 
 /**
  * Created by infinum on 28/04/15.

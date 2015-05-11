@@ -67,7 +67,6 @@ public class HelpingEventsFragment extends Fragment implements HelpingEventsView
         ButterKnife.inject(this, content);
         setUpRecyclerView();
 
-        eventsPresenter.fetchUserEvents(HelpeeApplication.getUserInstance().getUserId(), HelpeeApplication.getUserInstance().getToken());
         return content;
     }
 
@@ -76,6 +75,7 @@ public class HelpingEventsFragment extends Fragment implements HelpingEventsView
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         eventList.setLayoutManager(layoutManager);
     }
+
 
     /**
      * Hooks into recycler view adapter for onClick function
@@ -130,6 +130,7 @@ public class HelpingEventsFragment extends Fragment implements HelpingEventsView
     @Override
     public void onResume() {
         super.onResume();
+        eventsPresenter.fetchUserEvents(HelpeeApplication.getUserInstance().getUserId(), HelpeeApplication.getUserInstance().getToken());
 
     }
 }

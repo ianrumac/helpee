@@ -15,6 +15,7 @@ public class Constants {
 
     public static final int FAILURE_RESULT = 1;
 
+    public static final String PLACEHOLDER_URL ="http://i.imgur.com/P7tztRw.png";
 
     public static final String RECEIVER =  "RECEIVER";
 

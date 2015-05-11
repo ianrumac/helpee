@@ -24,6 +24,8 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/default_padding"
                 android:gravity="center_vertical"
+                android:singleLine="true"
+                android:ellipsize="end"
                 android:id="@+id/event_title_toolbar"
                 android:textColor="@color/white"
                 android:textSize="@dimen/abc_text_size_title_material_toolbar" />

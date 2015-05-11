@@ -56,7 +56,7 @@
         android:orientation="vertical">
 
 
-    <ee.help.helpee.custom.RoundImageView
+    <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_picture"
             android:layout_width="144dp"
             android:layout_height="144dp"
@@ -79,7 +79,12 @@
             app:met_floatingLabel="normal"
 
             app:met_floatingLabelText="Username"
-            app:met_underlineColor="@color/md_yellow_800" />
+            app:met_underlineColor="@color/md_yellow_800"
+            android:hint="@string/user_name"
+            app:met_clearButton="true"
+            app:met_floatingLabelTextColor="@color/grey_subtitle"
+            app:met_textColorHint="@color/grey_subtitle"
+            />
 
 
         <com.rengwuxian.materialedittext.MaterialEditText
@@ -94,7 +99,11 @@
             android:singleLine="true"
             app:met_floatingLabel="normal"
             app:met_floatingLabelText="E-mail"
-            app:met_underlineColor="@color/md_yellow_800" />
+            app:met_underlineColor="@color/md_yellow_800"
+            android:hint="@string/email"
+            app:met_clearButton="true"
+            app:met_floatingLabelTextColor="@color/grey_subtitle"
+            app:met_textColorHint="@color/grey_subtitle"/>
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/register_password"
@@ -107,7 +116,12 @@
             android:singleLine="true"
             app:met_floatingLabel="normal"
             app:met_floatingLabelText="Password"
-            app:met_underlineColor="@color/md_yellow_800" />
+            app:met_underlineColor="@color/md_yellow_800"
+            android:layout_marginBottom="@dimen/default_padding"
+            android:hint="@string/password"
+            app:met_clearButton="true"
+            app:met_floatingLabelTextColor="@color/grey_subtitle"
+            app:met_textColorHint="@color/grey_subtitle"/>
 
 
     </LinearLayout>

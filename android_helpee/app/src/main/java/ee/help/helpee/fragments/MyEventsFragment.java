@@ -2,7 +2,6 @@ package ee.help.helpee.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +20,6 @@ import ee.help.helpee.R;
 import ee.help.helpee.adapters.MyEventsPagerAdapter;
 import ee.help.helpee.dagger.MyEventsModule;
 import ee.help.helpee.dagger.components.DaggerMyEventsComponent;
-import ee.help.helpee.models.DoubleEventListContainer;
 import ee.help.helpee.mvp.presenters.MyEventsPresenter;
 import ee.help.helpee.mvp.views.MyEventsView;
 
@@ -44,7 +42,6 @@ public class MyEventsFragment extends BaseFragment implements MyEventsView {
     MyEventsPresenter eventsPresenter;
     HelpingEventsFragment helpeeEventsFragment;
     CurrentUserEventsFragment userEventsFragment;
-    FragmentActivity fragmentActivity;
     List<android.support.v4.app.Fragment> fragmentList;
     @Nullable
     @Override
@@ -54,7 +51,6 @@ public class MyEventsFragment extends BaseFragment implements MyEventsView {
         DaggerMyEventsComponent.builder().myEventsModule(new MyEventsModule(this)).build().inject(this);
         View contentView = inflater.inflate(R.layout.fragment_myevents, container, false);
         ButterKnife.inject(this, contentView);
-        fragmentActivity = (FragmentActivity) getActivity();
         viewPager.setVisibility(View.GONE);
         pagerIndicator.setVisibility(View.GONE);
         createFragmentsAndPager();

@@ -16,15 +16,13 @@
         android:layout_height="wrap_content">
 
 
-    <com.facebook.drawee.view.SimpleDraweeView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_picture"
         android:padding="@dimen/basic_padding"
-        android:layout_width="144dp"
-        android:layout_height="144dp"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
         android:scaleType="centerCrop"
         android:layout_gravity="center_horizontal"
-        fresco:placeholderImage="@drawable/ic_helpee"
-        fresco:roundAsCircle="true"
         />
 
 

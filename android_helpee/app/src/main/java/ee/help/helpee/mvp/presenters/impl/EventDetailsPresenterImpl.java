@@ -39,8 +39,6 @@ public class EventDetailsPresenterImpl implements EventDetailsPresenter {
     public void showEventData(Event event) {
 
         eventDetailsView.showEventData(event);
-
-
         eventDetailsView.setEventDate(TimeUtils.parseDateTimeIntoShowableString(event.getEventDate()));
     }
 
@@ -139,7 +137,6 @@ public class EventDetailsPresenterImpl implements EventDetailsPresenter {
             public void onSuccess() {
                 eventDetailsView.hideProgress();
                 eventDetailsView.cancelEvent();
-                //TODO usereventsview remove event
             }
 
             @Override
