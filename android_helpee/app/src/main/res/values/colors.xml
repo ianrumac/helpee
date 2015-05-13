@@ -8,18 +8,29 @@
     <color name="transparent">#00FFFFFF</color>
     <color name="green_continue">#399947</color>
     <color name="green_continue_pressed">#ff22542a</color>
+    <color name="background_color">#EEEEEE</color>
+
+    <color name="account_register_grey">#999999</color>
+
+    <color name="titles_grey">#212121</color>
+    <color name="login_text_grey">#cccccc</color>
 
     <color name="disabled_gray">#ff9d9d9d</color>
     <color name="edit_text_gray">#ffcccccc</color>
 <color name="decription">#757575</color>
+    <color name="time_date_black">#4c4c4c</color>
     <color name="light_blue">#C5CBE8</color>
     <color name="amber_main">#FEC006</color>
+    <color name="amber_pressed">#ffb98b05</color>
+
     <color name="grey_subtitle">#BBBBBB</color>
     <color name="divider_grey">#e5e5e5</color>
     <color name="overlay_grey">#5e9a9a9a</color>
 <color name="details_title_color">#333333</color>
     <color name="background_gray">#f2f2f2</color>
     <color name="main_blue">#303AA5</color>
+    <color name="blue_pressed">#ff1d2364</color>
+
     <color name="pressed_blue">#ff1a205b</color>
 
 </resources>

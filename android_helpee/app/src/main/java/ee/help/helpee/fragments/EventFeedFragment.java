@@ -27,6 +27,7 @@ import ee.help.helpee.activities.MainActivity;
 import ee.help.helpee.activities.NewEventActivity;
 import ee.help.helpee.adapters.EventsAdapter;
 import ee.help.helpee.custom.Constants;
+import ee.help.helpee.custom.SlideInOutLeftItemAnimator;
 import ee.help.helpee.dagger.EventFeedModule;
 import ee.help.helpee.dagger.components.DaggerEventFeedComponent;
 import ee.help.helpee.listeners.AdapterClickListener;
@@ -76,6 +77,8 @@ public class EventFeedFragment extends BaseFragment implements EventFeedView {
             }
         });
         swipeRefresh.setColorSchemeColors(R.color.main_blue, R.color.amber_main);
+        eventList.setItemAnimator(new SlideInOutLeftItemAnimator(eventList));
+
         return contentView;
 
 
@@ -88,8 +91,8 @@ public class EventFeedFragment extends BaseFragment implements EventFeedView {
 
     @Override
     public void onResume() {
-        super.onResume();
         eventsPresenter.loadEventList(HelpeeApplication.getUserCity(), getUser().getUserId(), getUser().getToken());
+        super.onResume();
 
     }
 
@@ -105,6 +108,7 @@ public class EventFeedFragment extends BaseFragment implements EventFeedView {
         events = eventResults;
         eventsAdapter = new EventsAdapter(events, getActivity(), adapterClickListener);
         eventList.setAdapter(eventsAdapter);
+
     }
 
     @Override

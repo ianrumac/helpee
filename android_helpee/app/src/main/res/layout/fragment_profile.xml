@@ -30,9 +30,9 @@
     <TextView
         android:padding="@dimen/basic_padding"
         android:layout_width="match_parent"
-        android:textSize="26dp"
+        android:textSize="34sp"
         android:id="@+id/profile_name"
-
+        android:fontFamily="sans-serif"
         android:gravity="center_horizontal"
         tools:text="Anutnununu mihaljević"
         android:layout_gravity="center_horizontal"
@@ -44,7 +44,7 @@
             android:id="@+id/profile_points_left"
             android:layout_width="wrap_content"
             android:drawablePadding="@dimen/single_unit"
-            android:textSize="26dp"
+            android:textSize="14dp"
             android:gravity="center_horizontal"
             tools:text="3 LEFT"
             android:layout_gravity="center_horizontal"
@@ -55,10 +55,11 @@
     <TextView
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
+
         android:id="@+id/sign_out_btn"
-        android:background="@color/disabled_gray"
+        android:background="@drawable/amber_selector"
         style="@style/LargeTextButton"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:text="SIGN OUT"
-        android:layout_height="@dimen/default_padding" />
+        android:layout_height="@dimen/button_height" />
 </RelativeLayout>

@@ -132,7 +132,7 @@
         style="@style/LargeTextButton"
         android:layout_width="match_parent"
         android:layout_height="@dimen/button_size"
-        android:background="@color/md_yellow_800"
+        android:background="@drawable/amber_selector"
         android:clickable="true"
         android:text="@string/create_account" />
 

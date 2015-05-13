@@ -10,7 +10,6 @@
         <item name="colorPrimaryDark">@color/main_blue</item>
         <item name="colorAccent">@color/amber_main</item>
         <item name="android:textColorPrimary">@color/white</item>
-
         <!-- Customize your theme here. -->
     </style>
 

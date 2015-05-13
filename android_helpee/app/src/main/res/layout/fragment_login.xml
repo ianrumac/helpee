@@ -47,7 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/md_yellow_800"
+        android:background="@drawable/amber_selector"
         android:clickable="true"
         android:text="@string/sign_in" />
 

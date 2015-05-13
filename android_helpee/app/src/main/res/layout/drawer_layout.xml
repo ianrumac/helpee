@@ -4,8 +4,7 @@
     android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="200dp"
-    android:background="@color/main_blue"
-    android:padding="@dimen/single_unit">
+    android:background="@color/main_blue">
 
 
     <LinearLayout
@@ -16,28 +15,38 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_image_view"
+            android:layout_marginTop="@dimen/margin_bottom_login"
+            android:layout_marginLeft="@dimen/basic_padding"
+
             android:layout_width="72dp"
             android:layout_height="72dp" />
 
 
         <TextView
             android:id="@+id/user_name"
+            android:paddingLeft="@dimen/basic_padding"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Users Name"
+            android:paddingTop="@dimen/single_unit"
             android:textColor="@color/white"
-            android:textSize="@dimen/abc_text_size_title_material_toolbar"
-            android:textStyle="bold" />
+            android:textSize="@dimen/text_size_material_subtitle"
+            android:fontFamily="sans-serif-medium"
+            />
 
         <TextView
+            android:layout_marginLeft="@dimen/basic_padding"
+            android:fontFamily="sans-serif-medium"
             android:id="@+id/user_chips_left"
             android:layout_width="wrap_content"
+            android:paddingBottom="@dimen/basic_padding"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:drawableLeft="@drawable/chip_icon"
+            android:paddingTop="@dimen/single_unit"
             android:drawablePadding="@dimen/half_unit"
             android:gravity="center"
-            android:padding="@dimen/half_unit"
+            android:textSize="@dimen/subtitle_size"
             android:textAllCaps="true"
             android:textColor="@color/white"
             tools:text="5 left" />

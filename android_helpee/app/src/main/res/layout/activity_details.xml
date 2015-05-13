@@ -26,6 +26,7 @@
                 android:gravity="center_vertical"
                 android:singleLine="true"
                 android:ellipsize="end"
+                android:fontFamily="sans-serif-medium"
                 android:id="@+id/event_title_toolbar"
                 android:textColor="@color/white"
                 android:textSize="@dimen/abc_text_size_title_material_toolbar" />
@@ -357,6 +358,21 @@
 
     </LinearLayout>
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/layout_cancel_checkin"
+        android:visibility="gone"
+        android:alpha="0"
+        android:background="#000000">
+        <TextView
+            android:text="@string/click_cancel"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </FrameLayout>
 
     <LinearLayout
         android:id="@+id/bottom_controls_container"
@@ -369,10 +385,11 @@
         <TextView
             android:id="@+id/chip_in_button"
             style="@style/LargeTextButton"
+            android:clickable="true"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="5"
-            android:background="@color/main_blue"
+            android:background="@drawable/blue_selector"
             android:text="@string/btn_chip_in" />
 
         <TextView
@@ -381,12 +398,13 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="5"
-            android:background="@color/amber_main"
+            android:background="@drawable/amber_selector"
             android:text="@string/btn_help_title" />
 
 
 
     </LinearLayout>
+
 
 
     <RelativeLayout
@@ -402,6 +420,7 @@
             android:layout_width="wrap_content"
             android:layout_centerHorizontal="true"
             android:padding="@dimen/basic_padding"
+            android:textAllCaps="true"
             android:textColor="@color/light_blue"
             android:text="@string/single_point"
             android:layout_alignParentTop="true"

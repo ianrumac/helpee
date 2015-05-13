@@ -23,7 +23,7 @@
     <string name="needs_help">%s NEEDS HELP </string>
 
     <string name="create_account">Create an account</string>
-    <string name="click_to_create_account">Or click here to create an account</string>
+    <string name="click_to_create_account">Don\'t have an account? Click here</string>
     <string name="check_username">Please check your username and try again</string>
     <string name="check_email">Please check your e-mail and try again</string>
     <string name="check_password">Please check your password and try again</string>
@@ -60,7 +60,7 @@
     <string name="error_description">Ooops! Seems like you forgot a description! C\'mon, think of something and try again!</string>
     <string name="error_time">What time does the event start? Click on \'Select time\' and tell us !</string>
     <string name="error_date">Hey hey hey, can\'t create it without knowing the date! Click on \'Select date\' and pick a day.</string>
-    <string name="event_feed">Event feed</string>
+    <string name="event_feed">Be a Helpee</string>
     <string name="my_events">My events</string>
     <string name="heroes">Heroes</string>
     <string name="select_location_error">Where should your helpees come? Psst, there\'s a select location button!</string>
@@ -94,5 +94,7 @@
     <string name="user_pass_req">Please ensure your email is valid, username longer than 3 letters and password contains at least one uppercase and lowercase letter, a number, special sign, and is longer than 6 characters.</string>
     <string name="email">E-mail</string>
     <string name="user_name">Username</string>
+    <string name="click_cancel">Click here to cancel</string>
+    <string name="no_description_event">No description</string>
 
 </resources>

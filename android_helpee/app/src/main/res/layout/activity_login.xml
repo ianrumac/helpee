@@ -1,28 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:background="@color/background_gray"
+                android:background="@color/white"
                 android:layout_height="match_parent">
 
     <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
               android:textSize="@dimen/extra_large_text"
               android:id="@+id/login_text"
         android:padding="@dimen/basic_padding"
-
-        android:layout_centerVertical="true"
-              android:layout_marginTop="@dimen/default_padding"
+            android:fontFamily="sans-serif"
+        android:lineSpacingExtra="5dp"
+        android:textColor="@color/login_text_grey"
+              android:layout_marginTop="100dp"
               android:paddingRight="@dimen/default_padding"
               android:text="@string/login_text"
             />
-
-    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:text="@string/click_to_create_account"
-        android:padding="@dimen/basic_padding"
-        android:textColor="@color/black"
-        android:id="@+id/create_account"
-        android:gravity="center"
-        android:layout_below="@id/login_text"
-/>
 
 
 
@@ -42,6 +34,17 @@
         android:layout_above="@id/login_button"
         android:layout_height="@dimen/button_size"
         android:layout_gravity="center_horizontal"/>
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:text="@string/click_to_create_account"
+        android:padding="@dimen/basic_padding"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@color/account_register_grey"
+        android:layout_marginBottom="@dimen/basic_padding"
+        android:layout_above="@id/facebook_login_button"
+        android:id="@+id/create_account"
+        android:gravity="center"
+        />
+
 
 
     <FrameLayout android:layout_width="match_parent"

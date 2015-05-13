@@ -1,8 +1,7 @@
 <animation-list
     android:id="@+id/selected"
     android:oneshot="false"
-    xmlns:android="http://schemas.android.com/apk/res/android"><item android:drawable="@drawable/splash_frame_00010" android:duration="30"/>
-
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:drawable="@drawable/splash_frame_00000" android:duration="30"/>
     <item android:drawable="@drawable/splash_frame_00001" android:duration="30"/>
     <item android:drawable="@drawable/splash_frame_00002" android:duration="30"/>

@@ -5,7 +5,7 @@
     <dimen name="single_unit">8dp</dimen>
     <dimen name="basic_padding">16dp</dimen>
     <dimen name="default_padding">72dp</dimen>
-    <dimen name="extra_large_text">28sp</dimen>
+    <dimen name="extra_large_text">34sp</dimen>
     <dimen name="half_unit">4dp</dimen>
 
     <dimen name="text_size_small_material_subtitle">10sp</dimen>
@@ -15,7 +15,7 @@
     <dimen name="drawer_width">320dp</dimen>
     <dimen name="details_item_size">72dp</dimen>
     <dimen name="corner_radius_card">2dp</dimen>
-    <dimen name="sliding_strip_height">2dp</dimen>
+    <dimen name="sliding_strip_height">3dp</dimen>
     <dimen name="button_height">56dp</dimen>
     <dimen name="subtitle_size">12sp</dimen>
     <dimen name="time_date_text">14dp</dimen>
@@ -24,4 +24,5 @@
     <dimen name="animation_margin">56dp</dimen>
     <dimen name="details_title_text_size">16sp</dimen>
     <dimen name="description_spacing">6dp</dimen>
+    <dimen name="margin_bottom_login">24dp</dimen>
 </resources>

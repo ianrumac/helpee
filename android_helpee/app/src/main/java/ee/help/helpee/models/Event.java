@@ -50,6 +50,7 @@ public class Event implements Serializable {
     @SerializedName("NrOfHelpees")
     int numberOfHelpees;
 
+    @SerializedName("Points")
     int points;
 
 

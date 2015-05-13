@@ -29,9 +29,9 @@
         android:id="@+id/toolbar_chips"
         android:layout_width="wrap_content"
         android:layout_height="?attr/actionBarSize"
-
+        android:layout_marginRight="@dimen/basic_padding"
         android:drawableLeft="@drawable/chip_icon"
-        android:drawablePadding="@dimen/half_unit"
+        android:drawablePadding="@dimen/single_unit"
         android:gravity="center"
         android:padding="@dimen/half_unit"
         android:textAllCaps="true"

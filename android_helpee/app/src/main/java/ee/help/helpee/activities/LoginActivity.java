@@ -105,29 +105,32 @@ public class LoginActivity extends BaseActivity implements LoginView {
                 .addToBackStack("")
                 .commit();
 
-        enableDisableButtons();
+        enableDisableButtons(false);
 
     }
 
 
-    public void enableDisableButtons() {
+    public void enableDisableButtons(boolean enable) {
 
-        if (normalLoginButton.getVisibility() != View.GONE) {
-            normalLoginButton.setVisibility(View.GONE);
-            createAccount.setVisibility(View.GONE);
-            loginButton.setVisibility(View.GONE);
-        } else {
+
+        if (enable) {
             normalLoginButton.setVisibility(View.VISIBLE);
             createAccount.setVisibility(View.VISIBLE);
             loginButton.setVisibility(View.VISIBLE);
+        } else {
+            normalLoginButton.setVisibility(View.GONE);
+            createAccount.setVisibility(View.GONE);
+            loginButton.setVisibility(View.GONE);
         }
 
 
     }
 
+
+
     @OnClick(R.id.create_account)
     void openRegistration() {
-        enableDisableButtons();
+        enableDisableButtons(false);
         fragmentManager.beginTransaction()
                 .add(R.id.fragment_container, new RegisterFragment())
                 .addToBackStack("")

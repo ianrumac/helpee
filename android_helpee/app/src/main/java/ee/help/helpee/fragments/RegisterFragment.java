@@ -200,7 +200,6 @@ public class RegisterFragment extends BaseFragment implements RegisterView {
 
     @OnClick(R.id.back_btn)
     void onBackPressed(){
-        ((LoginActivity)getActivity()).enableDisableButtons();
         getFragmentManager().popBackStackImmediate();
     }
 
@@ -218,5 +217,12 @@ public class RegisterFragment extends BaseFragment implements RegisterView {
             showError(getActivity().getString(R.string.user_pass_req));
         else
             super.showError(type);
+    }
+
+    @Override
+    public void onStop() {
+        ((LoginActivity)getActivity()).enableDisableButtons(true);
+
+        super.onStop();
     }
 }

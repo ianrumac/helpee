@@ -65,6 +65,9 @@ public class EventsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         holder.description.setText(event.getDescription());
 
+        if(holder.description.getLineCount()<2){
+            holder.description.setPadding(16,0,16,8);
+        }
         if (event.getPoints() > 1)
             holder.points.setText(String.format(context.getString(R.string.points), event.getPoints()));
         else

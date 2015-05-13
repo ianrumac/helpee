@@ -8,7 +8,9 @@
     style="@style/CardViewStyle"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/half_unit"
+    android:layout_marginTop="@dimen/single_unit"
+    android:layout_marginLeft="@dimen/single_unit"
+    android:layout_marginRight="@dimen/single_unit"
     android:orientation="vertical"
     card_view:cardCornerRadius="@dimen/corner_radius_card"
     card_view:cardElevation="2dp">
@@ -34,14 +36,14 @@
             <TextView
                 android:singleLine="true"
                 android:ellipsize="end"
-                android:fontFamily="sans-serif-medium"
+                android:fontFamily="sans-serif"
                 android:id="@+id/event_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/event_img"
                 android:paddingTop="@dimen/single_unit"
                 android:paddingRight="@dimen/single_unit"
-                android:textColor="@android:color/black"
+                android:textColor="@color/titles_grey"
                 android:textSize="@dimen/abc_text_size_headline_material"
                 tools:text="Pomoc oko preseljenja za sve ljude " />
 
@@ -57,14 +59,15 @@
                     android:layout_height="wrap_content"
                     android:background="@color/amber_main"
                     android:padding="@dimen/half_unit"
+                    android:textAllCaps="true"
                     android:textStyle="bold"
                     android:textSize="@dimen/subtitle_size"
                     android:textColor="@color/white"
                     tools:text="10 points" />
 
                 <TextView
-                    android:textStyle="bold"
-
+                    android:textColor="@color/titles_grey"
+                    android:fontFamily="sans-serif-medium"
                     android:id="@+id/event_user_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -80,11 +83,13 @@
 
 
         <TextView
-            android:textStyle="bold"
+            android:textColor="@color/time_date_black"
             android:id="@+id/event_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/time_date_text"
+            android:fontFamily="sans-serif-medium"
+
             android:paddingTop="@dimen/single_unit"
             android:paddingBottom="@dimen/basic_padding"
             android:paddingLeft="@dimen/basic_padding"
@@ -94,11 +99,13 @@
         <TextView
             android:id="@+id/event_description"
             android:layout_width="wrap_content"
+            android:textColor="@color/decription"
             android:layout_height="wrap_content"
             android:lines="2"
+            android:lineSpacingExtra="5dp"
             android:paddingBottom="@dimen/basic_padding"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
+            android:paddingLeft="@dimen/basic_padding"
+            android:paddingRight="@dimen/basic_padding"
             android:textSize="@dimen/subtitle_larger_desc"
             tools:text="U petak se selim u novi stan i trebala bi mi pomoć keksi i kava uključeni u ponudu :)" />
 
@@ -124,6 +131,7 @@
                 android:background="@drawable/abc_list_selector_holo_dark"
                 android:padding="@dimen/basic_padding"
                 android:text="@string/btn_help_title"
+                android:fontFamily="sans-serif-medium"
                 android:clickable="true"
                 android:textColor="@color/amber_main" />
 
@@ -131,6 +139,7 @@
                 android:layout_width="wrap_content"
                 android:clickable="true"
                 android:id="@+id/btn_chipin"
+                android:fontFamily="sans-serif-medium"
                 android:layout_height="@dimen/button_height"
                 android:gravity="center_vertical"
                 android:layout_toLeftOf="@id/btn_help"

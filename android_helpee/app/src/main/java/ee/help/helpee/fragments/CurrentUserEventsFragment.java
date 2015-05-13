@@ -20,10 +20,12 @@ import butterknife.InjectView;
 import ee.help.helpee.HelpeeApplication;
 import ee.help.helpee.R;
 import ee.help.helpee.activities.BaseActionBarActivity;
+import ee.help.helpee.activities.MainActivity;
 import ee.help.helpee.adapters.EventsAdapter;
 import ee.help.helpee.adapters.EventsHelpeeAdapter;
 import ee.help.helpee.adapters.EventsOwnerAdapter;
 import ee.help.helpee.custom.Constants;
+import ee.help.helpee.custom.SlideInOutLeftItemAnimator;
 import ee.help.helpee.dagger.EventFeedModule;
 import ee.help.helpee.dagger.UserEventsModule;
 import ee.help.helpee.dagger.components.DaggerEventFeedComponent;
@@ -101,6 +103,12 @@ public class CurrentUserEventsFragment extends Fragment implements UserEventsVie
         events = eventResultList;
         eventsAdapter = new EventsOwnerAdapter(events, getActivity(), cancelEventListener);
         eventList.setAdapter(eventsAdapter);
+        if(events.size()==0){
+            noEvents.setVisibility(View.VISIBLE);
+            HelpeeApplication.changePoints(HelpeeApplication.getUserInstance().getPoints() + 1);
+            ((MainActivity)getActivity()).updatePoints();
+        }
+
 
     }
 

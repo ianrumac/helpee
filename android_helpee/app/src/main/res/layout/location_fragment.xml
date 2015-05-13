@@ -76,7 +76,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/button_size"
         android:layout_alignParentBottom="true"
-        android:background="@color/amber_main"
+        android:background="@drawable/amber_selector"
         android:clickable="true"
         android:text="Confirm location" />
 

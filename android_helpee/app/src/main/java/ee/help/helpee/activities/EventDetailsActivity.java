@@ -105,10 +105,13 @@ public class EventDetailsActivity extends BaseActivity implements EventDetailsVi
     @InjectView(R.id.confirm_btn)
     TextView confirmBtn;
 
+    @InjectView(R.id.layout_cancel_checkin)
+    FrameLayout layoutCheckInOverlay;
+
     GoogleMap googleMap;
     Event currentEvent;
 
-    int pointstoChipIn;
+    int pointstoChipIn = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,7 +128,7 @@ public class EventDetailsActivity extends BaseActivity implements EventDetailsVi
         if (getUser().getPoints() > 0) {
             sliderLayout.setMax(getUser().getPoints());
             sliderLayout.setMin(1);
-        }else{
+        } else {
             sliderLayout.setVisibility(View.GONE);
             chipInModifiedPoints.setText(getString(R.string.not_enough_points_to_chip));
             confirmBtn.setVisibility(View.GONE);
@@ -159,13 +162,14 @@ public class EventDetailsActivity extends BaseActivity implements EventDetailsVi
 
 
         if (getIntent().getBooleanExtra(Constants.SHOULD_OPEN_CHIP_IN, false)) {
+            bottomControlsContainer.setVisibility(View.VISIBLE);
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     chipInSelected();
 
                 }
-            },100);
+            }, 100);
         } else if (getIntent().getBooleanExtra(Constants.FROM_HELPING, false)) {
             cantHelpBtn.setVisibility(View.VISIBLE);
         } else if (getIntent().getBooleanExtra(Constants.OWNER_OF_EVENT, false) && !currentEvent.isCompleted() && !TimeUtils.hasEventPassed(currentEvent.getEventDate())) {
@@ -207,6 +211,35 @@ public class EventDetailsActivity extends BaseActivity implements EventDetailsVi
 
     void setChipInOpened(int duration) {
         chipInContainer.animate().translationY(-chipInContainer.getHeight()).setDuration(duration).start();
+        layoutCheckInOverlay.setVisibility(View.VISIBLE);
+        layoutCheckInOverlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                closeChipIn();
+            }
+        });
+        layoutCheckInOverlay.animate().alpha(0.7f).setDuration(duration).setListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                layoutCheckInOverlay.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+
     }
 
     @OnClick(R.id.chip_in_button)
@@ -283,6 +316,10 @@ public class EventDetailsActivity extends BaseActivity implements EventDetailsVi
         if (event.getPoints() > 1) {
             eventPoints.setText(String.format(getString(R.string.int_points), event.getPoints()));
         }
+        if(event.getDescription()!=null && !"".equals(event.getDescription())){
+            eventDescription.setText(event.getDescription());
+        }else
+        eventDescription.setText(getString(R.string.no_description_event));
 
         /*Since it's just one marker we don't need to worry about bitmaps and memory, so we're good for now.*/
         googleMap.addMarker(new MarkerOptions()
@@ -305,7 +342,7 @@ public class EventDetailsActivity extends BaseActivity implements EventDetailsVi
 
     @Override
     public void hasChippedIn() {
-        HelpeeApplication.changePoints(getUser().getPoints()-pointstoChipIn);
+        HelpeeApplication.changePoints(getUser().getPoints() - pointstoChipIn);
         finishedOverlayText.setText(getString(R.string.chipped_in));
 
         animateOverlay(getResources().getColor(R.color.main_blue));
@@ -319,6 +356,36 @@ public class EventDetailsActivity extends BaseActivity implements EventDetailsVi
         animateOverlay(getResources().getColor(R.color.amber_main));
     }
 
+    @OnClick(R.id.layout_cancel_checkin)
+    void closeChipIn(){
+
+        layoutCheckInOverlay.animate().alpha(0.0f).setDuration(300).setListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+
+                layoutCheckInOverlay.setVisibility(View.GONE);
+                bottomControlsContainer.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        }).start();
+        chipInContainer.animate().translationY(chipInContainer.getHeight()).setDuration(700).start();
+
+
+    }
 
     @OnClick(R.id.btn_cant_help)
     void helpCancelPressed() {
@@ -380,15 +447,36 @@ public class EventDetailsActivity extends BaseActivity implements EventDetailsVi
     void animateOverlay(int backgroundColor) {
         helpedOverlay.setVisibility(View.VISIBLE);
         helpedOverlay.setBackgroundColor(backgroundColor);
-        helpedOverlay.animate().alpha(1).setDuration(1200).setListener(new Animator.AnimatorListener() {
+        helpedOverlay.animate().alpha(1).setDuration(800).setListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
+
 
             }
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                EventDetailsActivity.this.onBackPressed();
+                helpedOverlay.animate().alpha(1).setDuration(800).setListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        EventDetailsActivity.this.onBackPressed();
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+
+                    }
+                });
             }
 
             @Override

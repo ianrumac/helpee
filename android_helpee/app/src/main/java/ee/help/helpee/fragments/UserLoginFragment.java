@@ -77,7 +77,6 @@ public class UserLoginFragment extends BaseFragment implements LoginView {
 
     @OnClick(R.id.ic_back)
     void onBackPressed(){
-        ((LoginActivity)getActivity()).enableDisableButtons();
         getFragmentManager().popBackStackImmediate();
     }
 
@@ -87,6 +86,13 @@ public class UserLoginFragment extends BaseFragment implements LoginView {
         HelpeeApplication.setUserInstance(user);
         startActivity(new Intent(getActivity(), MainActivity.class));
         getActivity().finish();
+    }
+
+
+    @Override
+    public void onPause() {
+        ((LoginActivity)getActivity()).enableDisableButtons(true);
+        super.onPause();
     }
 
     @Override

@@ -105,6 +105,12 @@ public class HelpingEventsFragment extends Fragment implements HelpingEventsView
         events = eventResultList;
         eventsAdapter = new EventsHelpeeAdapter(events, getActivity(), cancelHelpClickListener);
         eventList.setAdapter(eventsAdapter);
+        if(events.size()==0){
+            noEvents.setVisibility(View.VISIBLE);
+            HelpeeApplication.changePoints(HelpeeApplication.getUserInstance().getPoints() + 1);
+            ((MainActivity)getActivity()).updatePoints();
+        }
+
         eventsAdapter.notifyDataSetChanged();
 
 

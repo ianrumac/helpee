@@ -1,5 +1,7 @@
 package ee.help.helpee.activities;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
@@ -11,6 +13,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.facebook.login.LoginManager;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
@@ -21,6 +24,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import ee.help.helpee.R;
 import de.hdodenhof.circleimageview.CircleImageView;
+import ee.help.helpee.custom.Constants;
 import ee.help.helpee.fragments.EventFeedFragment;
 import ee.help.helpee.fragments.HeroesFragment;
 import ee.help.helpee.fragments.MyEventsFragment;
@@ -39,7 +43,8 @@ public class MainActivity extends BaseActionBarActivity {
 
     PrimaryDrawerItem myEventsDrawerItem;
     PrimaryDrawerItem heroesFragmentDrawerItem;
-    SecondaryDrawerItem profileDrawerItem;
+    PrimaryDrawerItem profileDrawerItem;
+    PrimaryDrawerItem logoutDrawerItem;
 
 
     Drawer navigationDrawerBuilder;
@@ -62,7 +67,6 @@ public class MainActivity extends BaseActionBarActivity {
         fragmentManager.beginTransaction().add(R.id.fragment_container, new EventFeedFragment()).addToBackStack(EventFeedFragment.TAG).commit();
         toolbarChips.setText(String.format(getString(R.string.chips_left), getUser().getPoints()));
         getSupportActionBar().setTitle(getString(R.string.event_feed));
-
     }
 
 
@@ -94,13 +98,14 @@ public class MainActivity extends BaseActionBarActivity {
                 .withSelectedIcon(R.drawable.ic_heroes_active)
                 .withSelectedTextColor(R.color.main_blue);
 
-        profileDrawerItem = new SecondaryDrawerItem().withName(R.string.profile_title);
+        profileDrawerItem = new PrimaryDrawerItem().withName(R.string.profile_title).withIcon(R.drawable.ic_profile).withSelectedTextColor(R.color.main_blue).withSelectedIcon(R.drawable.ic_profile_active);
+        logoutDrawerItem = new PrimaryDrawerItem().withName(getString(R.string.logout)).withIcon(R.drawable.ic_logout).withSelectedIcon(R.drawable.ic_logout_active).withSelectedTextColor(R.color.main_blue);
         navigationDrawerBuilder.addDrawerItems(
                 eventsDrawerItem,
                 myEventsDrawerItem,
                 heroesFragmentDrawerItem,
-                new DividerDrawerItem(),
-                profileDrawerItem
+                profileDrawerItem,
+                logoutDrawerItem
 
         ).withHeader(drawerHeader);
 
@@ -139,6 +144,13 @@ public class MainActivity extends BaseActionBarActivity {
                     getSupportActionBar().setTitle(getString(R.string.profile_title));
                     fragmentContainer.setForeground(getResources().getDrawable(R.drawable.bottom_shadow));
                     fragmentManager.beginTransaction().replace(R.id.fragment_container, new ProfileFragment()).commit();
+                }
+                if(iDrawerItem.equals(logoutDrawerItem)){
+                    LoginManager.getInstance().logOut();
+                    getSharedPreferences(Constants.HELPEE_PREFS, Context.MODE_PRIVATE).edit().clear().commit();
+                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                    finish();
+
                 }
             }
         });
