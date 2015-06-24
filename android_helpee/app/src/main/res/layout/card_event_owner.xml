@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/event_card"
+    android:clickable="true"
+    style="@style/CardViewStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/single_unit"
+    android:layout_marginLeft="@dimen/single_unit"
+    android:layout_marginRight="@dimen/single_unit"
+    android:orientation="vertical"
+    card_view:cardCornerRadius="@dimen/corner_radius_card"
+    card_view:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/event_img"
+                android:layout_margin="@dimen/basic_padding"
+                android:layout_width="48dp"
+                android:layout_gravity="bottom"
+                android:layout_height="48dp"
+
+                />
+
+            <TextView
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif"
+                android:id="@+id/event_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/event_img"
+                android:paddingTop="@dimen/basic_padding"
+                android:paddingRight="@dimen/single_unit"
+                android:textColor="@color/titles_grey"
+                android:textSize="@dimen/abc_text_size_headline_material"
+                tools:text="Pomoc oko preseljenja za sve ljude " />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/event_title"
+                android:layout_toRightOf="@id/event_img">
+
+                <TextView
+                    android:id="@+id/event_points"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/amber_main"
+                    android:padding="@dimen/half_unit"
+                    android:textAllCaps="true"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/subtitle_size"
+                    android:textColor="@color/white"
+                    tools:text="10 points" />
+
+                <TextView
+                    android:textColor="@color/titles_grey"
+                    android:fontFamily="sans-serif-medium"
+                    android:id="@+id/event_user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/subtitle_size"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toRightOf="@id/event_points"
+                    tools:text="ANTE needs help" />
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+
+        <TextView
+            android:textColor="@color/time_date_black"
+            android:id="@+id/event_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/time_date_text"
+            android:fontFamily="sans-serif-medium"
+            android:paddingTop="@dimen/single_unit"
+            android:paddingBottom="@dimen/basic_padding"
+            android:paddingLeft="@dimen/basic_padding"
+            android:paddingRight="@dimen/basic_padding"
+            tools:text="13:00h - 16:00h  17/03/15" />
+
+        <TextView
+            android:id="@+id/event_description"
+            android:layout_width="wrap_content"
+            android:textColor="@color/decription"
+            android:layout_height="wrap_content"
+            android:lines="2"
+            android:lineSpacingExtra="5dp"
+            android:paddingBottom="@dimen/basic_padding"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:textSize="@dimen/subtitle_larger_desc"
+            tools:text="U petak se selim u novi stan i trebala bi mi pomoć keksi i kava uključeni u ponudu :)" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:id="@+id/divider"
+            android:background="@color/divider" />
+
+        <RelativeLayout
+            android:id="@+id/owner_event_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/btn_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/button_height"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/abc_list_selector_holo_dark"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:padding="@dimen/basic_padding"
+                android:fontFamily="sans-serif"
+                android:text="@string/cancel_event"
+                android:textColor="@color/md_red_600" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>

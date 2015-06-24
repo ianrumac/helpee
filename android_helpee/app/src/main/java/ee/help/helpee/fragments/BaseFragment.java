@@ -10,18 +10,22 @@ import ee.help.helpee.HelpeeApplication;
 import ee.help.helpee.R;
 import ee.help.helpee.errors.ErrorHandler;
 import ee.help.helpee.errors.ErrorType;
+import ee.help.helpee.models.User;
 
 
 /**
  * Created by ian on 23/04/15.
  */
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends android.support.v4.app.Fragment {
 
     ProgressDialog mProgressDialog;
 
     Dialog mDialog;
 
 
+    User getUser(){
+        return HelpeeApplication.getUserInstance();
+    }
 
     Application getApplication(){
         return HelpeeApplication.getInstance();

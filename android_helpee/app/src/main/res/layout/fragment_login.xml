@@ -1,40 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:id="@+id/fragment_container"
-                android:padding="@dimen/basic_padding"
-                android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-              android:textSize="@dimen/extra_large_text"
-              android:id="@+id/login_text"
-              android:layout_centerVertical="true"
-              android:layout_marginTop="@dimen/default_padding"
-              android:paddingRight="@dimen/default_padding"
-              android:text="@string/login_text"
-            />
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main_blue"
+        android:minHeight="?attr/actionBarSize">
 
-    <com.facebook.login.widget.LoginButton
-            android:layout_below="@id/login_text"
-            android:id="@+id/facebook_login_button"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/default_padding"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/basic_padding"
-            android:layout_marginBottom="@dimen/basic_padding"/>
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/default_padding"
+                android:gravity="center_vertical"
+                android:text="@string/sign_in"
+                android:textColor="@color/white"
+                android:textSize="@dimen/abc_text_size_title_material_toolbar" />
+
+            <ImageView
+                android:id="@id/ic_back"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:padding="@dimen/basic_padding"
+                android:src="@drawable/abc_ic_ab_back_mtrl_am_alpha" />
+        </FrameLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/basic_padding"
+        android:layout_below="@id/toolbar"
+        android:foreground="@drawable/bottom_shadow"></FrameLayout>
 
     <TextView
-            android:id="@+id/login_button"
-            android:layout_below="@id/facebook_login_button"
-            android:layout_centerInParent="true"
-            android:background="@color/button_bg"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/default_padding"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center"
-            android:text="@string/log_in"
-            android:layout_marginTop="@dimen/basic_padding"
-            android:layout_marginBottom="@dimen/basic_padding"/>
+        android:id="@+id/login_button"
+        style="@style/LargeTextButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/amber_selector"
+        android:clickable="true"
+        android:text="@string/sign_in" />
+
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/password"
+        style="@style/EditTextUserInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/login_button"
+        android:inputType="textWebPassword"
+        android:singleLine="true"
+        app:met_underlineColor="@color/md_yellow_800"
+        android:layout_marginBottom="@dimen/default_padding"
+        android:layout_marginLeft="@dimen/basic_padding"
+        android:layout_marginRight="@dimen/basic_padding"
+        android:hint="@string/password"
+        app:met_clearButton="true"
+        app:met_floatingLabel="normal"
+        app:met_floatingLabelText="@string/password"
+        app:met_floatingLabelTextColor="@color/grey_subtitle"
+        app:met_textColorHint="@color/grey_subtitle" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/user_name"
+        app:met_underlineColor="@color/md_yellow_800"
+        style="@style/EditTextUserInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/password"
+        android:layout_marginLeft="@dimen/basic_padding"
+        android:layout_marginRight="@dimen/basic_padding"
+        android:singleLine="true"
+        android:hint="@string/username"
+        app:met_clearButton="true"
+        app:met_floatingLabel="normal"
+        app:met_floatingLabelText="@string/username"
+        app:met_floatingLabelTextColor="@color/grey_subtitle"
+        app:met_textColorHint="@color/grey_subtitle" />
 
 
 </RelativeLayout>

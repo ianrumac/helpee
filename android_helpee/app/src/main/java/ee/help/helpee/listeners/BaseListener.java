@@ -7,8 +7,8 @@ import ee.help.helpee.errors.ErrorType;
  */
 public interface BaseListener<T> {
 
-    public void onSuccess(T sucess);
+     void onSuccess(T success);
 
-    public void onFail(ErrorType errorType);
+     void onFail(ErrorType errorType);
 }
 

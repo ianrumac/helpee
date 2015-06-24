@@ -1,41 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="ee.help.helpee">
+    package="ee.help.helpee">
 
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+<uses-permission android:name="android.permission.CLEAR_APP_CACHE"/>
+    <permission
+        android:name="ee.help.helpee.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+    <uses-permission android:name="ee.help.helpee.permission.C2D_MESSAGE" />
 
     <application
-            android:name=".HelpeeApplication"
-            android:allowBackup="true"
-            android:icon="@mipmap/ic_launcher"
+        android:name=".HelpeeApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/app_id" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyA079rl4O0-LrteRFMBhc8Uw26YXACmIqs" />
+
+
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme">
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/app_id"/>
-
-
-        <activity android:name="com.facebook.FacebookActivity"
-                  android:configChanges=
-                          "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-                  android:theme="@android:style/Theme.Translucent.NoTitleBar"
-                  android:label="@string/app_name"/>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <activity
-                android:name=".activities.MainActivity"
-                android:label="@string/app_name">
-        </activity>
-
-
+            android:name=".activities.MainActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity
-                android:name=".activities.LoginActivity"
-                android:label="@string/app_name">
+            android:name=".activities.SplashActivity"
+            android:label="@string/app_name">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
 
+
+        <activity
+            android:name=".activities.LoginActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+
+            android:windowSoftInputMode="adjustPan"></activity>
+
+        <activity
+            android:name=".activities.NewEventActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+
+            android:windowSoftInputMode="adjustResize"></activity>
+
+        <activity android:name=".activities.EventDetailsActivity"
+            android:screenOrientation="portrait"
+            ></activity>
+
+        <service
+            android:name=".services.FetchAddressIntentService"
+            android:exported="false" />
+
+        <service android:name="com.parse.PushService" />
+
+        <receiver android:name="com.parse.ParseBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="com.parse.ParsePushBroadcastReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.parse.push.intent.RECEIVE" />
+                <action android:name="com.parse.push.intent.DELETE" />
+                <action android:name="com.parse.push.intent.OPEN" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="com.parse.GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
+                <category android:name="ee.help.helpee" />
+            </intent-filter>
+        </receiver>
     </application>
+
 
 </manifest>

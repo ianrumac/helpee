@@ -26,9 +26,9 @@ public class LoginPresenterImpl implements LoginPresenter {
     }
 
     @Override
-    public void loginUserWithFacebookToken(String token) {
+    public void loginUserWithFacebookToken(String token,String deviceId) {
         loginView.showProgress();
-        loginInteractor.receiveUserInfo(token, userListener);
+        loginInteractor.receiveUserInfo(token, deviceId, userListener);
     }
 
     @Override
@@ -38,9 +38,10 @@ public class LoginPresenterImpl implements LoginPresenter {
 
     BaseListener<User> userListener = new BaseListener<User>() {
         @Override
-        public void onSuccess(User result) {
+        public void onSuccess(User success) {
             loginView.hideProgress();
-            loginView.userLoggedIn(result);
+            loginView.userLoggedIn(success);
+
         }
 
         @Override

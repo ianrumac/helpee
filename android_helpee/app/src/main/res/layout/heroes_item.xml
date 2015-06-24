@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/user_img"
+        android:layout_width="40dp"
+
+        android:layout_height="40dp"
+        android:layout_margin="@dimen/basic_padding"
+
+        />
+
+
+    <TextView
+        android:id="@+id/user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/default_padding"
+        android:layout_marginTop="@dimen/basic_padding"
+        tools:text="Margie Wolf" />
+
+    <TextView
+
+        android:id="@+id/user_points"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_name"
+        android:layout_marginLeft="@dimen/default_padding"
+        android:textColor="@color/grey_subtitle"
+        android:textSize="@dimen/text_size_material_subtitle"
+        tools:text="20 points" />
+
+</RelativeLayout>

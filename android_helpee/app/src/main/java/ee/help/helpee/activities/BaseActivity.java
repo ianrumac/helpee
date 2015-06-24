@@ -4,26 +4,32 @@ import com.gc.materialdesign.widgets.Dialog;
 import com.gc.materialdesign.widgets.ProgressDialog;
 
 import android.app.Activity;
+import android.support.v4.app.FragmentActivity;
 
 import ee.help.helpee.HelpeeApplication;
 import ee.help.helpee.R;
 import ee.help.helpee.errors.ErrorHandler;
 import ee.help.helpee.errors.ErrorType;
+import ee.help.helpee.models.User;
 
 /**
  * Created by ian on 12/04/15.
  */
-public abstract class BaseActivity extends Activity {
+public abstract class BaseActivity extends FragmentActivity {
 
     ProgressDialog mProgressDialog;
 
     Dialog mDialog;
+    public User getUser(){
+        return HelpeeApplication.getUserInstance();
+    }
 
 
     public void showProgress() {
 
         mProgressDialog = new ProgressDialog(this, HelpeeApplication.getInstance().getString(R.string.loading_msg),
                 R.color.maroon);
+        mProgressDialog.setCancelable(false);
         mProgressDialog.show();
 
     }
@@ -31,6 +37,7 @@ public abstract class BaseActivity extends Activity {
      public void showProgress(int message) {
 
         mProgressDialog = new ProgressDialog(this, HelpeeApplication.getInstance().getString(message), R.color.maroon);
+         mProgressDialog.setCancelable(false);
         mProgressDialog.show();
 
     }

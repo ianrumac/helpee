@@ -30,28 +30,30 @@ public class LoginInteractorImpl implements LoginInteractor {
     }
 
     @Override
-    public void receiveUserInfo(String accessToken, final BaseListener<User> userListener) {
-        apiManager.getApiService().postAccountInfo(accessToken, new Callback<User>() {
+    public void receiveUserInfo(String accessToken, String deviceId, final BaseListener<User> userListener) {
+        apiManager.getApiService().postAccountInfo(accessToken, deviceId, new Callback<User>() {
             @Override
             public void success(User user, Response response) {
                 if (user != null) {
                     userListener.onSuccess(user);
-                }else
+                } else
                     userListener.onFail(ErrorType.NULL_RESPONSE);
             }
 
             @Override
             public void failure(RetrofitError error) {
-                userListener.onFail(ErrorType.CONNECTION_ERROR);
+
+                if (error.getResponse().getStatus() == 400) {
+                    userListener.onFail(ErrorType.AUTH_ERROR);
+                } else
+                    userListener.onFail(ErrorType.CONNECTION_ERROR);
             }
         });
     }
 
     @Override
     public void saveUserToPreferences(User user) {
-        String userAsJson = new Gson().toJson(user);
-        HelpeeApplication.getInstance().getSharedPreferences(Constants.HELPEE_PREFS, Context.MODE_PRIVATE).edit()
-                .putString(Constants.HELPEE_PREFS, userAsJson).commit();
+        HelpeeApplication.setUserInstance(user);
     }
 
 

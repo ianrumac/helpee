@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.provider.Settings;
 import android.view.View;
 
+import ee.help.helpee.HelpeeApplication;
 import ee.help.helpee.R;
 import ee.help.helpee.activities.BaseActivity;
 import ee.help.helpee.activities.MainActivity;
@@ -43,13 +44,13 @@ public class ErrorHandler {
     }
 
 
-    public ErrorHandler(BaseActivity errorScopeContext) {
+    public ErrorHandler(Activity errorScopeContext) {
         this.errorScopeContext = errorScopeContext;
     }
 
     private static void handleConnectionError() {
 
-        SnackBar snackBar = new SnackBar((BaseActivity) errorScopeContext,
+        SnackBar snackBar = new SnackBar((Activity) errorScopeContext,
                 errorScopeContext.getString(R.string.check_connection));
         snackBar.setColorButton(Color.RED);
         snackBar.show();
@@ -57,7 +58,7 @@ public class ErrorHandler {
     }
 
     private static void handleLocationError() {
-        SnackBar snackbar = new SnackBar((BaseActivity) errorScopeContext,
+        SnackBar snackbar = new SnackBar((Activity) errorScopeContext,
                 errorScopeContext.getString(R.string.check_location),
                 errorScopeContext.getString(R.string.open_settings),
                 new View.OnClickListener() {

@@ -10,7 +10,7 @@ public interface LoginInteractor {
 
 
 
-    void receiveUserInfo(String token, BaseListener<User> userListener);
+    void receiveUserInfo(String token, String deviceId, BaseListener<User> userListener);
 
     void saveUserToPreferences(User user);
 

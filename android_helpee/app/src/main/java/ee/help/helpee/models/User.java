@@ -2,15 +2,21 @@ package ee.help.helpee.models;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
+import ee.help.helpee.custom.Constants;
+
 /**
  * Created by ian on 12/04/15.
  */
-public class User {
+public class User implements Serializable {
 
-    int id;
 
-    @SerializedName("userName")
+    @SerializedName("Name")
     String fullName;
+
+    @SerializedName("userid")
+    String userId;
 
     @SerializedName("access_token")
     String token;
@@ -18,12 +24,61 @@ public class User {
     @SerializedName("model.token")
     String fbToken;
 
-    public int getId() {
-        return id;
+    @SerializedName("email")
+    String email;
+
+    @SerializedName("ImageUri")
+    String imageUri;
+
+    @SerializedName("Points")
+
+    int points;
+
+    String userCity;
+
+    public String getUserCity() {
+        return userCity;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUserCity(String userCity) {
+        this.userCity = userCity;
+    }
+
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getImageUri() {
+
+        if (imageUri != null)
+            return "http://helpee.azurewebsites.net/Images/".concat(imageUri);
+        else
+            return Constants.PLACEHOLDER_URL;
+    }
+
+    public void setImageUri(String imageUri) {
+        this.imageUri = imageUri;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
     }
 
     public String getFullName() {
